@@ -5,6 +5,10 @@ class ConnectFour:
     def __init__(self):
         self.board = [[' ' for _ in range(7)] for _ in range(6)]
         self.currentPlayer = 'X'
+        self.val1 = 1
+        self.val2 = 5
+        self.val3 = 100
+        self.val4 = 1000
 
     def printBoard(self):
         for row in self.board:

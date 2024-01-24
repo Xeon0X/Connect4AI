@@ -2,11 +2,11 @@
 def evaluateFunction(game):
     result = 0
     for i in range(6):
-        result += checkRow(game.getRow(i))
+        result += checkRow(game, game.getRow(i))
     for i in range(7):
-        result += checkColumn(game.getColumn(i))
+        result += checkColumn(game, game.getColumn(i))
     diagonals = getDiagonals(game)
-    result += checkDiagonals(diagonals)
+    result += checkDiagonals(game, diagonals)
     return result
 
 
@@ -25,7 +25,7 @@ def getDiagonals(game):
     return result
 
 
-def checkRow(row):
+def checkRow(game, row):
 
     result = 0
     for i in range(4):
@@ -42,27 +42,27 @@ def checkRow(row):
         if (countX+countSpace == 4 and countSpace != 4):
             match(countX):
                 case 4:
-                    result += 1000
+                    result += game.val4
                 case 3:
-                    result += 100
+                    result += game.val3
                 case 2:
-                    result += 5
+                    result += game.val2
                 case _:
-                    result += 1
+                    result += game.val1
         elif (countO + countSpace == 4 and countSpace != 4):
             match(countO):
                 case 4:
-                    result -= 1000
+                    result -= game.val4
                 case 3:
-                    result -= 100
+                    result -= game.val3
                 case 2:
-                    result -= 5
+                    result -= game.val2
                 case _:
-                    result -= 1
+                    result -= game.val1
     return result
 
 
-def checkColumn(column):
+def checkColumn(game, column):
 
     result = 0
     for i in range(3):
@@ -79,27 +79,27 @@ def checkColumn(column):
         if (countX+countSpace == 4 and countSpace != 4):
             match(countX):
                 case 4:
-                    result += 1000
+                    result += game.val4
                 case 3:
-                    result += 100
+                    result += game.val3
                 case 2:
-                    result += 5
+                    result += game.val2
                 case _:
-                    result += 1
+                    result += game.val1
         elif (countO + countSpace == 4 and countSpace != 4):
             match(countO):
                 case 4:
-                    result -= 1000
+                    result -= game.val4
                 case 3:
-                    result -= 100
+                    result -= game.val3
                 case 2:
-                    result -= 5
+                    result -= game.val2
                 case _:
-                    result -= 1
+                    result -= game.val1
     return result
 
 
-def checkDiagonals(diagonals):
+def checkDiagonals(game, diagonals):
 
     result = 0
     for diagonal in diagonals:
@@ -116,21 +116,21 @@ def checkDiagonals(diagonals):
         if (countX+countSpace == 4 and countSpace != 4):
             match(countX):
                 case 4:
-                    result += 1000
+                    result += game.val4
                 case 3:
-                    result += 100
+                    result += game.val3
                 case 2:
-                    result += 5
+                    result += game.val2
                 case _:
-                    result += 1
+                    result += game.val1
         elif (countO + countSpace == 4 and countSpace != 4):
             match(countO):
                 case 4:
-                    result -= 1000
+                    result -= game.val4
                 case 3:
-                    result -= 100
+                    result -= game.val3
                 case 2:
-                    result -= 5
+                    result -= game.val2
                 case _:
-                    result -= 1
+                    result -= game.val1
     return result
