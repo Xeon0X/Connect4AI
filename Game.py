@@ -75,7 +75,7 @@ class ConnectFour:
                 self.printBoard()
                 break
             self.switchPlayer()
-            print(evaluateFunction.evaluateFunction(self))
+
 
 # game = ConnectFour()
 # game.play()
