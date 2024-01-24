@@ -18,6 +18,20 @@ class ConnectFour:
         else:
             return True
 
+    def isCollumnEmpty(self, column):
+        if (column > 6 or column < 0):
+            return True
+        elif (self.board[5][column] == ' '):
+            return True
+        else:
+            return False
+
+    def isBoardFull(self):
+        for column in range(7):
+            if (self.board[0][column] == ' '):
+                return False
+        return True
+
     def isWin(self, column):
         row = 0
         while (self.board[row][column] == ' '):
@@ -61,9 +75,23 @@ class ConnectFour:
     def getColumn(self, column):
         return [row[column] for row in self.board]
 
+    def getPossibleMoves(self):
+        possibleMoves = []
+        for column in range(7):
+            if self.isAPossibleMove(column):
+                tempGame = self.copy()
+                tempGame.makeMove(column)
+                possibleMoves.append((tempGame, column))
+        return possibleMoves
+
     def play(self):
         while True:
             self.printBoard()
+
+            if self.isBoardFull():
+                print("Draw!")
+                break
+
             column = int(
                 input(f"Player {self.currentPlayer}, enter a column (0-6): "))
             if (not self.isAPossibleMove(column)):

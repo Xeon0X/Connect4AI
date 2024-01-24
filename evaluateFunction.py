@@ -76,7 +76,6 @@ def checkColumn(column):
                 countO += 1
             else:
                 countSpace += 1
-        print(countX, countO, countSpace)
         if (countX+countSpace == 4 and countSpace != 4):
             match(countX):
                 case 4:
