@@ -85,6 +85,7 @@ class ConnectFour:
             if self.isAPossibleMove(column):
                 tempGame = self.copy()
                 tempGame.makeMove(column)
+                tempGame.switchPlayer()
                 possibleMoves.append((tempGame, column))
         return possibleMoves
 
