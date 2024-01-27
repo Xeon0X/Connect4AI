@@ -7,7 +7,7 @@ class ConnectFour:
         self.currentPlayer = 'X'
         self.val1 = 1
         self.val2 = 5
-        self.val3 = 100
+        self.val3 = 50
         self.val4 = 1000
 
     def printBoard(self):
@@ -85,6 +85,7 @@ class ConnectFour:
             if self.isAPossibleMove(column):
                 tempGame = self.copy()
                 tempGame.makeMove(column)
+                tempGame.switchPlayer()
                 possibleMoves.append((tempGame, column))
         return possibleMoves
 

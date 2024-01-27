@@ -14,6 +14,7 @@ def checkWin(game):
 
 def minmax(game, profondeur):
     eval, action = playerMax(game, profondeur)
+    print(eval)
     return action
 
 
@@ -53,13 +54,17 @@ def playMinMax(game):
             column = minmax(game, 5)
             print(f"Player {game.currentPlayer} played column {column}")
         else:
-            column = int(
-                input(f"Player {game.currentPlayer}, enter a column (0-6): "))
+            column = minmax(game, 5)
+            print(f"Player {game.currentPlayer} played column {column}")
+            
+            #column = int(
+                #input(f"Player {game.currentPlayer}, enter a column (0-6): "))
         if (not game.isAPossibleMove(column)):
             print("Invalid move")
             continue
 
         game.makeMove(column)
+        print(evaluateFunction(game))
         if game.isWin(column):
             print(f"Player {game.currentPlayer} wins!")
             game.printBoard()
