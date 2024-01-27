@@ -4,6 +4,8 @@ import random
 from Game import ConnectFour
 from minmax import checkWin
 
+import curses
+import time
 
 exploration = 1 / math.sqrt(2)
 
@@ -24,7 +26,7 @@ class Node:
         return True
 
 
-def isInComputationalBudget(startTime, limit=10):
+def isInComputationalBudget(startTime, limit=5):
     return True if time.time() - startTime < limit else False
 
 
@@ -32,7 +34,6 @@ def backup(node, reward):
     while (node != None):
         node.visited += 1
         node.totalReward += reward
-        print(node.totalReward)
         reward = -reward 
         node = node.parent
 
@@ -44,11 +45,16 @@ def bestChild(node, exploration):
     return max(bestChildren, key=lambda x: x[1])[0] # get the child
 
 
-def expand(node):
+def remainingMoves(node):
     possibleMoves = node.game.getPossibleMoves()
     remainingMoves = [move for move in possibleMoves if move != node.playedMove and node.isMoveUnique(move)]
-    if remainingMoves:
-        selectedMove = random.choice(remainingMoves) # get the column and not the temporary game state
+    return remainingMoves
+
+
+def expand(node):
+    moves = remainingMoves(node)
+    if moves:
+        selectedMove = random.choice(moves) # get the column and not the temporary game state
         node.game.makeMove(selectedMove[1])
         node.game.switchPlayer()
         child = Node(node.game, parent=node)
@@ -57,8 +63,8 @@ def expand(node):
         return child
 
 def treePolicy(node):
-    while not checkWin(node.game):
-        if not node.game.isBoardFull():
+    while not node.game.isBoardFull() and not checkWin(node.game):
+        if remainingMoves(node) != []:
             return expand(node)
         else:
             node = bestChild(node, exploration)
@@ -70,7 +76,6 @@ def defaultPolicy(game):
         move = random.choice(game.getPossibleMoves())
         game.makeMove(move[1]) # get the column and not the temporary game state
         game.switchPlayer()
-        print("yes")
         finalMove = move[1]
     if finalMove != None :
         return 0 if game.isWin(finalMove) else 1
@@ -78,13 +83,12 @@ def defaultPolicy(game):
         return 0
 
 
-def UCTSearch(game):
+def UCTSearch(game, debug=False):
     startTime = time.time()
     node = Node(game.copy())
     while isInComputationalBudget(startTime):
         lastNode = treePolicy(node)
         reward = defaultPolicy(lastNode.game)
-        # print("DEBUG : ", reward, lastNode.game.print())
         backup(lastNode, reward)
     return bestChild(node, 0).playedMove
 
@@ -97,7 +101,6 @@ def playMonteCarlo(game):
             break
         if game.currentPlayer == 'X':
             column = UCTSearch(game)[1] #get column
-            print(column, "---------------------")
             print(f"Player {game.currentPlayer} played column {column}")
         else:
             column = int(

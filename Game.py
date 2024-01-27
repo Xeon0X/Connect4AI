@@ -1,4 +1,5 @@
 import evaluateFunction
+import curses
 
 
 class ConnectFour:
@@ -9,6 +10,10 @@ class ConnectFour:
         self.val2 = 5
         self.val3 = 100
         self.val4 = 1000
+
+    def printBoardConsole(self, stdscr):
+        for i, row in enumerate(self.board):
+            stdscr.addstr(i + 4, 0, '|'.join(row))
 
     def printBoard(self):
         for row in self.board:
