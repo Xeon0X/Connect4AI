@@ -1,15 +1,17 @@
+import evaluateFunction
+
+
 class ConnectFour:
     def __init__(self):
         self.board = [[' ' for _ in range(7)] for _ in range(6)]
         self.currentPlayer = 'X'
         self.scoreValues = [1, 5, 50, 1000]
-
-
+  
     def printBoard(self):
         for row in self.board:
             print('|'.join(row))
 
-
+            
     def isAPossibleMove(self, column):
         if (column > 6 or column < 0):
             return False
@@ -18,7 +20,7 @@ class ConnectFour:
         else:
             return True
 
-
+          
     def isCollumnEmpty(self, column):
         if (column > 6 or column < 0):
             return True
@@ -50,13 +52,13 @@ class ConnectFour:
             if(column+i-3 >= 0 and column+i <=6):
                 if (self.board[row][column+i-3] == self.board[row][column+i-2] == self.board[row][column+i-1] == self.board[row][column+i]):
                     return True
-        
+       
         # Check diagonal grid
         for i in range(4):
             if (row+i-3 >= 0 and row+i <= 5 and column+i-3 >= 0 and column+i <= 6):
                 if (self.board[row+i-3][column+i-3] == self.board[row+i-2][column+i-2] == self.board[row+i-1][column+i-1] == self.board[row+i][column+i]):
                     return True
-                
+
             if (row-i+3 <= 5 and row-i >= 0 and column+i-3 >= 0 and column+i <= 6):
                 if (self.board[row-i+3][column+i-3] == self.board[row-i+2][column+i-2] == self.board[row-i+1][column+i-1] == self.board[row-i][column+i]):
                     return True
@@ -69,17 +71,22 @@ class ConnectFour:
             if self.board[row][column] == ' ':
                 self.board[row][column] = self.currentPlayer
                 break
-
+                
 
     def switchPlayer(self):
         self.currentPlayer = 'O' if self.currentPlayer == 'X' else 'X'
-
 
     def copy(self):
         newGame = ConnectFour()
         newGame.board = [row[:] for row in self.board]
         newGame.currentPlayer = self.currentPlayer
         return newGame
+
+    def getRow(self, row):
+        return self.board[row]
+
+    def getColumn(self, column):
+        return [row[column] for row in self.board]
 
 
     def getRow(self, row):
@@ -144,6 +151,7 @@ class ConnectFour:
         """
         This function is an example of how to use the ConnectFour class.
         """
+
         while True:
             self.printBoard()
 
