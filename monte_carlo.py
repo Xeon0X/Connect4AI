@@ -24,7 +24,7 @@ class Node:
         return True
 
 
-def isInComputationalBudget(startTime, limit=30):
+def isInComputationalBudget(startTime, limit=10):
     return True if time.time() - startTime < limit else False
 
 
@@ -32,6 +32,7 @@ def backup(node, reward):
     while (node != None):
         node.visited += 1
         node.totalReward += reward
+        print(node.totalReward)
         reward = -reward 
         node = node.parent
 
@@ -49,6 +50,7 @@ def expand(node):
     if remainingMoves:
         selectedMove = random.choice(remainingMoves) # get the column and not the temporary game state
         node.game.makeMove(selectedMove[1])
+        node.game.switchPlayer()
         child = Node(node.game, parent=node)
         child.playedMove = selectedMove
         node.childs.append(child)
@@ -63,10 +65,17 @@ def treePolicy(node):
     return node
 
 def defaultPolicy(game):
+    finalMove = None
     while not checkWin(game):
         move = random.choice(game.getPossibleMoves())
         game.makeMove(move[1]) # get the column and not the temporary game state
-    return 1 if checkWin(game) else 0
+        game.switchPlayer()
+        print("yes")
+        finalMove = move[1]
+    if finalMove != None :
+        return 0 if game.isWin(finalMove) else 1
+    else:
+        return 0
 
 
 def UCTSearch(game):
@@ -75,6 +84,7 @@ def UCTSearch(game):
     while isInComputationalBudget(startTime):
         lastNode = treePolicy(node)
         reward = defaultPolicy(lastNode.game)
+        # print("DEBUG : ", reward, lastNode.game.print())
         backup(lastNode, reward)
     return bestChild(node, 0).playedMove
 
