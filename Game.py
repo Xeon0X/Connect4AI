@@ -45,9 +45,10 @@ class ConnectFour:
             if (self.board[row][column] == self.board[row+1][column] == self.board[row+2][column] == self.board[row+3][column]):
                 return True
         # Check horizontal grid
-        for i in range(max(0, column-3), min(3, column)):
-            if (self.board[row][i] == self.board[row][i+1] == self.board[row][i+2] == self.board[row][i+3]):
-                return True
+        for i in range(4):
+            if(column+i-3 >= 0 and column+i <=6):
+                if (self.board[row][column+i-3] == self.board[row][column+i-2] == self.board[row][column+i-1] == self.board[row][column+i]):
+                    return True
         # Check diagonal grid
         for i in range(4):
             if (row+i-3 >= 0 and row+i <= 5 and column+i-3 >= 0 and column+i <= 6):
@@ -78,6 +79,47 @@ class ConnectFour:
 
     def getColumn(self, column):
         return [row[column] for row in self.board]
+    
+    def getDiagonalsUpToDown(self):
+        diagonals = []
+
+        #Diagonals with a length of 4
+        diagonals.append([self.board[2+i][i] for i in range(4)])
+        diagonals.append([self.board[i][3+i] for i in range(4)])
+
+        #Diagonals with a length of 5
+        for n in range(2):
+            diagonals.append([self.board[1+i+n][i+n] for i in range(4)])
+            diagonals.append([self.board[i+n][2+i+n] for i in range(4)])
+        
+        #Diagonals with a length of 6
+        for n in range(3):
+            diagonals.append([self.board[i+n][i+n] for i in range(4)])
+            diagonals.append([self.board[i+n][1+i+n] for i in range(4)])
+        
+        return diagonals
+    
+    def getDiagonalsDownToUp(self):
+        diagonals = []
+
+        #Diagonals with a length of 4
+        diagonals.append([self.board[3-i][i] for i in range(4)])
+        diagonals.append([self.board[5-i][3+i] for i in range(4)])
+
+        #Diagonals with a length of 5
+        for n in range(2):
+            diagonals.append([self.board[4-(i+n)][i+n] for i in range(4)])
+            diagonals.append([self.board[5-(i+n)][2+i+n] for i in range(4)])
+        
+        #Diagonals with a length of 6
+        for n in range(3):
+            diagonals.append([self.board[5-(i+n)][i+n] for i in range(4)])
+            diagonals.append([self.board[5-(i+n)][1+i+n] for i in range(4)])
+        
+        return diagonals
+    
+    def getDiagonals(self):
+        return self.getDiagonalsUpToDown() + self.getDiagonalsDownToUp()
 
     def getPossibleMoves(self):
         possibleMoves = []

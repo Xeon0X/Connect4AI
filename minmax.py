@@ -19,7 +19,7 @@ def minmax(game, profondeur):
 
 
 def playerMax(game, profondeur):
-    if profondeur == 0 or checkWin(game):
+    if profondeur == 0 or checkWin(game) or game.isBoardFull():
         return evaluateFunction(game), None
     maxEval = -math.inf
     maxAction = None
@@ -32,7 +32,7 @@ def playerMax(game, profondeur):
 
 
 def playerMin(game, profondeur):
-    if profondeur == 0 or checkWin(game):
+    if profondeur == 0 or checkWin(game) or game.isBoardFull():
         return evaluateFunction(game), None
     minEval = math.inf
     minAction = None
@@ -47,28 +47,29 @@ def playerMin(game, profondeur):
 def playMinMax(game):
     while True:
         game.printBoard()
-        if game.isBoardFull():
-            print("Draw!")
-            break
+
         if game.currentPlayer == 'X':
-            column = minmax(game, 5)
+            column = minmax(game, 4)
             print(f"Player {game.currentPlayer} played column {column}")
         else:
-            column = minmax(game, 5)
+            column = minmax(game, 2)
             print(f"Player {game.currentPlayer} played column {column}")
-            
-            #column = int(
-                #input(f"Player {game.currentPlayer}, enter a column (0-6): "))
         if (not game.isAPossibleMove(column)):
             print("Invalid move")
             continue
 
         game.makeMove(column)
-        print(evaluateFunction(game))
+
         if game.isWin(column):
             print(f"Player {game.currentPlayer} wins!")
             game.printBoard()
             break
+
+        if game.isBoardFull():
+            print("Draw!")
+            game.printBoard()
+            break
+
         game.switchPlayer()
 
 

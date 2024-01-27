@@ -47,13 +47,11 @@ def playAlphaBeta(game):
             print("Draw!")
             break
         if game.currentPlayer == 'X':
-            column = alphaBeta(game, 5)
+            column = alphaBeta(game, 7)
             print(f"Player {game.currentPlayer} played column {column}")
         else:
-            column = alphaBeta(game, 5)
-            print(f"Player {game.currentPlayer} played column {column}")
-            #column = int(
-                #input(f"Player {game.currentPlayer}, enter a column (0-6): "))
+            column = int(
+                input(f"Player {game.currentPlayer}, enter a column (0-6): "))
         if (not game.isAPossibleMove(column)):
             print("Invalid move")
             continue
