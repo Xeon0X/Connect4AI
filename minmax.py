@@ -1,0 +1,78 @@
+
+import math
+from Game import ConnectFour
+from evaluateFunction import evaluateFunction
+
+
+def checkWin(game):
+    for column in range(7):
+        if not game.isCollumnEmpty(column):
+            if game.isWin(column):
+                return True
+    return False
+
+
+def minmax(game, profondeur):
+    eval, action = playerMax(game, profondeur)
+    print(eval)
+    return action
+
+
+def playerMax(game, profondeur):
+    if profondeur == 0 or checkWin(game) or game.isBoardFull():
+        return evaluateFunction(game), None
+    maxEval = -math.inf
+    maxAction = None
+    for move, culumn in game.getPossibleMoves():
+        eval, _ = playerMin(move, profondeur-1)
+        if eval > maxEval:
+            maxEval = eval
+            maxAction = culumn
+    return maxEval, maxAction
+
+
+def playerMin(game, profondeur):
+    if profondeur == 0 or checkWin(game) or game.isBoardFull():
+        return evaluateFunction(game), None
+    minEval = math.inf
+    minAction = None
+    for move, column in game.getPossibleMoves():
+        eval, _ = playerMax(move, profondeur-1)
+        if eval < minEval:
+            minEval = eval
+            minAction = column
+    return minEval, minAction
+
+
+def playMinMax(game):
+    while True:
+        game.printBoard()
+
+        if game.currentPlayer == 'X':
+            column = minmax(game, 4)
+            print(f"Player {game.currentPlayer} played column {column}")
+        else:
+            column = minmax(game, 2)
+            print(f"Player {game.currentPlayer} played column {column}")
+        if (not game.isAPossibleMove(column)):
+            print("Invalid move")
+            continue
+
+        game.makeMove(column)
+
+        if game.isWin(column):
+            print(f"Player {game.currentPlayer} wins!")
+            game.printBoard()
+            break
+
+        if game.isBoardFull():
+            print("Draw!")
+            game.printBoard()
+            break
+
+        game.switchPlayer()
+
+
+if __name__ == "__main__":
+    game = ConnectFour()
+    playMinMax(game)
