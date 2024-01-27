@@ -63,6 +63,8 @@ class ConnectFour:
                 self.printBoard()
                 break
             self.switchPlayer()
+            
 
-#game = ConnectFour()
+game = ConnectFour()
+
 #game.play()
