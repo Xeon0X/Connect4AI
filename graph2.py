@@ -4,6 +4,7 @@ import pygame
 
 
 pygame.init()
+game = ConnectFour()
 
 height = 800
 width = 800
