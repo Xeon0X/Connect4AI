@@ -1,7 +1,7 @@
 
 import math
 from Game import ConnectFour
-from evaluateFunction import evaluateFunction
+from score import calculateScore
 from minmax import checkWin
 
 
@@ -11,9 +11,11 @@ def alphaBeta(game,profondeur):
 
 def playerMax(game,profondeur,alpha,beta):
     if (checkWin(game) or profondeur==0):
-        return evaluateFunction(game),None
+        return calculateScore(game),None
+    
     maxEval = -math.inf
     maxAction = None
+
     for move, culumn in game.getPossibleMoves():
         eval,_ = playerMin(move,profondeur-1,alpha,beta)
         if eval > maxEval:
@@ -26,9 +28,11 @@ def playerMax(game,profondeur,alpha,beta):
 
 def playerMin(game,profondeur,alpha,beta):
     if (checkWin(game) or profondeur==0):
-        return evaluateFunction(game),None
+        return calculateScore(game),None
+    
     minEval = math.inf
     minAction = None
+
     for move, culumn in game.getPossibleMoves():
         eval,_ = playerMax(move,profondeur-1,alpha,beta)
         if eval < minEval:
