@@ -65,10 +65,10 @@ def playMinMax(game):
         game.printBoard()
 
         if game.currentPlayer == 'X':
-            chosenMove = minmax(game, 1, game.currentPlayer)
+            chosenMove = minmax(game, 5, game.currentPlayer)
             print(f"Player {game.currentPlayer} played column {chosenMove}")
         else:
-            chosenMove = minmax(game, 3, game.currentPlayer)
+            chosenMove = minmax(game, 5, game.currentPlayer)
             print(f"Player {game.currentPlayer} played column {chosenMove}")
         
         if (not game.isAPossibleMove(chosenMove)):
