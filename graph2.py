@@ -15,30 +15,27 @@ running = True
 
 
 
-def drawboard() :
-        pygame.draw.line(screen, 'blue', (2,0), (2,height), width=5)
-        for i in range(1, 7):
-            x_position = i * width / 7
-            pygame.draw.line(screen, 'blue', (x_position, 0), (x_position, height), width=5)
-
-        pygame.draw.line(screen, 'blue', (width-2,0), (width-2,height), width=5)
-
-
-        pygame.draw.line(screen, 'blue', (0,2), (width,2), width=5)
-        for i in range(1, 7):
-            y_position = i * height / 6
-            pygame.draw.line(screen, 'blue', (0, y_position), (width, y_position), width=5)
-        
     
+def drawboard() :
+    screen.fill((0,0,140))
+    
+    for i in range(8):
+         for j in range(7):
+              addToken(i,j,'black')
+
+
+
 
 
 
 def addToken(x,y,player):
 
         if player == 'X':
-            color = 'red'
-        else :
-            color = 'yellow'
+            color = (204,0,0)
+        elif player == 'O':
+            color = (255,213,0)
+        else : color = 'black'
+             
 
 
         
@@ -46,7 +43,7 @@ def addToken(x,y,player):
         coordy = (y*(height/6))-(height/(6*2))
 
 
-        pygame.draw.circle(screen, color, (coordx,coordy), width/20) 
+        pygame.draw.circle(screen, color, (coordx,coordy), width/16) 
   
 
 
@@ -67,7 +64,7 @@ def clickToPos():
      return int(mouse_x/(width/7))
      
     
-
+drawboard()
 
 while running:
 
@@ -106,10 +103,7 @@ while running:
 
                 
                 
-                
 
-
-    drawboard()
    
     pygame.display.flip()
  
