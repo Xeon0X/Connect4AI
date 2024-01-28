@@ -5,39 +5,50 @@ from score import calculateScore
 from minmax import checkWin
 
 
-def alphaBeta(game,profondeur):
-    eval,action = playerMax(game,profondeur, -math.inf,math.inf)
+def alphaBeta(game,profondeur,player):
+    """
+    This function calculates the best move for a given game state with the alphaBeta algorithm.
+    """
+    eval,action = playerMax(game,profondeur,player, -math.inf,math.inf)
     return action
 
-def playerMax(game,profondeur,alpha,beta):
-    if (checkWin(game) or profondeur==0):
-        return calculateScore(game),None
+def playerMax(game,profondeur,player,alpha,beta):
+    """
+    This function calculates the maximum score for a given game state.
+    """
+    if checkWin(game) or profondeur==0 or game.isBoardFull():
+        return calculateScore(game,player),None
     
     maxEval = -math.inf
     maxAction = None
 
-    for move, culumn in game.getPossibleMoves():
-        eval,_ = playerMin(move,profondeur-1,alpha,beta)
+    for gameState, move in game.getPossibleMoves():
+        eval,_ = playerMin(gameState,profondeur-1,player,alpha,beta)
         if eval > maxEval:
             maxEval = eval
-            maxAction = culumn
+            maxAction = move
         alpha = max(alpha,eval)
         if beta <= alpha:
             return maxEval,maxAction
     return maxEval,maxAction
 
-def playerMin(game,profondeur,alpha,beta):
-    if (checkWin(game) or profondeur==0):
-        return calculateScore(game),None
+
+
+def playerMin(game,profondeur,player,alpha,beta):
+    """
+    This function calculates the minimum score for a given game state.
+    """
+    if checkWin(game) or profondeur==0 or game.isBoardFull():
+        return calculateScore(game,player),None
     
     minEval = math.inf
     minAction = None
 
-    for move, culumn in game.getPossibleMoves():
-        eval,_ = playerMax(move,profondeur-1,alpha,beta)
+    for gameState, move in game.getPossibleMoves():
+        eval,_ = playerMax(gameState,profondeur-1,player,alpha,beta)
         if eval < minEval:
             minEval = eval
-            minAction = culumn
+            minAction = move
         beta = min(beta,eval)
         if beta <= alpha:
             return minEval,minAction
@@ -51,11 +62,13 @@ def playAlphaBeta(game):
             print("Draw!")
             break
         if game.currentPlayer == 'X':
-            column = alphaBeta(game, 7)
+            column = alphaBeta(game, 5,game.currentPlayer)
             print(f"Player {game.currentPlayer} played column {column}")
         else:
-            column = int(
-                input(f"Player {game.currentPlayer}, enter a column (0-6): "))
+            column = alphaBeta(game, 5, game.currentPlayer)
+            print(f"Player {game.currentPlayer} played column {column}")
+            #column = int(
+                #input(f"Player {game.currentPlayer}, enter a column (0-6): "))
         if (not game.isAPossibleMove(column)):
             print("Invalid move")
             continue
