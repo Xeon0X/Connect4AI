@@ -88,15 +88,6 @@ class ConnectFour:
     def getColumn(self, column):
         return [row[column] for row in self.board]
 
-
-    def getRow(self, row):
-        return self.board[row]
-
-
-    def getColumn(self, column):
-        return [row[column] for row in self.board]
-
-
     def getDiagonals(self):
         diagonals = []
 

@@ -1,0 +1,204 @@
+Fichier : Game.py
+Classe : ConnectFour
+
+Description :
+Cette classe gère le jeu de Puissance 4
+
+Attributs:
+- board (list(list(str))) : Le plateau de jeu du puissance 4
+- currentPlayer (str) : Le joueur actuel
+- scoreValues (list(int)) : Les scores des différents cas de la fonction d'évaluation
+
+Méthodes :
+- __init__(self): Initialise un nouvel objet ConnectFour
+- printBoard(self): Affiche le plateau de jeu dans la console
+- isAPossibleMove(self, column): Check si la colonne fournie est un mouvement possible pour le joueur
+- isCollumnEmpty(self, column): Check si la colonne donnée est vide
+- isBoardFull(self): Check si le plateau est vide 
+- isWin(self, column): Check si le mouvement à la colonne donnée est un mouvement gagnant
+- makeMove(self, column): Fait le mouvement à la colonne donnée
+- switchPlayer(self): Change le joueur actuel
+- copy(self): Copie le jeu actuel
+- getRow(self, row): Renvoi la ligne demandée
+- getColumn(self, column): Renvoi la colonne demandée
+- getDiagonals(self): Renvoi les diagonales du plateau de jeu
+- getPossibleMoves(self): Renvoi une liste de tuples contenant tout les mouvements possibles et les colonnes correspondantes
+- play(self): Un exemple d'utilisation de la classe ConnectFour
+
+
+
+
+
+Fichier: minmax.py
+
+Fonction : CheckWin
+
+Description : 
+- Cette fonction regarde si un joueur a gagner la partie
+
+Paramètres :
+- game (ConnectFour) : Un objet ConnectFour
+
+Valeur de retour : 
+- (bool) : True si la partie est terminé sinon False
+
+
+Fonction : minmax
+
+Description : 
+- Cette fonction calcule le meilleur mouvement pour une partie donnée avec l'algorithme minmax
+
+Paramètres :
+- game (ConnectFour) : Un objet ConnectFour
+- profondeur (int) : La profondeur pour calculer le meilleur mouvement
+- player (str) : Le joueur pour lequel on doit calculer le meilleur mouvement
+
+Valeur de retour : 
+- (int) : Le numéro de la colonne du meilleur mouvement calculé
+
+
+Fonction : playerMax
+
+Description : 
+- Cette fonction calcule le score maximum pour une partie donnée
+
+Paramètres :
+- game (ConnectFour) : Un objet ConnectFour
+- profondeur (int) : La profondeur pour calculer le meilleur mouvement
+- player (str) : Le joueur pour lequel on doit calculer le meilleur mouvement
+
+Valeur de retour : 
+- (int) : L'évaluation maximal tout les mouvements possibles à partir de la partie actuelle
+- (int) : Le numéro de la colonne qui à l'évaluation maximal
+
+
+Fonction : playerMin
+
+Description : 
+- Cette fonction calcule le score minimum pour une partie donnée
+
+Paramètres :
+- game (ConnectFour) : Un objet ConnectFour
+- profondeur (int) : La profondeur pour calculer le meilleur mouvement
+- player (str) : Le joueur pour lequel on doit calculer le meilleur mouvement
+
+Valeur de retour : 
+- (int) : L'évaluation minimale tout les mouvements possibles à partir de la partie actuelle
+- (int) : Le numéro de la colonne qui à l'évaluation minimale
+
+
+
+Fonction : playMinMax
+
+Description : 
+- Cette fonction joue une partie avec deux IA avec l'algorithme minmax
+
+Paramètres :
+- game (ConnectFour) : Un objet ConnectFour
+
+Valeur de retour : 
+- None
+
+
+
+
+
+
+Fichier: alphaBeta.py
+
+
+Fonction : alphaBeta
+
+Description : 
+- Cette fonction calcule le meilleur mouvement pour une partie donnée avec l'algorithme alphaBeta
+
+Paramètres :
+- game (ConnectFour) : Un objet ConnectFour
+- profondeur (int) : La profondeur pour calculer le meilleur mouvement
+- player (str) : Le joueur pour lequel on doit calculer le meilleur mouvement
+
+Valeur de retour : 
+- (int) : Le numéro de la colonne du meilleur mouvement calculé
+
+
+Fonction : playerMax
+
+Description : 
+- Cette fonction calcule le score maximum pour une partie donnée
+
+Paramètres :
+- game (ConnectFour) : Un objet ConnectFour
+- profondeur (int) : La profondeur pour calculer le meilleur mouvement
+- player (str) : Le joueur pour lequel on doit calculer le meilleur mouvement
+- alpha (int)
+- beta (int)
+
+Valeur de retour : 
+- (int) : L'évaluation maximal tout les mouvements possibles à partir de la partie actuelle
+- (int) : Le numéro de la colonne qui à l'évaluation maximal
+
+
+Fonction : playerMin
+
+Description : 
+- Cette fonction calcule le score minimum pour une partie donnée
+
+Paramètres :
+- game (ConnectFour) : Un objet ConnectFour
+- profondeur (int) : La profondeur pour calculer le meilleur mouvement
+- player (str) : Le joueur pour lequel on doit calculer le meilleur mouvement
+- alpha (int)
+- beta (int)
+
+Valeur de retour : 
+- (int) : L'évaluation minimale tout les mouvements possibles à partir de la partie actuelle
+- (int) : Le numéro de la colonne qui à l'évaluation minimale
+
+
+
+Fonction : playAlphaBeta
+
+Description : 
+- Cette fonction joue une partie avec deux IA avec l'algorithme alphaBeta
+
+Paramètres :
+- game (ConnectFour) : Un objet ConnectFour
+
+Valeur de retour : 
+- None
+
+
+
+
+
+
+
+
+Fichier : score.py
+
+Fonction : calculateScore
+
+Description : 
+- Cette fonction calcule le score d'une partie donnée pour un joueur donnée
+
+Paramètres :
+- game (ConnectFour) : Un objet ConnectFour
+- player (str) : Le joueur pour lequel on doit calculer le meilleur mouvement
+
+Valeur de retour : 
+- (int) : Le score calculé
+
+
+Fonction : getScoreFromLines
+
+Description : 
+- Cette fonction calcule le score pour une ligne du plateau(ligne, colonne ou diagonale)
+  Ici "ligne" correspond à une liste de quatres éléments
+
+Paramètres :
+- game (ConnectFour) : Un objet ConnectFour
+- lines (list(str)) : Une liste de quatres éléments
+- player (str) : Le joueur pour lequel on doit calculer le meilleur mouvement
+
+Valeur de retour : 
+- (int) : Le score calculé
