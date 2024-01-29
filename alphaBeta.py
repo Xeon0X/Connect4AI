@@ -56,6 +56,11 @@ def playerMin(game,profondeur,player,alpha,beta):
 
 
 def playAlphaBeta(game):
+    """ This function is an example of how to use the ConnectFour class with the alphaBeta algorithm.
+
+    Args:
+        game (ConnectFour): The game state.
+    """
     while True:
         game.printBoard()
         if game.isBoardFull():

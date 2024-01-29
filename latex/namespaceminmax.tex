@@ -1,0 +1,109 @@
+\hypertarget{namespaceminmax}{}\doxysection{minmax Namespace Reference}
+\label{namespaceminmax}\index{minmax@{minmax}}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespaceminmax_adc667a1e1e796798799f4ab02a9130d7}{check\+Win}} (\mbox{\hyperlink{namespaceminmax_aaf20ada42f8c5d927a9d95f9a3daf37b}{game}})
+\item 
+def \mbox{\hyperlink{namespaceminmax_a14282bee1327d0f8f099bd5f2eea1e59}{minmax}} (\mbox{\hyperlink{namespaceminmax_aaf20ada42f8c5d927a9d95f9a3daf37b}{game}}, profondeur, player)
+\item 
+def \mbox{\hyperlink{namespaceminmax_a55112795f5d2330b40dc543e0f45c1e9}{player\+Max}} (\mbox{\hyperlink{namespaceminmax_aaf20ada42f8c5d927a9d95f9a3daf37b}{game}}, profondeur, player)
+\item 
+def \mbox{\hyperlink{namespaceminmax_ae840432d7802493d502247857ba90c5c}{player\+Min}} (\mbox{\hyperlink{namespaceminmax_aaf20ada42f8c5d927a9d95f9a3daf37b}{game}}, profondeur, player)
+\item 
+def \mbox{\hyperlink{namespaceminmax_a63f9135b219beed542efd66ac9680475}{play\+Min\+Max}} (\mbox{\hyperlink{namespaceminmax_aaf20ada42f8c5d927a9d95f9a3daf37b}{game}})
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceminmax_aaf20ada42f8c5d927a9d95f9a3daf37b}{game}} = \mbox{\hyperlink{classGame_1_1ConnectFour}{Connect\+Four}}()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespaceminmax_adc667a1e1e796798799f4ab02a9130d7}\label{namespaceminmax_adc667a1e1e796798799f4ab02a9130d7}} 
+\index{minmax@{minmax}!checkWin@{checkWin}}
+\index{checkWin@{checkWin}!minmax@{minmax}}
+\doxysubsubsection{\texorpdfstring{checkWin()}{checkWin()}}
+{\footnotesize\ttfamily def minmax.\+check\+Win (\begin{DoxyParamCaption}\item[{}]{game }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}This function checks if a player has won the game.
+
+
+Args:
+    game (ConnectFour): The game to check
+
+Returns:
+    bool: If a player has won the game or not
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespaceminmax_a14282bee1327d0f8f099bd5f2eea1e59}\label{namespaceminmax_a14282bee1327d0f8f099bd5f2eea1e59}} 
+\index{minmax@{minmax}!minmax@{minmax}}
+\index{minmax@{minmax}!minmax@{minmax}}
+\doxysubsubsection{\texorpdfstring{minmax()}{minmax()}}
+{\footnotesize\ttfamily def minmax.\+minmax (\begin{DoxyParamCaption}\item[{}]{game,  }\item[{}]{profondeur,  }\item[{}]{player }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb} This function calculates the best move for a given game state with the minmax algorithm.
+
+
+Args:
+    game (ConnectFour): The game state.
+    profondeur (int): The depth of the tree.
+    player (str): The player to calculate the best move for.
+
+Returns:
+    int: The best move for the given game state.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespaceminmax_a55112795f5d2330b40dc543e0f45c1e9}\label{namespaceminmax_a55112795f5d2330b40dc543e0f45c1e9}} 
+\index{minmax@{minmax}!playerMax@{playerMax}}
+\index{playerMax@{playerMax}!minmax@{minmax}}
+\doxysubsubsection{\texorpdfstring{playerMax()}{playerMax()}}
+{\footnotesize\ttfamily def minmax.\+player\+Max (\begin{DoxyParamCaption}\item[{}]{game,  }\item[{}]{profondeur,  }\item[{}]{player }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}This function calculates the maximum score for a given game state.
+
+
+Args:
+    game (ConnectFour): The game state.
+    profondeur (int): The depth of the tree.
+    player (str): The player to calculate the best move for.
+
+Returns:
+    int: The maximum score for the given game state.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespaceminmax_ae840432d7802493d502247857ba90c5c}\label{namespaceminmax_ae840432d7802493d502247857ba90c5c}} 
+\index{minmax@{minmax}!playerMin@{playerMin}}
+\index{playerMin@{playerMin}!minmax@{minmax}}
+\doxysubsubsection{\texorpdfstring{playerMin()}{playerMin()}}
+{\footnotesize\ttfamily def minmax.\+player\+Min (\begin{DoxyParamCaption}\item[{}]{game,  }\item[{}]{profondeur,  }\item[{}]{player }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb} This function calculates the minimum score for a given game state.
+
+
+Args:
+    game (ConnectFour): The game state.
+    profondeur (int): The depth of the tree.
+    player (str): The player to calculate the best move for.
+
+Returns:
+    int: The minimum score for the given game state.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespaceminmax_a63f9135b219beed542efd66ac9680475}\label{namespaceminmax_a63f9135b219beed542efd66ac9680475}} 
+\index{minmax@{minmax}!playMinMax@{playMinMax}}
+\index{playMinMax@{playMinMax}!minmax@{minmax}}
+\doxysubsubsection{\texorpdfstring{playMinMax()}{playMinMax()}}
+{\footnotesize\ttfamily def minmax.\+play\+Min\+Max (\begin{DoxyParamCaption}\item[{}]{game }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb} This function is an example of how to use the ConnectFour class with the minmax algorithm.
+
+Args:
+    game (ConnectFour): The game state.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{namespaceminmax_aaf20ada42f8c5d927a9d95f9a3daf37b}\label{namespaceminmax_aaf20ada42f8c5d927a9d95f9a3daf37b}} 
+\index{minmax@{minmax}!game@{game}}
+\index{game@{game}!minmax@{minmax}}
+\doxysubsubsection{\texorpdfstring{game}{game}}
+{\footnotesize\ttfamily minmax.\+game = \mbox{\hyperlink{classGame_1_1ConnectFour}{Connect\+Four}}()}
+
