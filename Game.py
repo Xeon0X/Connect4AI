@@ -1,4 +1,3 @@
-import evaluateFunction
 
 
 
@@ -209,6 +208,20 @@ class ConnectFour:
                 gameState.switchPlayer()
                 possibleMoves.append((gameState, column))
         return possibleMoves
+    
+    def checkWin(self):
+        """This function checks if a player has won the game.
+
+        Returns:
+            bool: If a player has won the game or not
+        """
+        for column in range(7):
+            if not self.isCollumnEmpty(column):
+                if self.isWin(column):
+                    return True
+        return False
+
+  
 
 
     def play(self):

@@ -3,23 +3,7 @@ from Game import ConnectFour
 from score import calculateScore
 
 
-def checkWin(game):
-    """This function checks if a player has won the game.
 
-
-    Args:
-        game (ConnectFour): The game to check
-
-    Returns:
-        bool: If a player has won the game or not
-    """
-    for column in range(7):
-        if not game.isCollumnEmpty(column):
-            if game.isWin(column):
-                return True
-    return False
-
-  
 def minmax(game, profondeur, player):   
     """ This function calculates the best move for a given game state with the minmax algorithm.
 
@@ -48,7 +32,7 @@ def playerMax(game, profondeur, player):
     Returns:
         int: The maximum score for the given game state.
     """
-    if profondeur == 0 or checkWin(game) or game.isBoardFull():
+    if profondeur == 0 or game.checkWin(game) or game.isBoardFull():
         return calculateScore(game, player), None
     
     maxEval = -math.inf
@@ -75,7 +59,7 @@ def playerMin(game, profondeur, player):
     Returns:
         int: The minimum score for the given game state.
     """
-    if profondeur == 0 or checkWin(game) or game.isBoardFull():
+    if profondeur == 0 or game.checkWin(game) or game.isBoardFull():
         return calculateScore(game, player), None
     
     minEval = math.inf
