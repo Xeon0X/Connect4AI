@@ -1,18 +1,35 @@
-import evaluateFunction
+
 
 
 class ConnectFour:
+    """
+    This class represents a game of Connect Four. It contains all the functions needed to play the game.
+    """
     def __init__(self):
+        """
+        Initializes a new ConnectFour object 
+        """
         self.board = [[' ' for _ in range(7)] for _ in range(6)]
         self.currentPlayer = 'X'
         self.scoreValues = [1, 5, 50, 1000]
   
     def printBoard(self):
+        """
+        Displays the game board in the console
+        """
         for row in self.board:
             print('|'.join(row))
 
             
     def isAPossibleMove(self, column):
+        """Checks if the provided column is a possible move for the player
+
+        Args:
+            column (int)): The column of the move give by the player
+
+        Returns:
+            bool: If the move is possible or not
+        """
         if (column > 6 or column < 0):
             return False
         elif (self.board[0][column] != ' '):
@@ -22,6 +39,14 @@ class ConnectFour:
 
           
     def isCollumnEmpty(self, column):
+        """Checks if the given column is empty
+
+        Args:
+            column (int): The column of the move give by the player
+
+        Returns:
+            int: If the column is empty or not
+        """
         if (column > 6 or column < 0):
             return True
         elif (self.board[5][column] == ' '):
@@ -31,6 +56,11 @@ class ConnectFour:
 
 
     def isBoardFull(self):
+        """Checks if the board is full
+
+        Returns:
+            bool: If the board is full or not
+        """
         for column in range(7):
             if (self.board[0][column] == ' '):
                 return False
@@ -38,6 +68,14 @@ class ConnectFour:
 
 
     def isWin(self, column):
+        """Checks if the move in the given column is a winning move
+
+        Args:
+            column (int): The column of the move give by the player
+
+        Returns:
+            bool: If the move is a winning move or not
+        """
         row = 0
         while (self.board[row][column] == ' '):
             row += 1
@@ -67,6 +105,12 @@ class ConnectFour:
 
 
     def makeMove(self, column):
+        """
+        Makes the move in the given column
+
+        Args:
+            column (int): The column of the move give by the player
+        """
         for row in range(5, -1, -1):
             if self.board[row][column] == ' ':
                 self.board[row][column] = self.currentPlayer
@@ -74,30 +118,49 @@ class ConnectFour:
                 
 
     def switchPlayer(self):
+        """Changes the current player
+        """
         self.currentPlayer = 'O' if self.currentPlayer == 'X' else 'X'
 
     def copy(self):
+        """Copies the current game
+
+        Returns:
+            ConnectFour: The copy of the current game
+        """
         newGame = ConnectFour()
         newGame.board = [row[:] for row in self.board]
         newGame.currentPlayer = self.currentPlayer
         return newGame
 
     def getRow(self, row):
+        """ Returns the requested row
+
+        Args:
+            row (int): The row to return
+
+        Returns:
+            list(str): The requested row
+        """
         return self.board[row]
 
     def getColumn(self, column):
+        """ Returns the requested column
+
+        Args:
+            column (int): The column to return
+
+        Returns:
+            list(str): The requested column
+        """
         return [row[column] for row in self.board]
-
-
-    def getRow(self, row):
-        return self.board[row]
-
-
-    def getColumn(self, column):
-        return [row[column] for row in self.board]
-
 
     def getDiagonals(self):
+        """ Returns all the diagonals of the board
+
+        Returns:
+            list(list(str)): All the diagonals of the board
+        """
         diagonals = []
 
         #DIAGONALS UP TO DOWN
@@ -145,6 +208,20 @@ class ConnectFour:
                 gameState.switchPlayer()
                 possibleMoves.append((gameState, column))
         return possibleMoves
+    
+    def checkWin(self):
+        """This function checks if a player has won the game.
+
+        Returns:
+            bool: If a player has won the game or not
+        """
+        for column in range(7):
+            if not self.isCollumnEmpty(column):
+                if self.isWin(column):
+                    return True
+        return False
+
+  
 
 
     def play(self):

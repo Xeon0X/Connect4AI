@@ -2,7 +2,6 @@
 import math
 from Game import ConnectFour
 from score import calculateScore
-from minmax import checkWin
 
 
 def alphaBeta(game,profondeur,player):
@@ -16,7 +15,7 @@ def playerMax(game,profondeur,player,alpha,beta):
     """
     This function calculates the maximum score for a given game state.
     """
-    if checkWin(game) or profondeur==0 or game.isBoardFull():
+    if game.checkWin(game) or profondeur==0 or game.isBoardFull():
         return calculateScore(game,player),None
     
     maxEval = -math.inf
@@ -38,7 +37,7 @@ def playerMin(game,profondeur,player,alpha,beta):
     """
     This function calculates the minimum score for a given game state.
     """
-    if checkWin(game) or profondeur==0 or game.isBoardFull():
+    if game.checkWin(game) or profondeur==0 or game.isBoardFull():
         return calculateScore(game,player),None
     
     minEval = math.inf
@@ -56,6 +55,11 @@ def playerMin(game,profondeur,player,alpha,beta):
 
 
 def playAlphaBeta(game):
+    """ This function is an example of how to use the ConnectFour class with the alphaBeta algorithm.
+
+    Args:
+        game (ConnectFour): The game state.
+    """
     while True:
         game.printBoard()
         if game.isBoardFull():

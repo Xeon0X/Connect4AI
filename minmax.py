@@ -3,30 +3,36 @@ from Game import ConnectFour
 from score import calculateScore
 
 
-def checkWin(game):
-    """
-    This function checks if a player has won the game.
-    """
-    for column in range(7):
-        if not game.isCollumnEmpty(column):
-            if game.isWin(column):
-                return True
-    return False
 
-  
 def minmax(game, profondeur, player):   
-    """
-    This function calculates the best move for a given game state with the minmax algorithm.
+    """ This function calculates the best move for a given game state with the minmax algorithm.
+
+
+    Args:
+        game (ConnectFour): The game state.
+        profondeur (int): The depth of the tree.
+        player (str): The player to calculate the best move for.
+
+    Returns:
+        int: The best move for the given game state.
     """
     eval, action = playerMax(game, profondeur, player)
     return action
 
 
 def playerMax(game, profondeur, player):   
+    """This function calculates the maximum score for a given game state.
+
+
+    Args:
+        game (ConnectFour): The game state.
+        profondeur (int): The depth of the tree.
+        player (str): The player to calculate the best move for.
+
+    Returns:
+        int: The maximum score for the given game state.
     """
-    This function calculates the maximum score for a given game state.
-    """
-    if profondeur == 0 or checkWin(game) or game.isBoardFull():
+    if profondeur == 0 or game.checkWin(game) or game.isBoardFull():
         return calculateScore(game, player), None
     
     maxEval = -math.inf
@@ -42,10 +48,18 @@ def playerMax(game, profondeur, player):
 
 
 def playerMin(game, profondeur, player):
+    """ This function calculates the minimum score for a given game state.
+
+
+    Args:
+        game (ConnectFour): The game state.
+        profondeur (int): The depth of the tree.
+        player (str): The player to calculate the best move for.
+
+    Returns:
+        int: The minimum score for the given game state.
     """
-    This function calculates the minimum score for a given game state.
-    """
-    if profondeur == 0 or checkWin(game) or game.isBoardFull():
+    if profondeur == 0 or game.checkWin(game) or game.isBoardFull():
         return calculateScore(game, player), None
     
     minEval = math.inf
@@ -61,6 +75,11 @@ def playerMin(game, profondeur, player):
 
 
 def playMinMax(game):
+    """ This function is an example of how to use the ConnectFour class with the minmax algorithm.
+
+    Args:
+        game (ConnectFour): The game state.
+    """
     while True:
         game.printBoard()
 

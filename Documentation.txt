@@ -1,0 +1,212 @@
+File: Game.py
+Class: ConnectFour
+
+Description:
+This class manages the Connect Four game.
+
+Attributes:
+
+    board (list(list(str))): The Connect Four game board
+    currentPlayer (str): The current player
+    scoreValues (list(int)): Scores for different cases of the evaluation function
+
+Methods:
+
+    __init__(self): Initializes a new ConnectFour object
+    printBoard(self): Displays the game board in the console
+    isAPossibleMove(self, column): Checks if the provided column is a possible move for the player
+    isCollumnEmpty(self, column): Checks if the given column is empty
+    isBoardFull(self): Checks if the board is full
+    isWin(self, column): Checks if the move in the given column is a winning move
+    makeMove(self, column): Makes the move in the given column
+    switchPlayer(self): Changes the current player
+    copy(self): Copies the current game
+    getRow(self, row): Returns the requested row
+    getColumn(self, column): Returns the requested column
+    getDiagonals(self): Returns the diagonals of the game board
+    getPossibleMoves(self): Returns a list of tuples containing all possible moves and corresponding columns
+    play(self): An example of using the ConnectFour class
+
+File: minmax.py
+
+Function: CheckWin
+
+Description:
+
+    This function checks if a player has won the game.
+
+Parameters:
+
+    game (ConnectFour): A ConnectFour object
+
+Return Value:
+
+    (bool): True if the game is over, otherwise False
+
+Function: minmax
+
+Description:
+
+    This function calculates the best move for a given game using the minmax algorithm.
+
+Parameters:
+
+    game (ConnectFour): A ConnectFour object
+    depth (int): The depth to calculate the best move
+    player (str): The player for whom to calculate the best move
+
+Return Value:
+
+    (int): The column number of the calculated best move
+
+Function: playerMax
+
+Description:
+
+    This function calculates the maximum score for a given game.
+
+Parameters:
+
+    game (ConnectFour): A ConnectFour object
+    depth (int): The depth to calculate the best move
+    player (str): The player for whom to calculate the best move
+
+Return Value:
+
+    (int): The maximum evaluation of all possible moves from the current game state
+    (int): The column number with the maximum evaluation
+
+Function: playerMin
+
+Description:
+
+    This function calculates the minimum score for a given game.
+
+Parameters:
+
+    game (ConnectFour): A ConnectFour object
+    depth (int): The depth to calculate the best move
+    player (str): The player for whom to calculate the best move
+
+Return Value:
+
+    (int): The minimum evaluation of all possible moves from the current game state
+    (int): The column number with the minimum evaluation
+
+Function: playMinMax
+
+Description:
+
+    This function plays a game with two AI players using the minmax algorithm.
+
+Parameters:
+
+    game (ConnectFour): A ConnectFour object
+
+Return Value:
+
+    None
+
+File: alphaBeta.py
+
+Function: alphaBeta
+
+Description:
+
+    This function calculates the best move for a given game using the alpha-beta pruning algorithm.
+
+Parameters:
+
+    game (ConnectFour): A ConnectFour object
+    depth (int): The depth to calculate the best move
+    player (str): The player for whom to calculate the best move
+
+Return Value:
+
+    (int): The column number of the calculated best move
+
+Function: playerMax
+
+Description:
+
+    This function calculates the maximum score for a given game using alpha-beta pruning.
+
+Parameters:
+
+    game (ConnectFour): A ConnectFour object
+    depth (int): The depth to calculate the best move
+    player (str): The player for whom to calculate the best move
+    alpha (int)
+    beta (int)
+
+Return Value:
+
+    (int): The maximum evaluation of all possible moves from the current game state
+    (int): The column number with the maximum evaluation
+
+Function: playerMin
+
+Description:
+
+    This function calculates the minimum score for a given game using alpha-beta pruning.
+
+Parameters:
+
+    game (ConnectFour): A ConnectFour object
+    depth (int): The depth to calculate the best move
+    player (str): The player for whom to calculate the best move
+    alpha (int)
+    beta (int)
+
+Return Value:
+
+    (int): The minimum evaluation of all possible moves from the current game state
+    (int): The column number with the minimum evaluation
+
+Function: playAlphaBeta
+
+Description:
+
+    This function plays a game with two AI players using the alpha-beta pruning algorithm.
+
+Parameters:
+
+    game (ConnectFour): A ConnectFour object
+
+Return Value:
+
+    None
+
+File: score.py
+
+Function: calculateScore
+
+Description:
+
+    This function calculates the score of a given game for a given player.
+
+Parameters:
+
+    game (ConnectFour): A ConnectFour object
+    player (str): The player for whom to calculate the best move
+
+Return Value:
+
+    (int): The calculated score
+
+Function: getScoreFromLines
+
+Description:
+
+    This function calculates the score for a line of the board (row, column, or diagonal).
+    Here, "line" corresponds to a list of four elements.
+
+Parameters:
+
+    game (ConnectFour): A ConnectFour object
+    lines (list(str)): A list of four elements
+    player (str): The player for whom to calculate the best move
+
+Return Value:
+
+    (int): The calculated score
