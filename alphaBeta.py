@@ -15,7 +15,7 @@ def playerMax(game,profondeur,player,alpha,beta):
     """
     This function calculates the maximum score for a given game state.
     """
-    if game.checkWin(game) or profondeur==0 or game.isBoardFull():
+    if game.checkWin() or profondeur==0 or game.isBoardFull():
         return calculateScore(game,player),None
     
     maxEval = -math.inf
@@ -37,7 +37,7 @@ def playerMin(game,profondeur,player,alpha,beta):
     """
     This function calculates the minimum score for a given game state.
     """
-    if game.checkWin(game) or profondeur==0 or game.isBoardFull():
+    if game.checkWin() or profondeur==0 or game.isBoardFull():
         return calculateScore(game,player),None
     
     minEval = math.inf
