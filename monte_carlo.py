@@ -7,7 +7,8 @@ from minmax import checkWin
 import curses
 import time
 
-exploration = 1 / math.sqrt(2)
+# exploration = 1 / math.sqrt(2)
+exploration = 1
 
 class Node:
     def __init__(self, game, parent=None, move=None):
@@ -26,7 +27,7 @@ class Node:
         return True
 
 
-def isInComputationalBudget(startTime, limit=120):
+def isInComputationalBudget(startTime, limit=30):
     return True if time.time() - startTime < limit else False
 
 
