@@ -1,13 +1,13 @@
+import curses
 import math
 import time
 import random
 from Game import ConnectFour
 from minmax import checkWin
 
-import curses
-import time
 
 exploration = 1 / math.sqrt(2)
+
 
 class Node:
     def __init__(self, game, parent=None, move=None):
@@ -26,7 +26,7 @@ class Node:
         return True
 
 
-def isInComputationalBudget(startTime, limit=120):
+def isInComputationalBudget(startTime, limit=20):
     return True if time.time() - startTime < limit else False
 
 
@@ -35,7 +35,7 @@ def backup(node, reward):
         print("While the node is not the root: ")
         node.visited += 1
         node.totalReward += reward
-        reward = -reward 
+        reward = -reward
         print("The total reward:", node.totalReward)
         print("The next reward:", reward)
         print("Total visit: ", node.visited)
@@ -43,29 +43,48 @@ def backup(node, reward):
         node.game.printBoard()
         node = node.parent
 
-        
+
+def visualize_paths(root):
+    G = nx.Graph()
+    stack = [(None, root)]
+
+    while stack:
+        parent, current_node = stack.pop()
+        G.add_node(current_node)
+        if parent:
+            G.add_edge(parent, current_node)
+
+        for child in current_node.children:
+            stack.append((current_node, child))
+
+    pos = nx.spring_layout(G)
+    nx.draw(G, pos, with_labels=True, font_weight='bold')
+    plt.show()
 
 
 def bestChild(node, exploration):
     bestChildren = []
     for child in node.childs:
-        bestChildren.append([child, child.totalReward / child.visited + exploration * math.sqrt((2 * math.log(node.visited))/child.visited)])
-    return max(bestChildren, key=lambda x: x[1])[0] # get the child
+        bestChildren.append([child, child.totalReward / child.visited +
+                            exploration * math.sqrt((math.log(node.visited))/child.visited)])
+    return max(bestChildren, key=lambda x: x[1])[0]  # get the child
 
 
 def remainingMoves(node):
     possibleMoves = node.game.getPossibleMoves()
     print("\nGet all possible moves: ", possibleMoves)
     print("And remove the already played: ", node.playedMove)
-    remainingMoves = [move[1] for move in possibleMoves if (move[1] != node.playedMove and node.isMoveUnique(move))]
+    remainingMoves = [move[1] for move in possibleMoves if (
+        move[1] != node.playedMove and node.isMoveUnique(move))]
     print("To get only: ", remainingMoves)
     return remainingMoves
 
 
 def expand(node, remainingMoves):
-    selectedMove = random.choice(remainingMoves) # get the column and not the temporary game state
+    # get the column and not the temporary game state
+    selectedMove = random.choice(remainingMoves)
     print("\nChoose a random one: ", selectedMove)
-    
+
     child = Node(node.game.copy(), parent=node)
     child.game.makeMove(selectedMove)
     child.game.switchPlayer()
@@ -74,13 +93,14 @@ def expand(node, remainingMoves):
     print("Turn to ", child.game.currentPlayer)
     child.playedMove = selectedMove
 
-    
     print("Create and return a child from this state")
     node.childs.append(child)
     return child
 
+
 def treePolicy(node):
-    print("\nIn treePolicy, check for nonterminal: ", node.game.isBoardFull(), checkWin(node.game))
+    print("\nIn treePolicy, check for nonterminal: ",
+          node.game.isBoardFull(), checkWin(node.game))
     while not node.game.isBoardFull() and not checkWin(node.game):
         print("\nWhile non terminal:")
         moves = remainingMoves(node)
@@ -92,22 +112,24 @@ def treePolicy(node):
             node = bestChild(node, exploration)
     return node
 
+
 def defaultPolicy(game):
     game = game.copy()
     finalMove = None
-    while not game.isBoardFull() and not checkWin(game) :
+    while not game.isBoardFull() and not checkWin(game):
         # time.sleep(0.1)
         print("\nWhile the game is not won: ")
         move = random.choice(game.getPossibleMoves())
         print("Choose a random move:", move)
-        game.makeMove(move[1]) # get the column and not the temporary game state
+        # get the column and not the temporary game state
+        game.makeMove(move[1])
         game.switchPlayer()
         print("The board looks like this after the move: ")
         game.printBoard()
         print("Turn to ", game.currentPlayer)
 
         finalMove = move[1]
-    if finalMove != None :
+    if finalMove != None:
         print("The game has been lose by: ", game.currentPlayer)
         game.printBoard()
 
@@ -146,11 +168,12 @@ def UCTSearch(game, debug=False):
 def playMonteCarlo(game):
     while True:
         game.printBoard()
+
         if game.isBoardFull():
             print("Draw!")
             break
         if game.currentPlayer == 'X':
-            column = UCTSearch(game) #get column
+            column = UCTSearch(game)  # get column
             print(f"Player {game.currentPlayer} played column {column}")
         else:
             column = int(

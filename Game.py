@@ -42,25 +42,39 @@ class ConnectFour:
         return True
 
     def isWin(self, column):
+        """Checks if the move in the given column is a winning move
+
+        Args:
+            column (int): The column of the move give by the player
+
+        Returns:
+            bool: If the move is a winning move or not
+        """
         row = 0
         while (self.board[row][column] == ' '):
             row += 1
+
         # Check vertical grid
         if (row <= 2):
             if (self.board[row][column] == self.board[row+1][column] == self.board[row+2][column] == self.board[row+3][column]):
                 return True
+
         # Check horizontal grid
-        for i in range(max(0, column-3), min(3, column)):
-            if (self.board[row][i] == self.board[row][i+1] == self.board[row][i+2] == self.board[row][i+3]):
-                return True
+        for i in range(4):
+            if (column+i-3 >= 0 and column+i <= 6):
+                if (self.board[row][column+i-3] == self.board[row][column+i-2] == self.board[row][column+i-1] == self.board[row][column+i]):
+                    return True
+
         # Check diagonal grid
         for i in range(4):
             if (row+i-3 >= 0 and row+i <= 5 and column+i-3 >= 0 and column+i <= 6):
                 if (self.board[row+i-3][column+i-3] == self.board[row+i-2][column+i-2] == self.board[row+i-1][column+i-1] == self.board[row+i][column+i]):
                     return True
+
             if (row-i+3 <= 5 and row-i >= 0 and column+i-3 >= 0 and column+i <= 6):
                 if (self.board[row-i+3][column+i-3] == self.board[row-i+2][column+i-2] == self.board[row-i+1][column+i-1] == self.board[row-i][column+i]):
                     return True
+
         return False
 
     def makeMove(self, column):
