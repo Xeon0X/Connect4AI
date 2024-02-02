@@ -3,7 +3,6 @@ from Game import ConnectFour
 from score import calculateScore
 
 
-
 def minmax(game, profondeur, player):   
     """ This function calculates the best move for a given game state with the minmax algorithm.
 
@@ -32,7 +31,7 @@ def playerMax(game, profondeur, player):
     Returns:
         int: The maximum score for the given game state.
     """
-    if profondeur == 0 or game.checkWin(game) or game.isBoardFull():
+    if profondeur == 0 or game.checkWin() or game.isBoardFull():
         return calculateScore(game, player), None
     
     maxEval = -math.inf
@@ -59,7 +58,7 @@ def playerMin(game, profondeur, player):
     Returns:
         int: The minimum score for the given game state.
     """
-    if profondeur == 0 or game.checkWin(game) or game.isBoardFull():
+    if profondeur == 0 or game.checkWin() or game.isBoardFull():
         return calculateScore(game, player), None
     
     minEval = math.inf
@@ -97,6 +96,7 @@ def playMinMax(game):
         game.makeMove(chosenMove)
 
         if game.isWin(chosenMove):
+            game.switchPlayer()
             print(f"Player {game.currentPlayer} wins!")
             game.printBoard()
             break
@@ -105,8 +105,6 @@ def playMinMax(game):
             print("Draw!")
             game.printBoard()
             break
-
-        game.switchPlayer()
 
 
 if __name__ == "__main__":

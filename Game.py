@@ -1,6 +1,3 @@
-
-
-
 class ConnectFour:
     """
     This class represents a game of Connect Four. It contains all the functions needed to play the game.
@@ -110,17 +107,24 @@ class ConnectFour:
 
         Args:
             column (int): The column of the move give by the player
+        
+        Returns:
+            int: The row of the move
         """
         for row in range(5, -1, -1):
             if self.board[row][column] == ' ':
                 self.board[row][column] = self.currentPlayer
-                break
+                self.switchPlayer()
+                return row
+        
+        return -1
                 
 
     def switchPlayer(self):
         """Changes the current player
         """
         self.currentPlayer = 'O' if self.currentPlayer == 'X' else 'X'
+
 
     def copy(self):
         """Copies the current game
@@ -133,6 +137,7 @@ class ConnectFour:
         newGame.currentPlayer = self.currentPlayer
         return newGame
 
+
     def getRow(self, row):
         """ Returns the requested row
 
@@ -144,6 +149,7 @@ class ConnectFour:
         """
         return self.board[row]
 
+
     def getColumn(self, column):
         """ Returns the requested column
 
@@ -154,6 +160,7 @@ class ConnectFour:
             list(str): The requested column
         """
         return [row[column] for row in self.board]
+
 
     def getDiagonals(self):
         """ Returns all the diagonals of the board
@@ -205,10 +212,10 @@ class ConnectFour:
             if self.isAPossibleMove(column):
                 gameState = self.copy()
                 gameState.makeMove(column)
-                gameState.switchPlayer()
                 possibleMoves.append((gameState, column))
         return possibleMoves
     
+
     def checkWin(self):
         """This function checks if a player has won the game.
 
@@ -220,9 +227,7 @@ class ConnectFour:
                 if self.isWin(column):
                     return True
         return False
-
-  
-
+    
 
     def play(self):
         """

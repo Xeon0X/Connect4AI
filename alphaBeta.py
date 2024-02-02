@@ -1,4 +1,3 @@
-
 import math
 from Game import ConnectFour
 from score import calculateScore
@@ -15,7 +14,7 @@ def playerMax(game,profondeur,player,alpha,beta):
     """
     This function calculates the maximum score for a given game state.
     """
-    if game.checkWin(game) or profondeur==0 or game.isBoardFull():
+    if game.checkWin() or profondeur==0 or game.isBoardFull():
         return calculateScore(game,player),None
     
     maxEval = -math.inf
@@ -37,7 +36,7 @@ def playerMin(game,profondeur,player,alpha,beta):
     """
     This function calculates the minimum score for a given game state.
     """
-    if game.checkWin(game) or profondeur==0 or game.isBoardFull():
+    if game.checkWin() or profondeur==0 or game.isBoardFull():
         return calculateScore(game,player),None
     
     minEval = math.inf
@@ -79,10 +78,10 @@ def playAlphaBeta(game):
 
         game.makeMove(column)
         if game.isWin(column):
+            game.switchPlayer()
             print(f"Player {game.currentPlayer} wins!")
             game.printBoard()
             break
-        game.switchPlayer()
 
 
 if __name__ == "__main__":
