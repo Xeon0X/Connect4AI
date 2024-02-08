@@ -1,0 +1,167 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 950px;
+                 background-color: #222222;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+             #config {
+                 float: left;
+                 width: 400px;
+                 height: 600px;
+             }
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+            <div id="config"></div>
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "hsl(4680.0, 100%, 50%)", "font": {"color": "white"}, "id": "140521946815824", "label": "State: \u003cGame.ConnectFour object at 0x7fcdd37e1a10\u003e\nAction: None\nVisit Count: 39\nReward: -38", "shape": "dot", "size": 30.0}, {"color": "hsl(0.0, 100%, 50%)", "font": {"color": "white"}, "id": "140521946813584", "label": "State: \u003cGame.ConnectFour object at 0x7fcdd0b910d0\u003e\nAction: 5\nVisit Count: 2\nReward: 1", "shape": "dot", "size": 1.5384615384615383}, {"color": "hsl(0.0, 100%, 50%)", "font": {"color": "white"}, "id": "140521946816720", "label": "State: \u003cGame.ConnectFour object at 0x7fcdd0b90cd0\u003e\nAction: 5\nVisit Count: 2\nReward: 1", "shape": "dot", "size": 1.5384615384615383}, {"color": "hsl(0.0, 100%, 50%)", "font": {"color": "white"}, "id": "140521946814288", "label": "State: \u003cGame.ConnectFour object at 0x7fcdd0b91a10\u003e\nAction: 5\nVisit Count: 2\nReward: 1", "shape": "dot", "size": 1.5384615384615383}, {"color": "hsl(0.0, 100%, 50%)", "font": {"color": "white"}, "id": "140521946721744", "label": "State: \u003cGame.ConnectFour object at 0x7fcdd0b7ad10\u003e\nAction: 5\nVisit Count: 2\nReward: 1", "shape": "dot", "size": 1.5384615384615383}, {"color": "hsl(0.0, 100%, 50%)", "font": {"color": "white"}, "id": "140521946723216", "label": "State: \u003cGame.ConnectFour object at 0x7fcdd0b7b850\u003e\nAction: 3\nVisit Count: 2\nReward: 1", "shape": "dot", "size": 1.5384615384615383}, {"color": "hsl(0.0, 100%, 50%)", "font": {"color": "white"}, "id": "140521946748304", "label": "State: \u003cGame.ConnectFour object at 0x7fcdd0b78890\u003e\nAction: 5\nVisit Count: 2\nReward: 1", "shape": "dot", "size": 1.5384615384615383}, {"color": "hsl(0.0, 100%, 50%)", "font": {"color": "white"}, "id": "140521946750672", "label": "State: \u003cGame.ConnectFour object at 0x7fcdd0b80250\u003e\nAction: 3\nVisit Count: 2\nReward: 1", "shape": "dot", "size": 1.5384615384615383}, {"color": "hsl(0.0, 100%, 50%)", "font": {"color": "white"}, "id": "140521946747728", "label": "State: \u003cGame.ConnectFour object at 0x7fcdd0b80490\u003e\nAction: 6\nVisit Count: 2\nReward: 1", "shape": "dot", "size": 1.5384615384615383}, {"color": "hsl(0.0, 100%, 50%)", "font": {"color": "white"}, "id": "140521946757776", "label": "State: \u003cGame.ConnectFour object at 0x7fcdd0b82090\u003e\nAction: 5\nVisit Count: 2\nReward: 1", "shape": "dot", "size": 1.5384615384615383}, {"color": "hsl(0.0, 100%, 50%)", "font": {"color": "white"}, "id": "140521946746960", "label": "State: \u003cGame.ConnectFour object at 0x7fcdd0b7b990\u003e\nAction: 5\nVisit Count: 2\nReward: 1", "shape": "dot", "size": 1.5384615384615383}, {"color": "hsl(0.0, 100%, 50%)", "font": {"color": "white"}, "id": "140521946745744", "label": "State: \u003cGame.ConnectFour object at 0x7fcdd0b820d0\u003e\nAction: 6\nVisit Count: 2\nReward: 1", "shape": "dot", "size": 1.5384615384615383}, {"color": "hsl(0.0, 100%, 50%)", "font": {"color": "white"}, "id": "140521946757072", "label": "State: \u003cGame.ConnectFour object at 0x7fcdd0b81090\u003e\nAction: 3\nVisit Count: 2\nReward: 1", "shape": "dot", "size": 1.5384615384615383}, {"color": "hsl(0.0, 100%, 50%)", "font": {"color": "white"}, "id": "140521946754832", "label": "State: \u003cGame.ConnectFour object at 0x7fcdd0b83ad0\u003e\nAction: 5\nVisit Count: 2\nReward: 1", "shape": "dot", "size": 1.5384615384615383}, {"color": "hsl(0.0, 100%, 50%)", "font": {"color": "white"}, "id": "140521946746256", "label": "State: \u003cGame.ConnectFour object at 0x7fcdd0b83c10\u003e\nAction: 4\nVisit Count: 2\nReward: 1", "shape": "dot", "size": 1.5384615384615383}, {"color": "hsl(0.0, 100%, 50%)", "font": {"color": "white"}, "id": "140521946628816", "label": "State: \u003cGame.ConnectFour object at 0x7fcdd0b66d10\u003e\nAction: 4\nVisit Count: 2\nReward: 1", "shape": "dot", "size": 1.5384615384615383}, {"color": "hsl(0.0, 100%, 50%)", "font": {"color": "white"}, "id": "140521946873616", "label": "State: \u003cGame.ConnectFour object at 0x7fcdd0b61850\u003e\nAction: 5\nVisit Count: 2\nReward: 1", "shape": "dot", "size": 1.5384615384615383}, {"color": "hsl(0.0, 100%, 50%)", "font": {"color": "white"}, "id": "140521946871248", "label": "State: \u003cGame.ConnectFour object at 0x7fcdd0b9f490\u003e\nAction: 5\nVisit Count: 2\nReward: 1", "shape": "dot", "size": 1.5384615384615383}, {"color": "hsl(0.0, 100%, 50%)", "font": {"color": "white"}, "id": "140521946872912", "label": "State: \u003cGame.ConnectFour object at 0x7fcdd0b9efd0\u003e\nAction: 5\nVisit Count: 2\nReward: 1", "shape": "dot", "size": 1.5384615384615383}, {"color": "hsl(0.0, 100%, 50%)", "font": {"color": "white"}, "id": "140521946867856", "label": "State: \u003cGame.ConnectFour object at 0x7fcdd0b9ef90\u003e\nAction: 5\nVisit Count: 2\nReward: 1", "shape": "dot", "size": 1.5384615384615383}, {"color": "hsl(0.0, 100%, 50%)", "font": {"color": "white"}, "id": "140521946871696", "label": "State: \u003cGame.ConnectFour object at 0x7fcdd0b9da10\u003e\nAction: 5\nVisit Count: 2\nReward: 1", "shape": "dot", "size": 1.5384615384615383}, {"color": "hsl(0.0, 100%, 50%)", "font": {"color": "white"}, "id": "140521946860688", "label": "State: \u003cGame.ConnectFour object at 0x7fcdd0b9cfd0\u003e\nAction: 5\nVisit Count: 2\nReward: 1", "shape": "dot", "size": 1.5384615384615383}, {"color": "hsl(0.0, 100%, 50%)", "font": {"color": "white"}, "id": "140521946867344", "label": "State: \u003cGame.ConnectFour object at 0x7fcdd0b9d310\u003e\nAction: 5\nVisit Count: 2\nReward: 1", "shape": "dot", "size": 1.5384615384615383}, {"color": "hsl(0.0, 100%, 50%)", "font": {"color": "white"}, "id": "140521946867664", "label": "State: \u003cGame.ConnectFour object at 0x7fcdd0b9fe90\u003e\nAction: 5\nVisit Count: 2\nReward: 1", "shape": "dot", "size": 1.5384615384615383}, {"color": "hsl(0.0, 100%, 50%)", "font": {"color": "white"}, "id": "140521946871632", "label": "State: \u003cGame.ConnectFour object at 0x7fcdd0b9d110\u003e\nAction: 5\nVisit Count: 2\nReward: 1", "shape": "dot", "size": 1.5384615384615383}, {"color": "hsl(0.0, 100%, 50%)", "font": {"color": "white"}, "id": "140521946863120", "label": "State: \u003cGame.ConnectFour object at 0x7fcdd0b9ca90\u003e\nAction: 5\nVisit Count: 2\nReward: 1", "shape": "dot", "size": 1.5384615384615383}, {"color": "hsl(0.0, 100%, 50%)", "font": {"color": "white"}, "id": "140521946926352", "label": "State: \u003cGame.ConnectFour object at 0x7fcdd0bacd50\u003e\nAction: 5\nVisit Count: 2\nReward: 1", "shape": "dot", "size": 1.5384615384615383}, {"color": "hsl(0.0, 100%, 50%)", "font": {"color": "white"}, "id": "140521946939024", "label": "State: \u003cGame.ConnectFour object at 0x7fcdd0baef90\u003e\nAction: 2\nVisit Count: 2\nReward: 1", "shape": "dot", "size": 1.5384615384615383}, {"color": "hsl(0.0, 100%, 50%)", "font": {"color": "white"}, "id": "140521946924688", "label": "State: \u003cGame.ConnectFour object at 0x7fcdd0bafb90\u003e\nAction: 4\nVisit Count: 2\nReward: 1", "shape": "dot", "size": 1.5384615384615383}, {"color": "hsl(0.0, 100%, 50%)", "font": {"color": "white"}, "id": "140521946931152", "label": "State: \u003cGame.ConnectFour object at 0x7fcdd0bad590\u003e\nAction: 5\nVisit Count: 2\nReward: 1", "shape": "dot", "size": 1.5384615384615383}, {"color": "hsl(0.0, 100%, 50%)", "font": {"color": "white"}, "id": "140521946925456", "label": "State: \u003cGame.ConnectFour object at 0x7fcdd0bafcd0\u003e\nAction: 5\nVisit Count: 2\nReward: 1", "shape": "dot", "size": 1.5384615384615383}, {"color": "hsl(0.0, 100%, 50%)", "font": {"color": "white"}, "id": "140521946929552", "label": "State: \u003cGame.ConnectFour object at 0x7fcdd0baf3d0\u003e\nAction: 6\nVisit Count: 2\nReward: 1", "shape": "dot", "size": 1.5384615384615383}, {"color": "hsl(0.0, 100%, 50%)", "font": {"color": "white"}, "id": "140521946875152", "label": "State: \u003cGame.ConnectFour object at 0x7fcdd0ba2a90\u003e\nAction: 4\nVisit Count: 2\nReward: 1", "shape": "dot", "size": 1.5384615384615383}, {"color": "hsl(0.0, 100%, 50%)", "font": {"color": "white"}, "id": "140521946885456", "label": "State: \u003cGame.ConnectFour object at 0x7fcdd0ba1210\u003e\nAction: 5\nVisit Count: 2\nReward: 1", "shape": "dot", "size": 1.5384615384615383}, {"color": "hsl(0.0, 100%, 50%)", "font": {"color": "white"}, "id": "140521946885328", "label": "State: \u003cGame.ConnectFour object at 0x7fcdd0ba2b90\u003e\nAction: 5\nVisit Count: 2\nReward: 1", "shape": "dot", "size": 1.5384615384615383}, {"color": "hsl(0.0, 100%, 50%)", "font": {"color": "white"}, "id": "140521946884496", "label": "State: \u003cGame.ConnectFour object at 0x7fcdd0ba1b90\u003e\nAction: 1\nVisit Count: 2\nReward: 1", "shape": "dot", "size": 1.5384615384615383}, {"color": "hsl(0.0, 100%, 50%)", "font": {"color": "white"}, "id": "140521946889360", "label": "State: \u003cGame.ConnectFour object at 0x7fcdd0ba2b10\u003e\nAction: 5\nVisit Count: 2\nReward: 1", "shape": "dot", "size": 1.5384615384615383}, {"color": "hsl(0.0, 100%, 50%)", "font": {"color": "white"}, "id": "140521946883280", "label": "State: \u003cGame.ConnectFour object at 0x7fcdd0ba36d0\u003e\nAction: 5\nVisit Count: 2\nReward: 1", "shape": "dot", "size": 1.5384615384615383}, {"color": "hsl(0.0, 100%, 50%)", "font": {"color": "white"}, "id": "140521946883600", "label": "State: \u003cGame.ConnectFour object at 0x7fcdd0ba2c10\u003e\nAction: 3\nVisit Count: 2\nReward: 1", "shape": "dot", "size": 1.5384615384615383}]);
+                  edges = new vis.DataSet([{"from": "140521946815824", "to": "140521946813584"}, {"from": "140521946815824", "to": "140521946816720"}, {"from": "140521946815824", "to": "140521946814288"}, {"from": "140521946815824", "to": "140521946721744"}, {"from": "140521946815824", "to": "140521946723216"}, {"from": "140521946815824", "to": "140521946748304"}, {"from": "140521946815824", "to": "140521946750672"}, {"from": "140521946815824", "to": "140521946747728"}, {"from": "140521946815824", "to": "140521946757776"}, {"from": "140521946815824", "to": "140521946746960"}, {"from": "140521946815824", "to": "140521946745744"}, {"from": "140521946815824", "to": "140521946757072"}, {"from": "140521946815824", "to": "140521946754832"}, {"from": "140521946815824", "to": "140521946746256"}, {"from": "140521946815824", "to": "140521946628816"}, {"from": "140521946815824", "to": "140521946873616"}, {"from": "140521946815824", "to": "140521946871248"}, {"from": "140521946815824", "to": "140521946872912"}, {"from": "140521946815824", "to": "140521946867856"}, {"from": "140521946815824", "to": "140521946871696"}, {"from": "140521946815824", "to": "140521946860688"}, {"from": "140521946815824", "to": "140521946867344"}, {"from": "140521946815824", "to": "140521946867664"}, {"from": "140521946815824", "to": "140521946871632"}, {"from": "140521946815824", "to": "140521946863120"}, {"from": "140521946815824", "to": "140521946926352"}, {"from": "140521946815824", "to": "140521946939024"}, {"from": "140521946815824", "to": "140521946924688"}, {"from": "140521946815824", "to": "140521946931152"}, {"from": "140521946815824", "to": "140521946925456"}, {"from": "140521946815824", "to": "140521946929552"}, {"from": "140521946815824", "to": "140521946875152"}, {"from": "140521946815824", "to": "140521946885456"}, {"from": "140521946815824", "to": "140521946885328"}, {"from": "140521946815824", "to": "140521946884496"}, {"from": "140521946815824", "to": "140521946889360"}, {"from": "140521946815824", "to": "140521946883280"}, {"from": "140521946815824", "to": "140521946883600"}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": true
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+                  // if this network requires displaying the configure window,
+                  // put it in its div
+                  options.configure["container"] = document.getElementById("config");
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>
