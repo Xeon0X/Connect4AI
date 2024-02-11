@@ -182,8 +182,6 @@ def get_normalized_reward_color(node, max_reward):
 
 
 def get_normalized_visit_size(node, max_visits):
-    # Normalise le nombre de visites pour la taille du nœud
-    # Vous pouvez ajuster le facteur d'échelle selon vos préférences
     return node.visitCount / max_visits * 30
 
 
@@ -203,7 +201,6 @@ def visualize_tree(root_node):
                   bgcolor="#222222", font_color="white")
     net.show_buttons()
 
-    # Calcul du maximum de récompense et de visites
     max_reward, max_visits = calculate_max_reward_and_visits(root_node)
 
     def add_nodes_edges(node, parent_name=None):
