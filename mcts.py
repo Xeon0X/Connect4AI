@@ -20,6 +20,7 @@ class Node:
 
     def addChild(self, child):
         self.children.append(child)
+        child.parent = self
 
     def isActionUnique(self, action):
         """Check if a move has already been played on an other child.
@@ -60,12 +61,12 @@ class Node:
         print(max(bestChildren, key=lambda x: x[1]))
         return max(bestChildren, key=lambda x: x[1])[0]
 
-    def backup(self, reward):
-        while (self != None):
-            self.visitCount += 1
-            self.reward += reward
+    def backup(self, node, reward):
+        while (node != None):
+            node.visitCount += 1
+            node.reward += reward
             reward = -reward
-            self = self.parent
+            node = node.parent
 
     def stateTransition(self, action):
         self.state.makeMove(action)
@@ -76,7 +77,7 @@ class Node:
         action = random.choice(actions)
         child = Node(self.state.copy(), parent=self)
         child.stateTransition(action)
-        self.children.append(child)
+        self.addChild(child)
         return child
 
     def isTerminal(self):
@@ -88,9 +89,12 @@ class Node:
         while not self.isTerminal():
             actions = self.remainingActions()
             if actions:
+                print("expand")
                 return self.expand(actions)
             else:
                 self = self.bestChild(exploration)
+
+        print("last return in treePolicy")
         return self
 
     def getReward(self):
@@ -111,6 +115,8 @@ class Node:
             self.stateTransition(action)
         return self.getReward()
 
+# -------------------
+
 
 def isInComputationalBudget(startTime, limit=0.01):
     return True if time.time() - startTime < limit else False
@@ -120,11 +126,13 @@ def UCTSearch(game, debug=False):
     startTime = time.time()
     node = Node(game.copy())
     while isInComputationalBudget(startTime):
+        printDebug(node)
+        node.addChild(Node(node.state))
+        print("Is in time")
         lastNode = node.treePolicy()
+        print("out")
         reward = lastNode.defaultPolicy()
-        lastNode.backup(reward)
-    if debug:
-        visualize_tree(node).show("tree.html")
+        lastNode.backup(lastNode, reward)
     return node.bestChild(0).action
 
 
@@ -154,19 +162,20 @@ def playMonteCarlo(game):
 
 # -------------------
 
-def createTree():
+def createTree(n):
     root_node = Node(state="Root")
 
-    for i in range(1, 20):
+    for i in range(1, n):
         child = Node(state=f"Child{i}", parent=root_node,
                      action=f"Action{i}", reward=10, visitCount=1+i**3)
         root_node.addChild(child)
 
-        for j in range(1, 20):
+        for j in range(1, n):
+            printDebug(root_node)
             sub_child = Node(
                 state=f"Child{i}.{j}", parent=child, action=f"Action{i}.{j}", visitCount=1+i * j**2)
             child.addChild(sub_child)
-
+            printDebug(root_node)
             sub_sub_child = Node(
                 state=f"Child{i}.{j}.1", parent=sub_child, action=f"Action{i}.{j}.1", reward=i * j, visitCount=1+i * j**2)
             sub_child.addChild(sub_sub_child)
@@ -175,10 +184,12 @@ def createTree():
 
 
 def get_normalized_reward_color(node, max_reward):
-    normalized_reward = node.reward / max_reward
-    hue = 120 * (1 - normalized_reward)
-    color = f"hsl({hue}, 100%, 50%)"
-    return color
+    if max_reward != 0:
+        normalized_reward = node.reward / max_reward
+        hue = 120 * (1 - normalized_reward)
+        color = f"hsl({hue}, 100%, 50%)"
+        return color
+    return f"hsl({0}, 100%, 50%)"
 
 
 def get_normalized_visit_size(node, max_visits):
@@ -221,9 +232,16 @@ def visualize_tree(root_node):
     return net
 
 
-# root_node = createTree()
-# visualize_tree(root_node).show("tree.html")
+def printDebug(node, debug=True):
+    if debug:
+        visualize_tree(node).show("tree.html")
+        input("En attente...")
 
-if __name__ == "__main__":
-    game = ConnectFour()
-    playMonteCarlo(game)
+
+root_node = createTree(3)
+visualize_tree(root_node).show("tree.html")
+
+
+# if __name__ == "__main__":
+#     game = ConnectFour()
+#     playMonteCarlo(game)
