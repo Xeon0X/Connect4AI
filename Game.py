@@ -251,7 +251,7 @@ class ConnectFour:
                 print(f"Player {self.currentPlayer} wins!")
                 self.printBoard()
                 break
-            self.switchPlayer()
+            # self.switchPlayer()
 
 
 if __name__ == "__main__":
