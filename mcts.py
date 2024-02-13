@@ -22,6 +22,16 @@ class Node:
         self.children.append(childNode)
 
 
+def mcts(game):
+    startTime = time.time()
+
+
+def isInComputationalBudget(startTime, limit=0.01):
+    return True if time.time() - startTime < limit else False
+
+# Play
+
+
 def playMonteCarlo(game):
     while True:
 
@@ -32,7 +42,7 @@ def playMonteCarlo(game):
             break
 
         if game.currentPlayer == 'X':
-            column = random.randint(0, 6)
+            column = mcts(game)
             print(f"Player {game.currentPlayer} played column {column}")
         else:
             column = int(
@@ -143,5 +153,5 @@ def printDebug(node, delay=0):
 if __name__ == "__main__":
     game = ConnectFour()
     playMonteCarlo(game)
-    # root_node = createRandomTree(6)
-    # visualizeTree(root_node).show("tree.html")
+    root_node = createRandomTree(6)
+    visualizeTree(root_node).show("tree.html")
