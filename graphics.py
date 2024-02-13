@@ -61,12 +61,12 @@ def handleMouseDown(event, screen, game):
     return PLAYING
 
 
-def gameLoop(screen, game):
+def gameLoop(screen, game,mode):
     clock = pygame.time.Clock()
     state = PLAYING
     drawBoard(screen)
 
-    while state :
+    while state and mode == 1 :
         clock.tick(60) # limits FPS to 60
         for event in pygame.event.get() :
             if event.type == pygame.QUIT:
@@ -74,56 +74,34 @@ def gameLoop(screen, game):
 
             elif event.type == pygame.MOUSEBUTTONDOWN :
                 state = handleMouseDown(event, screen, game)
+        pygame.display.flip()
+
+    while state and mode == 2 :
+
+        IA1 = Player('O')
+        clock.tick(60) # limits FPS to 60
+        for event in pygame.event.get() :
+            if event.type == pygame.QUIT:
+                state = GAMEOVER
+
+            elif event.type == pygame.MOUSEBUTTONDOWN :
+                
+                
+                state = handleMouseDown(event, screen, game)
+                pygame.display.flip()
+
+                chosenMove = minmax(game, 5, IA1)
+                makeMove(screen,game,chosenMove)
+                #game.makeMove(chosenMove)
+                if game.isWin(chosenMove):
+                    print(f"Player {game.currentPlayer} wins!")
+                    game.printBoard()
+                    state = GAMEOVER
+
+                
 
         pygame.display.flip()
 
-
-
-
-
-
-
-def playMinMax(game,screen):
-    """ This function is an example of how to use the ConnectFour class with the minmax algorithm.
-
-    Args:
-        game (ConnectFour): The game state.
-    """
-    clock = pygame.time.Clock()
-    IA1 = Player('X')
-    IA2 = Player('O')
-    game.printBoard()
-
-    while True:
-        
-        clock.tick(60) 
-        
-        #drawBoard(screen)
-
-        if game.currentPlayer == IA1.symbol:
-            chosenMove = minmax(game, 5, IA1)
-            print(f"Player {IA1.symbol} played column {chosenMove}")
-        else:
-            chosenMove = minmax(game, 5, IA2)
-            print(f"Player {IA2.symbol} played column {chosenMove}")
-        
-        if (not game.isAPossibleMove(chosenMove)):
-            print("Invalid move")
-            continue
-
-        game.makeMove(chosenMove)
-
-        if game.isWin(chosenMove):
-            game.switchPlayer()
-            print(f"Player {game.currentPlayer} wins!")
-            game.printBoard()
-            break
-
-        if game.isBoardFull():
-            print("Draw!")
-            game.printBoard()
-            break
-        pygame.display.flip()
 
 
 
@@ -145,7 +123,7 @@ def optionMenu(screen,game):
         button1_rect = pygame.Rect(300, 200, 200, 80)  #bouton1 pour jouer en 1v1
         button1_text = "Play 1v1"
 
-        button2_rect = pygame.Rect(500, 500, 200, 80)
+        button2_rect = pygame.Rect(300, 300, 200, 80)
         button2_text = "MinMax"
 
         while running:
@@ -177,11 +155,11 @@ def optionMenu(screen,game):
 
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if button1_rect.collidepoint(event.pos):
-                        gameLoop(screen, game)
+                        gameLoop(screen, game,1)
                         running = False
                         print("Button Clicked!")
                     if button2_rect.collidepoint(event.pos):
-                        playMinMax(game,screen)
+                        gameLoop(screen, game,2)
                         running = False
                         print("Button Clicked!")                
 

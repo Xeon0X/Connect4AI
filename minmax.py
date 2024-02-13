@@ -16,7 +16,7 @@ def minmax(game, profondeur, player):
 
     Returns:
         int: The best move for the given game state.
-    """
+    """ 
     eval, action = playerMax(game, profondeur, player)
     return action
 
