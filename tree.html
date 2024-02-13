@@ -33,8 +33,8 @@
 
              #mynetwork {
                  width: 100%;
-                 height: 950px;
-                 background-color: #222222;
+                 height: 1450px;
+                 background-color: #000000;
                  border: 1px solid lightgray;
                  position: relative;
                  float: left;
@@ -42,12 +42,6 @@
 
              
 
-             
-             #config {
-                 float: left;
-                 width: 400px;
-                 height: 600px;
-             }
              
 
              
@@ -63,8 +57,6 @@
         </div>
 
         
-        
-            <div id="config"></div>
         
 
         <script type="text/javascript">
@@ -96,8 +88,8 @@
                   
 
                   // parsing and collecting nodes and edges from the python
-                  nodes = new vis.DataSet([{"color": "hsl(120.0, 100%, 50%)", "font": {"color": "white"}, "id": "140198418105168", "label": "State: Root\nAction: None\nVisit Count: 1\nReward: 0", "shape": "dot", "size": 3.333333333333333}, {"color": "hsl(0.0, 100%, 50%)", "font": {"color": "white"}, "id": "140198417108560", "label": "State: Child1\nAction: Action1\nVisit Count: 2\nReward: 10", "shape": "dot", "size": 6.666666666666666}, {"color": "hsl(120.0, 100%, 50%)", "font": {"color": "white"}, "id": "140198176123088", "label": "State: Child1.1\nAction: Action1.1\nVisit Count: 2\nReward: 0", "shape": "dot", "size": 6.666666666666666}, {"color": "hsl(108.0, 100%, 50%)", "font": {"color": "white"}, "id": "140198221514512", "label": "State: Child1.1.1\nAction: Action1.1.1\nVisit Count: 2\nReward: 1", "shape": "dot", "size": 6.666666666666666}, {"color": "hsl(120.0, 100%, 50%)", "font": {"color": "white"}, "id": "140198257545488", "label": "State: Child1.2\nAction: Action1.2\nVisit Count: 5\nReward: 0", "shape": "dot", "size": 16.666666666666668}, {"color": "hsl(96.0, 100%, 50%)", "font": {"color": "white"}, "id": "140198129759952", "label": "State: Child1.2.1\nAction: Action1.2.1\nVisit Count: 5\nReward: 2", "shape": "dot", "size": 16.666666666666668}, {"color": "hsl(0.0, 100%, 50%)", "font": {"color": "white"}, "id": "140198210479184", "label": "State: Child2\nAction: Action2\nVisit Count: 9\nReward: 10", "shape": "dot", "size": 30.0}, {"color": "hsl(120.0, 100%, 50%)", "font": {"color": "white"}, "id": "140198118914640", "label": "State: Child2.1\nAction: Action2.1\nVisit Count: 3\nReward: 0", "shape": "dot", "size": 10.0}, {"color": "hsl(96.0, 100%, 50%)", "font": {"color": "white"}, "id": "140198119138896", "label": "State: Child2.1.1\nAction: Action2.1.1\nVisit Count: 3\nReward: 2", "shape": "dot", "size": 10.0}, {"color": "hsl(120.0, 100%, 50%)", "font": {"color": "white"}, "id": "140198222403024", "label": "State: Child2.2\nAction: Action2.2\nVisit Count: 9\nReward: 0", "shape": "dot", "size": 30.0}, {"color": "hsl(72.0, 100%, 50%)", "font": {"color": "white"}, "id": "140198119341456", "label": "State: Child2.2.1\nAction: Action2.2.1\nVisit Count: 9\nReward: 4", "shape": "dot", "size": 30.0}]);
-                  edges = new vis.DataSet([{"from": "140198418105168", "to": "140198417108560"}, {"from": "140198417108560", "to": "140198176123088"}, {"from": "140198176123088", "to": "140198221514512"}, {"from": "140198417108560", "to": "140198257545488"}, {"from": "140198257545488", "to": "140198129759952"}, {"from": "140198418105168", "to": "140198210479184"}, {"from": "140198210479184", "to": "140198118914640"}, {"from": "140198118914640", "to": "140198119138896"}, {"from": "140198210479184", "to": "140198222403024"}, {"from": "140198222403024", "to": "140198119341456"}]);
+                  nodes = new vis.DataSet([{"color": "hsl(120.0, 100%, 50%)", "font": {"color": "white"}, "id": "139720029701456", "label": "State: Root\nAction: \nVisit Count: 0\nReward: 0", "shape": "dot", "size": 0.0}, {"color": "hsl(100.0, 100%, 50%)", "font": {"color": "white"}, "id": "139719861596112", "label": "State: Root.1\nAction: Action1\nVisit Count: 1\nReward: 1", "shape": "dot", "size": 5.0}, {"color": "hsl(0.0, 100%, 50%)", "font": {"color": "white"}, "id": "139720029918480", "label": "State: Root.1.1\nAction: Action1\nVisit Count: 3\nReward: 6", "shape": "dot", "size": 15.0}, {"color": "hsl(0.0, 100%, 50%)", "font": {"color": "white"}, "id": "139719825593488", "label": "State: Root.1.1.1\nAction: Action1\nVisit Count: 0\nReward: 6", "shape": "dot", "size": 0.0}, {"color": "hsl(120.0, 100%, 50%)", "font": {"color": "white"}, "id": "139719825457104", "label": "State: Root.1.1.1.1\nAction: Action1\nVisit Count: 6\nReward: 0", "shape": "dot", "size": 30.0}, {"color": "hsl(60.0, 100%, 50%)", "font": {"color": "white"}, "id": "139719825482192", "label": "State: Root.1.1.1.1.1\nAction: Action1\nVisit Count: 1\nReward: 3", "shape": "dot", "size": 5.0}, {"color": "hsl(0.0, 100%, 50%)", "font": {"color": "white"}, "id": "139719825482384", "label": "State: Root.1.1.2\nAction: Action2\nVisit Count: 6\nReward: 6", "shape": "dot", "size": 30.0}, {"color": "hsl(0.0, 100%, 50%)", "font": {"color": "white"}, "id": "139719722938320", "label": "State: Root.1.1.3\nAction: Action3\nVisit Count: 5\nReward: 6", "shape": "dot", "size": 25.0}, {"color": "hsl(120.0, 100%, 50%)", "font": {"color": "white"}, "id": "139719722937872", "label": "State: Root.1.1.3.1\nAction: Action1\nVisit Count: 1\nReward: 0", "shape": "dot", "size": 5.0}, {"color": "hsl(60.0, 100%, 50%)", "font": {"color": "white"}, "id": "139719722929232", "label": "State: Root.1.1.3.2\nAction: Action2\nVisit Count: 0\nReward: 3", "shape": "dot", "size": 0.0}, {"color": "hsl(60.0, 100%, 50%)", "font": {"color": "white"}, "id": "139719722939856", "label": "State: Root.2\nAction: Action2\nVisit Count: 4\nReward: 3", "shape": "dot", "size": 20.0}, {"color": "hsl(19.999999999999996, 100%, 50%)", "font": {"color": "white"}, "id": "139719722938576", "label": "State: Root.2.1\nAction: Action1\nVisit Count: 5\nReward: 5", "shape": "dot", "size": 25.0}, {"color": "hsl(80.00000000000001, 100%, 50%)", "font": {"color": "white"}, "id": "139719722935184", "label": "State: Root.2.1.1\nAction: Action1\nVisit Count: 1\nReward: 2", "shape": "dot", "size": 5.0}, {"color": "hsl(0.0, 100%, 50%)", "font": {"color": "white"}, "id": "139719722935376", "label": "State: Root.2.1.2\nAction: Action2\nVisit Count: 3\nReward: 6", "shape": "dot", "size": 15.0}, {"color": "hsl(19.999999999999996, 100%, 50%)", "font": {"color": "white"}, "id": "139719722935632", "label": "State: Root.2.1.2.1\nAction: Action1\nVisit Count: 6\nReward: 5", "shape": "dot", "size": 30.0}, {"color": "hsl(80.00000000000001, 100%, 50%)", "font": {"color": "white"}, "id": "139719722935760", "label": "State: Root.2.1.2.2\nAction: Action2\nVisit Count: 4\nReward: 2", "shape": "dot", "size": 20.0}, {"color": "hsl(60.0, 100%, 50%)", "font": {"color": "white"}, "id": "139719722935952", "label": "State: Root.2.1.3\nAction: Action3\nVisit Count: 4\nReward: 3", "shape": "dot", "size": 20.0}, {"color": "hsl(120.0, 100%, 50%)", "font": {"color": "white"}, "id": "139719722936144", "label": "State: Root.2.2\nAction: Action2\nVisit Count: 5\nReward: 0", "shape": "dot", "size": 25.0}, {"color": "hsl(80.00000000000001, 100%, 50%)", "font": {"color": "white"}, "id": "139719722936336", "label": "State: Root.2.2.1\nAction: Action1\nVisit Count: 3\nReward: 2", "shape": "dot", "size": 15.0}, {"color": "hsl(120.0, 100%, 50%)", "font": {"color": "white"}, "id": "139719722940048", "label": "State: Root.2.2.1.1\nAction: Action1\nVisit Count: 5\nReward: 0", "shape": "dot", "size": 25.0}, {"color": "hsl(120.0, 100%, 50%)", "font": {"color": "white"}, "id": "139719722939984", "label": "State: Root.2.2.1.1.1\nAction: Action1\nVisit Count: 3\nReward: 0", "shape": "dot", "size": 15.0}, {"color": "hsl(80.00000000000001, 100%, 50%)", "font": {"color": "white"}, "id": "139719722940112", "label": "State: Root.2.2.1.2\nAction: Action2\nVisit Count: 2\nReward: 2", "shape": "dot", "size": 10.0}, {"color": "hsl(0.0, 100%, 50%)", "font": {"color": "white"}, "id": "139719722940368", "label": "State: Root.2.2.1.2.1\nAction: Action1\nVisit Count: 6\nReward: 6", "shape": "dot", "size": 30.0}, {"color": "hsl(80.00000000000001, 100%, 50%)", "font": {"color": "white"}, "id": "139719722940624", "label": "State: Root.2.3\nAction: Action3\nVisit Count: 4\nReward: 2", "shape": "dot", "size": 20.0}, {"color": "hsl(100.0, 100%, 50%)", "font": {"color": "white"}, "id": "139719722940880", "label": "State: Root.3\nAction: Action3\nVisit Count: 0\nReward: 1", "shape": "dot", "size": 0.0}, {"color": "hsl(60.0, 100%, 50%)", "font": {"color": "white"}, "id": "139719722941136", "label": "State: Root.3.1\nAction: Action1\nVisit Count: 5\nReward: 3", "shape": "dot", "size": 25.0}, {"color": "hsl(40.00000000000001, 100%, 50%)", "font": {"color": "white"}, "id": "139719722941392", "label": "State: Root.3.1.1\nAction: Action1\nVisit Count: 3\nReward: 4", "shape": "dot", "size": 15.0}, {"color": "hsl(100.0, 100%, 50%)", "font": {"color": "white"}, "id": "139719722941648", "label": "State: Root.3.1.1.1\nAction: Action1\nVisit Count: 0\nReward: 1", "shape": "dot", "size": 0.0}, {"color": "hsl(60.0, 100%, 50%)", "font": {"color": "white"}, "id": "139719722941904", "label": "State: Root.3.1.1.2\nAction: Action2\nVisit Count: 6\nReward: 3", "shape": "dot", "size": 30.0}, {"color": "hsl(120.0, 100%, 50%)", "font": {"color": "white"}, "id": "139719722942160", "label": "State: Root.3.1.1.2.1\nAction: Action1\nVisit Count: 3\nReward: 0", "shape": "dot", "size": 15.0}, {"color": "hsl(100.0, 100%, 50%)", "font": {"color": "white"}, "id": "139719722942416", "label": "State: Root.4\nAction: Action4\nVisit Count: 2\nReward: 1", "shape": "dot", "size": 10.0}, {"color": "hsl(120.0, 100%, 50%)", "font": {"color": "white"}, "id": "139719723008272", "label": "State: Root.4.1\nAction: Action1\nVisit Count: 6\nReward: 0", "shape": "dot", "size": 30.0}, {"color": "hsl(100.0, 100%, 50%)", "font": {"color": "white"}, "id": "139719723008528", "label": "State: Root.4.1.1\nAction: Action1\nVisit Count: 1\nReward: 1", "shape": "dot", "size": 5.0}, {"color": "hsl(100.0, 100%, 50%)", "font": {"color": "white"}, "id": "139719723008784", "label": "State: Root.4.1.1.1\nAction: Action1\nVisit Count: 2\nReward: 1", "shape": "dot", "size": 10.0}, {"color": "hsl(60.0, 100%, 50%)", "font": {"color": "white"}, "id": "139719723009040", "label": "State: Root.4.1.1.1.1\nAction: Action1\nVisit Count: 5\nReward: 3", "shape": "dot", "size": 25.0}, {"color": "hsl(120.0, 100%, 50%)", "font": {"color": "white"}, "id": "139719723009296", "label": "State: Root.4.1.2\nAction: Action2\nVisit Count: 5\nReward: 0", "shape": "dot", "size": 25.0}, {"color": "hsl(40.00000000000001, 100%, 50%)", "font": {"color": "white"}, "id": "139719723009552", "label": "State: Root.4.1.2.1\nAction: Action1\nVisit Count: 2\nReward: 4", "shape": "dot", "size": 10.0}, {"color": "hsl(80.00000000000001, 100%, 50%)", "font": {"color": "white"}, "id": "139719723009808", "label": "State: Root.5\nAction: Action5\nVisit Count: 1\nReward: 2", "shape": "dot", "size": 5.0}, {"color": "hsl(100.0, 100%, 50%)", "font": {"color": "white"}, "id": "139719723010192", "label": "State: Root.5.1\nAction: Action1\nVisit Count: 5\nReward: 1", "shape": "dot", "size": 25.0}, {"color": "hsl(0.0, 100%, 50%)", "font": {"color": "white"}, "id": "139719723010384", "label": "State: Root.5.2\nAction: Action2\nVisit Count: 6\nReward: 6", "shape": "dot", "size": 30.0}, {"color": "hsl(19.999999999999996, 100%, 50%)", "font": {"color": "white"}, "id": "139719723010640", "label": "State: Root.5.2.1\nAction: Action1\nVisit Count: 5\nReward: 5", "shape": "dot", "size": 25.0}, {"color": "hsl(100.0, 100%, 50%)", "font": {"color": "white"}, "id": "139719723010896", "label": "State: Root.5.2.1.1\nAction: Action1\nVisit Count: 2\nReward: 1", "shape": "dot", "size": 10.0}, {"color": "hsl(100.0, 100%, 50%)", "font": {"color": "white"}, "id": "139719723011152", "label": "State: Root.5.2.1.2\nAction: Action2\nVisit Count: 2\nReward: 1", "shape": "dot", "size": 10.0}, {"color": "hsl(100.0, 100%, 50%)", "font": {"color": "white"}, "id": "139719723011408", "label": "State: Root.5.2.1.2.1\nAction: Action1\nVisit Count: 5\nReward: 1", "shape": "dot", "size": 25.0}]);
+                  edges = new vis.DataSet([{"from": "139720029701456", "to": "139719861596112"}, {"from": "139719861596112", "to": "139720029918480"}, {"from": "139720029918480", "to": "139719825593488"}, {"from": "139719825593488", "to": "139719825457104"}, {"from": "139719825457104", "to": "139719825482192"}, {"from": "139720029918480", "to": "139719825482384"}, {"from": "139720029918480", "to": "139719722938320"}, {"from": "139719722938320", "to": "139719722937872"}, {"from": "139719722938320", "to": "139719722929232"}, {"from": "139720029701456", "to": "139719722939856"}, {"from": "139719722939856", "to": "139719722938576"}, {"from": "139719722938576", "to": "139719722935184"}, {"from": "139719722938576", "to": "139719722935376"}, {"from": "139719722935376", "to": "139719722935632"}, {"from": "139719722935376", "to": "139719722935760"}, {"from": "139719722938576", "to": "139719722935952"}, {"from": "139719722939856", "to": "139719722936144"}, {"from": "139719722936144", "to": "139719722936336"}, {"from": "139719722936336", "to": "139719722940048"}, {"from": "139719722940048", "to": "139719722939984"}, {"from": "139719722936336", "to": "139719722940112"}, {"from": "139719722940112", "to": "139719722940368"}, {"from": "139719722939856", "to": "139719722940624"}, {"from": "139720029701456", "to": "139719722940880"}, {"from": "139719722940880", "to": "139719722941136"}, {"from": "139719722941136", "to": "139719722941392"}, {"from": "139719722941392", "to": "139719722941648"}, {"from": "139719722941392", "to": "139719722941904"}, {"from": "139719722941904", "to": "139719722942160"}, {"from": "139720029701456", "to": "139719722942416"}, {"from": "139719722942416", "to": "139719723008272"}, {"from": "139719723008272", "to": "139719723008528"}, {"from": "139719723008528", "to": "139719723008784"}, {"from": "139719723008784", "to": "139719723009040"}, {"from": "139719723008272", "to": "139719723009296"}, {"from": "139719723009296", "to": "139719723009552"}, {"from": "139720029701456", "to": "139719723009808"}, {"from": "139719723009808", "to": "139719723010192"}, {"from": "139719723009808", "to": "139719723010384"}, {"from": "139719723010384", "to": "139719723010640"}, {"from": "139719723010640", "to": "139719723010896"}, {"from": "139719723010640", "to": "139719723011152"}, {"from": "139719723011152", "to": "139719723011408"}]);
 
                   nodeColors = {};
                   allNodes = nodes.get({ returnType: "Object" });
@@ -110,7 +102,7 @@
 
                   var options = {
     "configure": {
-        "enabled": true
+        "enabled": false
     },
     "edges": {
         "color": {
@@ -125,6 +117,19 @@
         "dragNodes": true,
         "hideEdgesOnDrag": false,
         "hideNodesOnDrag": false
+    },
+    "layout": {
+        "hierarchical": {
+            "blockShifting": true,
+            "edgeMinimization": true,
+            "enabled": true,
+            "levelSeparation": 150,
+            "parentCentralization": true,
+            "sortMethod": "hubsize",
+            "treeSpacing": 200
+        },
+        "improvedLayout": true,
+        "randomSeed": 0
     },
     "physics": {
         "enabled": true,
@@ -141,10 +146,6 @@
                   
 
 
-                  
-                  // if this network requires displaying the configure window,
-                  // put it in its div
-                  options.configure["container"] = document.getElementById("config");
                   
 
                   network = new vis.Network(container, data, options);
