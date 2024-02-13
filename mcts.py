@@ -10,10 +10,10 @@ import matplotlib.pyplot as plt
 
 
 class Node:
-    def __init__(self, state="", parent=None, action="", reward=0, visit=0):
-        self.state = state
+    def __init__(self, game, parent=None, move=None, reward=0, visit=0):
+        self.game = game
         self.parent = parent
-        self.action = action
+        self.move = move
         self.reward = reward
         self.visit = visit
         self.children = []
@@ -22,8 +22,40 @@ class Node:
         self.children.append(childNode)
 
 
+def playMonteCarlo(game):
+    while True:
+
+        game.printBoard()
+
+        if game.isBoardFull():
+            print("Draw!")
+            break
+
+        if game.currentPlayer == 'X':
+            column = random.randint(0, 6)
+            print(f"Player {game.currentPlayer} played column {column}")
+        else:
+            column = int(
+                input(f"Player {game.currentPlayer}, enter a column (0-6): "))
+        if (not game.isAPossibleMove(column)):
+            print("Invalid move")
+            continue
+
+        game.makeMove(column)
+
+        if game.isWin(column):
+            print(f"Player {game.currentPlayer} looses!")
+            game.printBoard()
+            break
+
+        print(game.currentPlayer)
+
+
+# Tree Management
+
+
 def createRandomTree(n):
-    rootNode = Node(state=ConnectFour())
+    rootNode = Node(game=ConnectFour())
 
     def addRandomChildren(parent, remainingNodes):
         if remainingNodes <= 0:
@@ -31,13 +63,13 @@ def createRandomTree(n):
 
         numChildren = random.randint(0, remainingNodes)
         for i in range(1, numChildren+1):
-            childState = parent.state
-            childAction = parent.action
+            childState = parent.game
+            childAction = parent.move
             childReward = random.randint(0, n)
             childVisit = random.randint(0, n)
 
-            child = Node(state=childState, parent=parent,
-                         action=childAction, reward=childReward, visit=childVisit)
+            child = Node(game=childState, parent=parent,
+                         move=childAction, reward=childReward, visit=childVisit)
             parent.addChild(child)
 
             remainingSubNodes = remainingNodes - 1
@@ -87,7 +119,7 @@ def visualizeTree(rootNode, debug=False):
         color = getNormalizedRewardColor(node, maxReward)
         size = getNormalizedVisitSize(node, maxVisits)
         net.add_node(
-            currentName, label=f"{str(node.state.currentPlayer)}, [{str(node.action)}]", color=color, size=size)
+            currentName, label=f"{str(node.game.currentPlayer)}, [{str(node.move)}]", color=color, size=size)
 
         if parentName is not None:
             net.add_edge(parentName, currentName)
@@ -108,5 +140,8 @@ def printDebug(node, delay=0):
         time.sleep(delay)
 
 
-root_node = createRandomTree(6)
-visualizeTree(root_node).show("tree.html")
+if __name__ == "__main__":
+    game = ConnectFour()
+    playMonteCarlo(game)
+    # root_node = createRandomTree(6)
+    # visualizeTree(root_node).show("tree.html")

@@ -2,6 +2,7 @@ class ConnectFour:
     """
     This class represents a game of Connect Four. It contains all the functions needed to play the game.
     """
+
     def __init__(self):
         """
         Initializes a new ConnectFour object 
@@ -9,7 +10,7 @@ class ConnectFour:
         self.board = [[' ' for _ in range(7)] for _ in range(6)]
         self.currentPlayer = 'X'
         self.scoreValues = [1, 5, 50, 1000]
-  
+
     def printBoard(self):
         """
         Displays the game board in the console
@@ -17,7 +18,6 @@ class ConnectFour:
         for row in self.board:
             print('|'.join(row))
 
-            
     def isAPossibleMove(self, column):
         """Checks if the provided column is a possible move for the player
 
@@ -34,7 +34,6 @@ class ConnectFour:
         else:
             return True
 
-          
     def isCollumnEmpty(self, column):
         """Checks if the given column is empty
 
@@ -51,7 +50,6 @@ class ConnectFour:
         else:
             return False
 
-
     def isBoardFull(self):
         """Checks if the board is full
 
@@ -62,7 +60,6 @@ class ConnectFour:
             if (self.board[0][column] == ' '):
                 return False
         return True
-
 
     def isWin(self, column):
         """Checks if the move in the given column is a winning move
@@ -81,13 +78,13 @@ class ConnectFour:
         if (row <= 2):
             if (self.board[row][column] == self.board[row+1][column] == self.board[row+2][column] == self.board[row+3][column]):
                 return True
-        
+
         # Check horizontal grid
         for i in range(4):
-            if(column+i-3 >= 0 and column+i <=6):
+            if (column+i-3 >= 0 and column+i <= 6):
                 if (self.board[row][column+i-3] == self.board[row][column+i-2] == self.board[row][column+i-1] == self.board[row][column+i]):
                     return True
-       
+
         # Check diagonal grid
         for i in range(4):
             if (row+i-3 >= 0 and row+i <= 5 and column+i-3 >= 0 and column+i <= 6):
@@ -97,9 +94,8 @@ class ConnectFour:
             if (row-i+3 <= 5 and row-i >= 0 and column+i-3 >= 0 and column+i <= 6):
                 if (self.board[row-i+3][column+i-3] == self.board[row-i+2][column+i-2] == self.board[row-i+1][column+i-1] == self.board[row-i][column+i]):
                     return True
-        
-        return False
 
+        return False
 
     def makeMove(self, column):
         """
@@ -107,7 +103,7 @@ class ConnectFour:
 
         Args:
             column (int): The column of the move give by the player
-        
+
         Returns:
             int: The row of the move
         """
@@ -116,15 +112,14 @@ class ConnectFour:
                 self.board[row][column] = self.currentPlayer
                 self.switchPlayer()
                 return row
-        
+
         return -1
-                
 
     def switchPlayer(self):
         """Changes the current player
         """
         self.currentPlayer = 'O' if self.currentPlayer == 'X' else 'X'
-
+        print("hhhh")
 
     def copy(self):
         """Copies the current game
@@ -137,7 +132,6 @@ class ConnectFour:
         newGame.currentPlayer = self.currentPlayer
         return newGame
 
-
     def getRow(self, row):
         """ Returns the requested row
 
@@ -148,7 +142,6 @@ class ConnectFour:
             list(str): The requested row
         """
         return self.board[row]
-
 
     def getColumn(self, column):
         """ Returns the requested column
@@ -161,7 +154,6 @@ class ConnectFour:
         """
         return [row[column] for row in self.board]
 
-
     def getDiagonals(self):
         """ Returns all the diagonals of the board
 
@@ -170,38 +162,37 @@ class ConnectFour:
         """
         diagonals = []
 
-        #DIAGONALS UP TO DOWN
-        #Diagonals with a length of 4
+        # DIAGONALS UP TO DOWN
+        # Diagonals with a length of 4
         diagonals.append([self.board[2+i][i] for i in range(4)])
         diagonals.append([self.board[i][3+i] for i in range(4)])
 
-        #Diagonals with a length of 5
+        # Diagonals with a length of 5
         for n in range(2):
             diagonals.append([self.board[1+i+n][i+n] for i in range(4)])
             diagonals.append([self.board[i+n][2+i+n] for i in range(4)])
-        
-        #Diagonals with a length of 6
+
+        # Diagonals with a length of 6
         for n in range(3):
             diagonals.append([self.board[i+n][i+n] for i in range(4)])
             diagonals.append([self.board[i+n][1+i+n] for i in range(4)])
 
-        #DIAGONALS DOWN TO UP
-        #Diagonals with a length of 4
+        # DIAGONALS DOWN TO UP
+        # Diagonals with a length of 4
         diagonals.append([self.board[3-i][i] for i in range(4)])
         diagonals.append([self.board[5-i][3+i] for i in range(4)])
 
-        #Diagonals with a length of 5
+        # Diagonals with a length of 5
         for n in range(2):
             diagonals.append([self.board[4-(i+n)][i+n] for i in range(4)])
             diagonals.append([self.board[5-(i+n)][2+i+n] for i in range(4)])
-        
-        #Diagonals with a length of 6
+
+        # Diagonals with a length of 6
         for n in range(3):
             diagonals.append([self.board[5-(i+n)][i+n] for i in range(4)])
             diagonals.append([self.board[5-(i+n)][1+i+n] for i in range(4)])
-        
-        return diagonals
 
+        return diagonals
 
     def getPossibleMoves(self):
         """
@@ -214,7 +205,6 @@ class ConnectFour:
                 gameState.makeMove(column)
                 possibleMoves.append((gameState, column))
         return possibleMoves
-    
 
     def checkWin(self):
         """This function checks if a player has won the game.
@@ -227,7 +217,6 @@ class ConnectFour:
                 if self.isWin(column):
                     return True
         return False
-    
 
     def play(self):
         """
