@@ -24,6 +24,7 @@ class Node:
 
 def mcts(game):
     startTime = time.time()
+    return random.randint(0, 6)
 
 
 def isInComputationalBudget(startTime, limit=0.01):
@@ -83,7 +84,7 @@ def createRandomTree(n):
             parent.addChild(child)
 
             remainingSubNodes = remainingNodes - 1
-            printDebug(rootNode, delay=0.1)
+            printDebug(rootNode)
             addRandomChildren(child, remainingSubNodes)
 
     addRandomChildren(rootNode, n - 1)
@@ -118,7 +119,7 @@ def calculateMaxRewardAndVisits(rootNode):
 
 def visualizeTree(rootNode, debug=False):
     net = Network(notebook=True, height="1450px", width="100%",
-                  bgcolor="#000000", font_color="white", layout={'hierarchical': {'enabled': True, 'direction': 'UD'}})
+                  bgcolor="#000000", font_color="white", layout={'hierarchical': {'enabled': True, 'direction': 'UD'}}, cdn_resources='in_line')
     if debug:
         net.show_buttons()
 
@@ -142,16 +143,16 @@ def visualizeTree(rootNode, debug=False):
     return net
 
 
-def printDebug(node, delay=0):
-    visualizeTree(node).show("tree.html")
-    if delay == 0:
-        input("Waiting input")
-    else:
-        time.sleep(delay)
+def printDebug(node, delay=0.1, debug=True):
+    if debug:
+        visualizeTree(node).show("tree.html")
+        if delay == 0:
+            input("Waiting input")
+        else:
+            time.sleep(delay)
 
 
 if __name__ == "__main__":
-    game = ConnectFour()
-    playMonteCarlo(game)
+    # game = ConnectFour()
+    # playMonteCarlo(game)
     root_node = createRandomTree(6)
-    visualizeTree(root_node).show("tree.html")
