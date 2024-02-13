@@ -4,6 +4,7 @@ from score import calculateScore
 from Player import Player
 
 
+
 def minmax(game, profondeur, player):   
     """ This function calculates the best move for a given game state with the minmax algorithm.
 

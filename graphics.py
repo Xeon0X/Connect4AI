@@ -1,5 +1,10 @@
+import math
 from Game import ConnectFour
 import pygame
+from score import calculateScore
+from Player import Player
+from minmax import minmax
+import sys
 
 HEIGHT = 800
 WIDTH = 800
@@ -59,6 +64,7 @@ def handleMouseDown(event, screen, game):
 def gameLoop(screen, game):
     clock = pygame.time.Clock()
     state = PLAYING
+    drawBoard(screen)
 
     while state :
         clock.tick(60) # limits FPS to 60
@@ -72,14 +78,120 @@ def gameLoop(screen, game):
         pygame.display.flip()
 
 
+
+
+
+
+
+def playMinMax(game,screen):
+    """ This function is an example of how to use the ConnectFour class with the minmax algorithm.
+
+    Args:
+        game (ConnectFour): The game state.
+    """
+    clock = pygame.time.Clock()
+    IA1 = Player('X')
+    IA2 = Player('O')
+    game.printBoard()
+
+    while True:
+        
+        clock.tick(60) 
+        
+        #drawBoard(screen)
+
+        if game.currentPlayer == IA1.symbol:
+            chosenMove = minmax(game, 5, IA1)
+            print(f"Player {IA1.symbol} played column {chosenMove}")
+        else:
+            chosenMove = minmax(game, 5, IA2)
+            print(f"Player {IA2.symbol} played column {chosenMove}")
+        
+        if (not game.isAPossibleMove(chosenMove)):
+            print("Invalid move")
+            continue
+
+        game.makeMove(chosenMove)
+
+        if game.isWin(chosenMove):
+            game.switchPlayer()
+            print(f"Player {game.currentPlayer} wins!")
+            game.printBoard()
+            break
+
+        if game.isBoardFull():
+            print("Draw!")
+            game.printBoard()
+            break
+        pygame.display.flip()
+
+
+
+
+
+def optionMenu(screen,game):
+        pygame.font.init()
+        font_size = 36 #taille du text des boutons
+        font_sizeé = 100 #taille du texte en haut 
+        font = pygame.font.Font(None, font_size)
+        font2 = pygame.font.Font(None, 80)
+        clock = pygame.time.Clock()
+        running = True
+        nbr = 0
+        button_rect = pygame.Rect(300, 200, 200, 80)
+        button_text = "Play"
+        while running:
+            
+            text = "Connect Four"
+            text_surface = font2.render(text, True,(255, 255, 255))
+            text_rect = text_surface.get_rect()
+            text_rect.center = (WIDTH/2, HEIGHT/12)
+            
+            screen.blit(text_surface, text_rect)
+
+            pygame.draw.rect(screen, 'red', button_rect)
+            text_surface = font.render(button_text, True, 'white')
+            text_rect = text_surface.get_rect(center=button_rect.center)
+            screen.blit(text_surface, text_rect)
+
+            pygame.display.flip()
+            clock.tick(60)
+
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    running = False
+
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    if button_rect.collidepoint(event.pos):
+                        gameLoop(screen, game)
+                        running = False
+                        print("Button Clicked!")
+
+        pygame.quit()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 def main():
     pygame.init()
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
     game = ConnectFour()
+    optionMenu(screen,game)
     
-    drawBoard(screen)
-    gameLoop(screen, game)
     
+   # gameLoop(screen, game)
+
     pygame.quit()
 
 if __name__ == "__main__":
