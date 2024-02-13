@@ -18,8 +18,8 @@ class Node:
         self.visit = visit
         self.children = []
 
-    def addChild(self, child_node):
-        self.children.append(child_node)
+    def addChild(self, childNode):
+        self.children.append(childNode)
 
 
 def createRandomTree(n):
