@@ -23,7 +23,7 @@ class Node:
 
 
 def createRandomTree(n):
-    rootNode = Node(state="Root")
+    rootNode = Node(state=ConnectFour())
 
     def addRandomChildren(parent, remainingNodes):
         if remainingNodes <= 0:
@@ -31,8 +31,8 @@ def createRandomTree(n):
 
         numChildren = random.randint(0, remainingNodes)
         for i in range(1, numChildren+1):
-            childState = f"{parent.state}.{i}"
-            childAction = f"Action{i}"
+            childState = parent.state
+            childAction = parent.action
             childReward = random.randint(0, n)
             childVisit = random.randint(0, n)
 
@@ -41,6 +41,7 @@ def createRandomTree(n):
             parent.addChild(child)
 
             remainingSubNodes = remainingNodes - 1
+            printDebug(rootNode, delay=0.1)
             addRandomChildren(child, remainingSubNodes)
 
     addRandomChildren(rootNode, n - 1)
@@ -86,7 +87,7 @@ def visualizeTree(rootNode, debug=False):
         color = getNormalizedRewardColor(node, maxReward)
         size = getNormalizedVisitSize(node, maxVisits)
         net.add_node(
-            currentName, label=f"State: {str(node.state)}\nAction: {str(node.action)}\nVisit Count: {node.visit}\nReward: {node.reward}", color=color, size=size)
+            currentName, label=f"{str(node.state.currentPlayer)}, [{str(node.action)}]", color=color, size=size)
 
         if parentName is not None:
             net.add_edge(parentName, currentName)
@@ -99,10 +100,12 @@ def visualizeTree(rootNode, debug=False):
     return net
 
 
-def printDebug(node, debug=True):
-    if debug:
-        visualizeTree(node).show("tree.html")
-        input("En attente...")
+def printDebug(node, delay=0):
+    visualizeTree(node).show("tree.html")
+    if delay == 0:
+        input("Waiting input")
+    else:
+        time.sleep(delay)
 
 
 root_node = createRandomTree(6)
