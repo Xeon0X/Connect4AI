@@ -104,9 +104,9 @@ def defaultPolicy(node):
         simulation.move = move
         simulation.game.makeMove(move)
     if node.game.currentPlayer == simulation.game.currentPlayer:  # loser
-        return -simulation.getReward()
+        return simulation.getReward()
     else:
-        return simulation.getReward()  # winner
+        return -simulation.getReward()  # winner
 
 
 def backup(node, reward):
