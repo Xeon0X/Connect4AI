@@ -122,17 +122,17 @@ def mcts(game):
     iteration = 0
     node = Node(game.copy())
     printDebug(node, delay=0.1)
-    while isInComputationalBudget(startTime) and iteration <= 100:
+    while isInComputationalBudget(startTime) and iteration <= 20:
         iteration += 1
         lastNode = treePolicy(node)
         reward = defaultPolicy(lastNode)
         backup(lastNode, reward)
-        # printDebug(node, delay=0)
+        printDebug(node, delay=0)
     printDebug(node, delay=1)
     return node.bestChild(0).move
 
 
-def isInComputationalBudget(startTime, limit=5):
+def isInComputationalBudget(startTime, limit=6000):
     return True if time.time() - startTime < limit else False
 
 # Play
