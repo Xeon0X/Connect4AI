@@ -1,6 +1,7 @@
 import math
 from Game import ConnectFour
 from score import calculateScore
+from Player import Player
 
 
 def alphaBeta(game,profondeur,player):
@@ -59,17 +60,19 @@ def playAlphaBeta(game):
     Args:
         game (ConnectFour): The game state.
     """
+    IA1 = Player('X')
+    IA2 = Player('O')
     while True:
         game.printBoard()
         if game.isBoardFull():
             print("Draw!")
             break
-        if game.currentPlayer == 'X':
-            column = alphaBeta(game, 5,game.currentPlayer)
-            print(f"Player {game.currentPlayer} played column {column}")
+        if game.currentPlayer == IA1.symbol:
+            column = alphaBeta(game, 5,IA1)
+            print(f"Player {IA1.symbol} played column {column}")
         else:
-            column = alphaBeta(game, 5, game.currentPlayer)
-            print(f"Player {game.currentPlayer} played column {column}")
+            column = alphaBeta(game, 5, IA2)
+            print(f"Player {IA2.symbol} played column {column}")
             #column = int(
                 #input(f"Player {game.currentPlayer}, enter a column (0-6): "))
         if (not game.isAPossibleMove(column)):
