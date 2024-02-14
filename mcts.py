@@ -10,24 +10,129 @@ import matplotlib.pyplot as plt
 
 
 class Node:
-    def __init__(self, game, parent=None, move=None, reward=0, visit=0):
+    def __init__(self, game, parent=None, move=None, reward=0, visit=1):
         self.game = game
         self.parent = parent
         self.move = move
         self.reward = reward
         self.visit = visit
         self.children = []
+        self.score = None
 
-    def addChild(self, childNode):
-        self.children.append(childNode)
+    def addChild(self, child):
+        child.parent = self
+        self.children.append(child)
+
+    def bestChild(self, exploration=1 / math.sqrt(2)):
+        """Select the best child based on reward, visits, and exploration parameter.
+
+        From https://www.lamsade.dauphine.fr/~cazenave/A+Survey+of+Monte+Carlo+Tree+Search+Methods.pdf : "Balance exploitation of
+        the currently most promising action with exploration of alternatives which may later turn out to be superior"
+
+        Args:
+            exploration (int[0-1]): Factor influencing the balence between exploration or exploration of nodes.
+
+        Returns:
+            Node: The most promissing child according to the exploration-exploitation parameter.
+        """
+        bestChildren = []
+        for child in self.children:
+            child.score = child.reward / child.visit + exploration * \
+                math.sqrt((2 * math.log(self.visit))/child.visit)
+            bestChildren.append([child, child.score])
+
+        return max(bestChildren, key=lambda x: x[1])[0]
+
+    def expand(self, moves):
+        move = random.choice(moves)
+        child = Node(game=self.game.copy(), parent=self, move=move)
+        child.game.makeMove(move)
+        self.addChild(child)
+        return child
+
+    def remainingMoves(self):
+        possibleMoves = self.game.getPossibleMoves()
+        remainingMoves = [move[1]
+                          for move in possibleMoves if (self.isMoveUnique(move[1]))]
+        return remainingMoves
+
+    def isMoveUnique(self, move):
+        for child in self.children:
+            if move == child.move:
+                return False
+        return True
+
+    def isTerminal(self):  # TO CHECK
+        if (self.move is not None and self.game.isWin(self.move)) or self.game.isBoardFull():
+            return True
+        return False
+
+    def getReward(self):
+        if self.game.isWin(self.move):  # player agnostic
+            return 1
+        else:
+            return 0
+
+
+def treePolicy(node):
+    """Choose to explore a new move if still possible or continue on the most pomissing one
+
+    Args:
+        node (Node): The node from which the choice starts.
+
+    Returns:
+        Node: Return the chosen node, and the tree is updated.
+    """
+    while not node.isTerminal():
+        moves = node.remainingMoves()
+        if moves:
+            return node.expand(moves)
+        else:
+            node = node.bestChild()
+    return node
+
+
+def defaultPolicy(node):
+    """Simulate random movements until termial state of the game and return a reward depending on win, lose, draw.
+
+    Returns:
+        int: -1 if lose, 0 if draw, 1 if win.
+    """
+    simulation = Node(node.game.copy())
+    while not simulation.isTerminal():
+        move = random.choice(simulation.game.getPossibleMoves())[1]
+        simulation.move = move
+        simulation.game.makeMove(move)
+    if node.game.currentPlayer == simulation.game.currentPlayer:  # loser
+        return -simulation.getReward()
+    else:
+        return simulation.getReward()  # winner
+
+
+def backup(node, reward):
+    while (node != None):
+        node.visit += 1
+        node.reward += reward
+        reward = -reward  # Sure ?
+        node = node.parent
 
 
 def mcts(game):
     startTime = time.time()
-    return random.randint(0, 6)
+    iteration = 0
+    node = Node(game.copy())
+    printDebug(node, delay=0.1)
+    while isInComputationalBudget(startTime) and iteration <= 100:
+        iteration += 1
+        lastNode = treePolicy(node)
+        reward = defaultPolicy(lastNode)
+        backup(lastNode, reward)
+        # printDebug(node, delay=0)
+    printDebug(node, delay=1)
+    return node.bestChild(0).move
 
 
-def isInComputationalBudget(startTime, limit=0.01):
+def isInComputationalBudget(startTime, limit=5):
     return True if time.time() - startTime < limit else False
 
 # Play
@@ -130,7 +235,7 @@ def visualizeTree(rootNode, debug=False):
         color = getNormalizedRewardColor(node, maxReward)
         size = getNormalizedVisitSize(node, maxVisits)
         net.add_node(
-            currentName, label=f"{str(node.game.currentPlayer)}, [{str(node.move)}]", color=color, size=size)
+            currentName, label=f"{str(node.game.currentPlayer)}, [{str(node.move)}], \n{node.score}", color=color, size=size)
 
         if parentName is not None:
             net.add_edge(parentName, currentName)
@@ -145,7 +250,7 @@ def visualizeTree(rootNode, debug=False):
 
 def printDebug(node, delay=0.1, debug=True):
     if debug:
-        visualizeTree(node).show("tree.html")
+        visualizeTree(node, debug=True).show("tree.html")
         if delay == 0:
             input("Waiting input")
         else:
@@ -153,6 +258,7 @@ def printDebug(node, delay=0.1, debug=True):
 
 
 if __name__ == "__main__":
-    # game = ConnectFour()
-    # playMonteCarlo(game)
-    root_node = createRandomTree(6)
+    game = ConnectFour()
+    playMonteCarlo(game)
+    # mcts(game)
+    # root_node = createRandomTree(3)

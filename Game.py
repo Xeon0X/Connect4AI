@@ -119,7 +119,6 @@ class ConnectFour:
         """Changes the current player
         """
         self.currentPlayer = 'O' if self.currentPlayer == 'X' else 'X'
-        print("hhhh")
 
     def copy(self):
         """Copies the current game
