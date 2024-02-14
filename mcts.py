@@ -37,8 +37,8 @@ class Node:
         """
         bestChildren = []
         for child in self.children:
-            child.score = child.reward / child.visit + exploration * \
-                math.sqrt((2 * math.log(self.visit))/child.visit)
+            child.score = round((child.reward / child.visit) + (exploration *
+                                math.sqrt((2 * math.log(self.visit))/child.visit)), 5)
             bestChildren.append([child, child.score])
 
         return max(bestChildren, key=lambda x: x[1])[0]
@@ -113,7 +113,7 @@ def backup(node, reward):
     while (node != None):
         node.visit += 1
         node.reward += reward
-        reward = -reward  # Sure ?
+        reward = -reward
         node = node.parent
 
 
@@ -121,18 +121,18 @@ def mcts(game):
     startTime = time.time()
     iteration = 0
     node = Node(game.copy())
-    printDebug(node, delay=0.1)
-    while isInComputationalBudget(startTime) and iteration <= 20:
+    while isInComputationalBudget(startTime):  # and iteration <= 200:
         iteration += 1
         lastNode = treePolicy(node)
         reward = defaultPolicy(lastNode)
         backup(lastNode, reward)
-        printDebug(node, delay=0)
-    printDebug(node, delay=1)
+        # printDebug(node, delay=0)
+    # printDebug(node, delay=1)
+    print(iteration)
     return node.bestChild(0).move
 
 
-def isInComputationalBudget(startTime, limit=6000):
+def isInComputationalBudget(startTime, limit=30):
     return True if time.time() - startTime < limit else False
 
 # Play
@@ -235,7 +235,7 @@ def visualizeTree(rootNode, debug=False):
         color = getNormalizedRewardColor(node, maxReward)
         size = getNormalizedVisitSize(node, maxVisits)
         net.add_node(
-            currentName, label=f"{str(node.game.currentPlayer)}, [{str(node.move)}], \n{node.score}", color=color, size=size)
+            currentName, label=f"{str(node.game.currentPlayer)}, [{str(node.move)}], \n{node.score}\n{node.reward}", color=color, size=size)
 
         if parentName is not None:
             net.add_edge(parentName, currentName)
