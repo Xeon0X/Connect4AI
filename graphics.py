@@ -5,6 +5,7 @@ from score import calculateScore
 from Player import Player
 from minmax import minmax
 import sys
+from alphaBeta import alphaBeta
 
 HEIGHT = 800
 WIDTH = 800
@@ -56,7 +57,40 @@ def handleMouseDown(event, screen, game):
         if game.isWin(column):
             print(f"Player {game.currentPlayer} wins!")
             game.printBoard()
-            screen.fill('black')
+
+            
+            while(not GAMEOVER):
+               # button1_rect = pygame.circle(300, 200, 200, 80)  #bouton1 pour jouer en 1v1
+                button1_text = "Win !"
+                font = pygame.font.Font(None, 28)
+                screen.fill('black')
+                if game.currentPlayer == 'X':
+                    rectcolor = 'red'
+                else: 
+                    rectcolor = 'yellow'
+
+
+                #pygame.draw.rect(screen, rectcolor, button1_rect)
+                pygame.draw.circle(screen, rectcolor, (HEIGHT/2, WIDTH/2), WIDTH / 16)
+                text_surface = font.render(button1_text, True, 'white')
+                #text_rect = text_surface.get_rect(button1_text) #bouton1
+               # screen.blit(text_surface, WIDTH/2)
+                titleText = "Win !"
+                text_surface = font.render(titleText, True,(0, 0, 0)) 
+                text_rect = text_surface.get_rect()
+                text_rect.center = (WIDTH/2, HEIGHT/2)  
+                screen.blit(text_surface, text_rect)
+
+                pygame.display.flip()
+
+
+                for event in pygame.event.get() :
+                    if event.type == pygame.QUIT:
+                        return GAMEOVER
+                    elif event.type == pygame.MOUSEBUTTONDOWN :
+                        return GAMEOVER
+
+                
 
            # return GAMEOVER
 
@@ -94,18 +128,52 @@ def gameLoop(screen, game,mode):
                 state = handleMouseDown(event, screen, game)
                 pygame.display.flip()
 
-                chosenMove = minmax(game, 3, IA1)
+                chosenMove = minmax(game, 5, IA1)
                 makeMove(screen,game,chosenMove)
                 #game.makeMove(chosenMove)
-                if game.isWin(chosenMove):
+               # if game.isWin(chosenMove):
+                #    print(f"Player {game.currentPlayer} wins!")
+                 #   game.printBoard()
+                 #   state = GAMEOVER
+                    
+    while state and mode == 3 :
+        clock.tick(60)
+
+
+        for event in pygame.event.get() :
+            if event.type == pygame.QUIT:
+                state = GAMEOVER
+
+            elif event.type == pygame.MOUSEBUTTONDOWN :
+                state = handleMouseDown(event, screen, game)
+                pygame.display.flip()
+                game.printBoard()
+                if game.isBoardFull():
+                    print("Draw!")
+                    break
+                if game.currentPlayer == 'X':
+                    column = alphaBeta(game, 5,game.currentPlayer)
+                    print(f"Player {game.currentPlayer} played column {column}")
+                else:
+                    column = alphaBeta(game, 5, game.currentPlayer)
+                    print(f"Player {game.currentPlayer} played column {column}")
+                    #column = int(
+                        #input(f"Player {game.currentPlayer}, enter a column (0-6): "))
+                if (not game.isAPossibleMove(column)):
+                    print("Invalid move")
+                    continue
+
+                game.makeMove(column)
+                if game.isWin(column):
+                    game.switchPlayer()
                     print(f"Player {game.currentPlayer} wins!")
                     game.printBoard()
-                    state = GAMEOVER
+                    break
+
+            
                     
 
-                
-
-        pygame.display.flip()
+            pygame.display.flip()
 
 
 
