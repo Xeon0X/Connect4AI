@@ -15,6 +15,9 @@ def TestStatAlphaBeta(nbIteration):
         randomProfondeurIA1 = random.randint(1, 7)
         randomProfondeurIA2 = random.randint(1, 7)
         game = ConnectFour()
+        print(f"Game {i+1} started")
+        print(f"Profondeur IA1: {randomProfondeurIA1}")
+        print(f"Profondeur IA2: {randomProfondeurIA2}")
         while True:
             if game.isBoardFull():
                 nbWin["Draw"] += 1
@@ -36,13 +39,19 @@ def TestStatAlphaBeta(nbIteration):
                 
                 break
         print(f"Game {i+1} finished")
-    
-    return nbWin,profondeur, time.time() - timeElapsed
+    with open('TestStatAlphaBeta.txt', 'w') as file:
+        file.write(f"AlphaBeta\n")
+        file.write(f"NbWin: {nbWin}\n")
+        file.write(f"Profondeur: {profondeur}\n")
+        file.write(f"TimeElapsed: {time.time() - timeElapsed}\n")
+        file.write(f"---------------------\n")
+        
+   
 
 
 def TestStatMinMax(nbIteration):
     nbWin = {"X": 0, "O": 0, "Draw": 0}
-    profondeur={"1" :0 , "2" :0 , "3" :0 , "4" :0 , "5" :0 , "6" :0 , "7" :0 }
+    profondeur={"1" :0 , "2" :0 , "3" :0 , "4" :0 , "5" :0 }
     timeElapsed = time.time()
     IA1 = Player('X')
     IA2 = Player('O')
@@ -50,6 +59,9 @@ def TestStatMinMax(nbIteration):
         randomProfondeurIA1 = random.randint(1, 5)
         randomProfondeurIA2 = random.randint(1, 5)
         game = ConnectFour()
+        print(f"Game {i+1} started")
+        print(f"Profondeur IA1: {randomProfondeurIA1}")
+        print(f"Profondeur IA2: {randomProfondeurIA2}")
         while True:
             if game.isBoardFull():
                 nbWin["Draw"] += 1
@@ -71,23 +83,20 @@ def TestStatMinMax(nbIteration):
                 
                 break
         print(f"Game {i+1} finished")
-    
-    return nbWin,profondeur, time.time() - timeElapsed
-
-
-if __name__ == "__main__":
-    nbWin,profondeur, timeElapsed = TestStatAlphaBeta(10)
-    with open('TestStatAlphaBeta.txt', 'w') as file:
-        file.write(f"AlphaBeta\n")
-        file.write(f"NbWin: {nbWin}\n")
-        file.write(f"Profondeur: {profondeur}\n")
-        file.write(f"TimeElapsed: {timeElapsed}\n")
-        file.write(f"---------------------\n")
         
-    nbWin,profondeur, timeElapsed = TestStatMinMax(10)
     with open('TestStatMinMax.txt', 'w') as file:
         file.write(f"MinMax\n")
         file.write(f"NbWin: {nbWin}\n")
         file.write(f"Profondeur: {profondeur}\n")
-        file.write(f"TimeElapsed: {timeElapsed}\n")
+        file.write(f"TimeElapsed: {time.time() - timeElapsed}\n")
         file.write(f"---------------------\n")
+    
+    
+   
+
+
+if __name__ == "__main__":
+    
+    TestStatAlphaBeta(3) 
+    TestStatMinMax(3)
+   
