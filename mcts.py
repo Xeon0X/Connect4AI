@@ -3,6 +3,7 @@ import time
 import random
 
 from Game import ConnectFour
+from minmax import minmax
 
 import networkx as nx
 from pyvis.network import Network
@@ -132,7 +133,7 @@ def mcts(game):
     return node.bestChild(0).move
 
 
-def isInComputationalBudget(startTime, limit=30):
+def isInComputationalBudget(startTime, limit=10):
     return True if time.time() - startTime < limit else False
 
 # Play
@@ -151,8 +152,7 @@ def playMonteCarlo(game):
             column = mcts(game)
             print(f"Player {game.currentPlayer} played column {column}")
         else:
-            column = int(
-                input(f"Player {game.currentPlayer}, enter a column (0-6): "))
+            column = minmax(game, 5, game.currentPlayer)
         if (not game.isAPossibleMove(column)):
             print("Invalid move")
             continue
