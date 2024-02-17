@@ -31,10 +31,10 @@ class Node:
         the currently most promising action with exploration of alternatives which may later turn out to be superior"
 
         Args:
-            exploration (int[0-1]): Factor influencing the balence between exploration or exploration of nodes.
+            exploration (int[0-1]): Factor influencing the balance between exploration or exploration of nodes.
 
         Returns:
-            Node: The most promissing child according to the exploration-exploitation parameter.
+            Node: The most promising child according to the exploration-exploitation parameter.
         """
         bestChildren = []
         for child in self.children:
@@ -76,7 +76,7 @@ class Node:
 
 
 def treePolicy(node):
-    """Choose to explore a new move if still possible or continue on the most pomissing one
+    """Choose to explore a new move if still possible or continue on the most poising one
 
     Args:
         node (Node): The node from which the choice starts.
@@ -94,7 +94,7 @@ def treePolicy(node):
 
 
 def defaultPolicy(node):
-    """Simulate random movements until termial state of the game and return a reward depending on win, lose, draw.
+    """Simulate random movements until terminal state of the game and return a reward depending on win, lose, draw.
 
     Returns:
         int: -1 if lose, 0 if draw, 1 if win.
