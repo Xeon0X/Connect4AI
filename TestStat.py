@@ -1,3 +1,5 @@
+import json
+import os
 from minmax import minmax
 from alphaBeta import alphaBeta
 from Game import ConnectFour
@@ -39,14 +41,31 @@ def TestStatAlphaBeta(nbIteration):
                 
                 break
         print(f"Game {i+1} finished")
-    with open('TestStatAlphaBeta.txt', 'w') as file:
-        file.write(f"AlphaBeta\n")
-        file.write(f"NbWin: {nbWin}\n")
-        file.write(f"Profondeur: {profondeur}\n")
-        file.write(f"TimeElapsed: {time.time() - timeElapsed}\n")
-        file.write(f"---------------------\n")
-        
-   
+    
+    data = {}
+    
+    if os.path.exists('TestStatAlphaBeta.json'):
+        with open('TestStatAlphaBeta.json', 'r') as file:
+            data = json.load(file)
+
+    if "AlphaBeta" not in data:
+        data["AlphaBeta"] = {
+            "NbWin": nbWin,
+            "Profondeur": profondeur,
+            "TimeElapsed": time.time() - timeElapsed,
+            "NbIteration": nbIteration
+        }
+    else:
+        data["AlphaBeta"]["NbWin"]["X"] += nbWin["X"]
+        data["AlphaBeta"]["NbWin"]["O"] += nbWin["O"]
+        data["AlphaBeta"]["NbWin"]["Draw"] += nbWin["Draw"]
+        for key in profondeur:
+            data["AlphaBeta"]["Profondeur"][key] += profondeur[key]
+        data["AlphaBeta"]["TimeElapsed"] += time.time() - timeElapsed
+        data["AlphaBeta"]["NbIteration"] += nbIteration
+
+    with open('TestStatAlphaBeta.json', 'w') as file:
+        json.dump(data, file, indent=4)
 
 
 def TestStatMinMax(nbIteration):
@@ -84,19 +103,37 @@ def TestStatMinMax(nbIteration):
                 break
         print(f"Game {i+1} finished")
         
-    with open('TestStatMinMax.txt', 'w') as file:
-        file.write(f"MinMax\n")
-        file.write(f"NbWin: {nbWin}\n")
-        file.write(f"Profondeur: {profondeur}\n")
-        file.write(f"TimeElapsed: {time.time() - timeElapsed}\n")
-        file.write(f"---------------------\n")
+    data = {}
     
-    
+    if os.path.exists('TestStatMinMax.json'):
+        with open('TestStatMinMax.json', 'r') as file:
+            data = json.load(file)
+
+    if "AlphaBeta" not in data:
+        data["MinMax"] = {
+            "NbWin": nbWin,
+            "Profondeur": profondeur,
+            "TimeElapsed": time.time() - timeElapsed,
+            "NbIteration": nbIteration
+        }
+    else:
+        data["MinMax"]["NbWin"]["X"] += nbWin["X"]
+        data["MinMax"]["NbWin"]["O"] += nbWin["O"]
+        data["MinMax"]["NbWin"]["Draw"] += nbWin["Draw"]
+        for key in profondeur:
+            data["MinMax"]["Profondeur"][key] += profondeur[key]
+        data["MinMax"]["TimeElapsed"] += time.time() - timeElapsed
+        data["MinMax"]["NbIteration"] += nbIteration
+
+    with open('TestStatMinMax.json', 'w') as file:
+        json.dump(data, file, indent=4)
+
+
    
 
 
 if __name__ == "__main__":
     
-    TestStatAlphaBeta(3) 
-    TestStatMinMax(3)
+    TestStatAlphaBeta(500) 
+    #TestStatMinMax(3)
    
