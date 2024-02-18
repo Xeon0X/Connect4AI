@@ -134,6 +134,6 @@ def TestStatMinMax(nbIteration):
 
 if __name__ == "__main__":
     
-    TestStatAlphaBeta(500) 
+    TestStatAlphaBeta(100) 
     #TestStatMinMax(3)
    

@@ -228,7 +228,7 @@ class ConnectFour:
                     return True
         return False
     
-
+   
     def play(self):
         """
         This function is an example of how to use the ConnectFour class.

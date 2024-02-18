@@ -8,21 +8,28 @@ def alphaBeta(game,profondeur,player):
     """
     This function calculates the best move for a given game state with the alphaBeta algorithm.
     """
-    eval,action = playerMax(game,profondeur,player, -math.inf,math.inf)
+    memoryBoard = {}
+    eval,action = playerMax(game,profondeur,player, -math.inf,math.inf,memoryBoard)
     return action
 
-def playerMax(game,profondeur,player,alpha,beta):
+def playerMax(game,profondeur,player,alpha,beta,memoryBoard):
     """
     This function calculates the maximum score for a given game state.
     """
-    if game.checkWin() or profondeur==0 or game.isBoardFull():
-        return calculateScore(game,player),None
+    key = str(game.board)
+    if key in memoryBoard:
+        return memoryBoard[key], None
     
+    if game.checkWin() or profondeur==0 or game.isBoardFull():
+        score = calculateScore(game,player)
+        memoryBoard[key] = score
+        return score,None 
+       
     maxEval = -math.inf
     maxAction = None
 
     for gameState, move in game.getPossibleMoves():
-        eval,_ = playerMin(gameState,profondeur-1,player,alpha,beta)
+        eval,_ = playerMin(gameState,profondeur-1,player,alpha,beta,memoryBoard)
         if eval > maxEval:
             maxEval = eval
             maxAction = move
@@ -33,18 +40,25 @@ def playerMax(game,profondeur,player,alpha,beta):
 
 
 
-def playerMin(game,profondeur,player,alpha,beta):
+def playerMin(game,profondeur,player,alpha,beta,memoryBoard):
     """
     This function calculates the minimum score for a given game state.
     """
+    key = str(game.board)
+    if key in memoryBoard:
+        return memoryBoard[key], None
+    
     if game.checkWin() or profondeur==0 or game.isBoardFull():
-        return calculateScore(game,player),None
+        score = calculateScore(game,player)
+        memoryBoard[key] = score
+        return score,None 
+   
     
     minEval = math.inf
     minAction = None
 
     for gameState, move in game.getPossibleMoves():
-        eval,_ = playerMax(gameState,profondeur-1,player,alpha,beta)
+        eval,_ = playerMax(gameState,profondeur-1,player,alpha,beta,memoryBoard)
         if eval < minEval:
             minEval = eval
             minAction = move
@@ -68,10 +82,10 @@ def playAlphaBeta(game):
             print("Draw!")
             break
         if game.currentPlayer == IA1.symbol:
-            column = alphaBeta(game, 5,IA1)
+            column = alphaBeta(game, 7,IA1)
             print(f"Player {IA1.symbol} played column {column}")
         else:
-            column = alphaBeta(game, 5, IA2)
+            column = alphaBeta(game, 7, IA2)
             print(f"Player {IA2.symbol} played column {column}")
             #column = int(
                 #input(f"Player {game.currentPlayer}, enter a column (0-6): "))
