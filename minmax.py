@@ -1,7 +1,7 @@
 import math
 from Game import ConnectFour
 from score import calculateScore
-
+from Player import Player
 
 
 def minmax(game, profondeur, player):   
@@ -80,15 +80,18 @@ def playMinMax(game):
     Args:
         game (ConnectFour): The game state.
     """
+    IA1 = Player('X')
+    IA2 = Player('O')
+
     while True:
         game.printBoard()
 
-        if game.currentPlayer == 'X':
-            chosenMove = minmax(game, 5, game.currentPlayer)
-            print(f"Player {game.currentPlayer} played column {chosenMove}")
+        if game.currentPlayer == IA1.symbol:
+            chosenMove = minmax(game, 5, IA1)
+            print(f"Player {IA1.symbol} played column {chosenMove}")
         else:
-            chosenMove = minmax(game, 5, game.currentPlayer)
-            print(f"Player {game.currentPlayer} played column {chosenMove}")
+            chosenMove = minmax(game, 5, IA2)
+            print(f"Player {IA2.symbol} played column {chosenMove}")
         
         if (not game.isAPossibleMove(chosenMove)):
             print("Invalid move")
@@ -97,6 +100,7 @@ def playMinMax(game):
         game.makeMove(chosenMove)
 
         if game.isWin(chosenMove):
+            game.switchPlayer()
             print(f"Player {game.currentPlayer} wins!")
             game.printBoard()
             break
@@ -105,8 +109,6 @@ def playMinMax(game):
             print("Draw!")
             game.printBoard()
             break
-
-        game.switchPlayer()
 
 
 if __name__ == "__main__":
