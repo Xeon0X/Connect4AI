@@ -1,3 +1,4 @@
+
 def calculateScore(game, player):
     """
     This function calculates the score of a given game state.

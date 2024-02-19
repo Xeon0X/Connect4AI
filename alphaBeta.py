@@ -4,6 +4,7 @@ from score import calculateScore
 from Player import Player
 
 
+
 def alphaBeta(game,profondeur,player):
     """
     This function calculates the best move for a given game state with the alphaBeta algorithm.
