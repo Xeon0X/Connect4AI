@@ -7,7 +7,7 @@ AI2_WON = 1
 DRAW = 2
 NUMBER_OF_AI = 20
 NUMBER_AI_SELECTED = 5
-DEAPTH = 4
+DEPTH = 4
 NUMBER_OF_GENERATION = 5
 
 def gameLoop(ai1,ai2):
@@ -17,9 +17,9 @@ def gameLoop(ai1,ai2):
             return DRAW
         
         if game.currentPlayer == ai1.symbol:
-            column = alphaBeta(game, DEAPTH, ai1)
+            column = alphaBeta(game, DEPTH, ai1)
         else:
-            column = alphaBeta(game, DEAPTH , ai2)
+            column = alphaBeta(game, DEPTH , ai2)
 
         game.makeMove(column)
         if game.isWin(column):
