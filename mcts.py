@@ -64,8 +64,9 @@ class Node:
         return True
 
     def isTerminal(self):  # TO CHECK
-        if (self.move is not None and self.game.isWin(self.move)) or self.game.isBoardFull():
-            return True
+        if self.move is not None:
+            if (self.game.isWin(self.move)) or self.game.isBoardFull():
+                return True
         return False
 
     def getReward(self):
@@ -101,9 +102,11 @@ def defaultPolicy(node):
     """
     simulation = Node(node.game.copy())
     while not simulation.isTerminal():
-        move = random.choice(simulation.game.getPossibleMoves())[1]
-        simulation.move = move
-        simulation.game.makeMove(move)
+        moves = simulation.game.getPossibleMoves()
+        if moves != []:
+            move = random.choice(moves)[1]
+            simulation.move = move
+            simulation.game.makeMove(move)
     if node.game.currentPlayer == simulation.game.currentPlayer:  # loser
         return simulation.getReward()
     else:
@@ -130,9 +133,6 @@ def mcts(game, limit=10):
         # printDebug(node, delay=0)
     # printDebug(node, delay=0)
     # print(iteration)
-    if node.bestChild(0).move == None:
-        print("None move on :")
-        game.printBoard()
     return node.bestChild(0).move
 
 

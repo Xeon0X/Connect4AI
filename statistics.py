@@ -70,27 +70,29 @@ def read_write_json(file_path, algorithm1, algorithm2, looser):
         json.dump(data, f, indent=4)
 
 
+def runSimulations(settings):
+    algorithm1, algorithm2 = settings
+    gpu_id = queue.get()
+    try:
+        # run processing on GPU <gpu_id>
+        ident = current_process().ident
+        print('{}: starting process on GPU {}'.format(ident, gpu_id))
+        playSimulation(algorithm1, algorithm2)
+        print('{}: finished'.format(ident))
+    finally:
+        queue.put(gpu_id)
+
+
 if __name__ == "__main__":
+    max_depth = 6
+    time = 10
+    toRun = toRun = [[["mcts", time], ["minmax", depth]] for _ in range(
+        10) for depth in range(1, max_depth)] + [[["minmax", depth], ["mcts", time]] for _ in range(10) for depth in range(1, max_depth)]
 
-    toRun = toRun = [[["mcts", 1], ["minmax", 5]] for _ in range(
-        10)] + [[["minmax", 5], ["mcts", 1]] for _ in range(10)]
-
-    NUM_GPUS = 12
+    NUM_GPUS = 2
     PROC_PER_GPU = 12
 
     queue = Queue()
-
-    def runSimulations(settings):
-        algorithm1, algorithm2 = settings
-        gpu_id = queue.get()
-        try:
-            # run processing on GPU <gpu_id>
-            ident = current_process().ident
-            print('{}: starting process on GPU {}'.format(ident, gpu_id))
-            playSimulation(algorithm1, algorithm2)
-            print('{}: finished'.format(ident))
-        finally:
-            queue.put(gpu_id)
 
     # initialize the queue with the GPU ids
     for gpu_ids in range(NUM_GPUS):
@@ -102,5 +104,3 @@ if __name__ == "__main__":
         pass
     pool.close()
     pool.join()
-
-    # playSimulation(["mcts", 1], ["minmax", 5])
