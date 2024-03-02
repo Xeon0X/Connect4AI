@@ -86,7 +86,7 @@ def runSimulations(settings):
 if __name__ == "__main__":
     max_depth = 6
     time = 10
-    toRun = toRun = [[["mcts", time], ["minmax", depth]] for _ in range(
+    toRun = [[["mcts", time], ["minmax", depth]] for _ in range(
         10) for depth in range(1, max_depth)] + [[["minmax", depth], ["mcts", time]] for _ in range(10) for depth in range(1, max_depth)]
 
     NUM_GPUS = 2
