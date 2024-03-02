@@ -128,12 +128,12 @@ def mcts(game):
         reward = defaultPolicy(lastNode)
         backup(lastNode, reward)
         # printDebug(node, delay=0)
-    # printDebug(node, delay=1)
+    printDebug(node, delay=0)
     print(iteration)
     return node.bestChild(0).move
 
 
-def isInComputationalBudget(startTime, limit=10):
+def isInComputationalBudget(startTime, limit=0.05):
     return True if time.time() - startTime < limit else False
 
 # Play
@@ -224,7 +224,7 @@ def calculateMaxRewardAndVisits(rootNode):
 
 def visualizeTree(rootNode, debug=False):
     net = Network(notebook=True, height="1450px", width="100%",
-                  bgcolor="#000000", font_color="white", layout={'hierarchical': {'enabled': True, 'direction': 'UD'}}, cdn_resources='in_line')
+                  bgcolor="#fafafa", font_color="black", cdn_resources='in_line')
     if debug:
         net.show_buttons()
 
