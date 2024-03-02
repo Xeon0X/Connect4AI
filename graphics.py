@@ -68,6 +68,8 @@ def gameLoop(screen, game,mode):
     clock = pygame.time.Clock()
     state = PLAYING
     drawBoard(screen)
+    IA1 = Player('O')
+    
     
 
     while state and mode == 1 :
@@ -81,8 +83,9 @@ def gameLoop(screen, game,mode):
         pygame.display.flip()
 
     while state and mode == 2 :
-
-        IA1 = Player('O')
+        
+        
+        
         clock.tick(60) # limits FPS to 60
         for event in pygame.event.get() :
             if event.type == pygame.QUIT:
@@ -147,8 +150,10 @@ class RadioButton():
             pygame.draw.circle(self.screen, 'yellow', (self.x + 10, self.y + 10), 20)
             if self.game.currentPlayer == 'O':
                 self.game.currentPlayer = 'X'
+                
             else :
                 self.game.currentPlayer = 'O'
+                
         
        
 
@@ -308,7 +313,6 @@ def main():
    # gameLoop(screen, game)
     
 
-    print("lkfdskmjfsqkfjdslfmjlqjlml")
     pygame.quit()
 
 if __name__ == "__main__":
