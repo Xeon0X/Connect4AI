@@ -118,22 +118,25 @@ def backup(node, reward):
         node = node.parent
 
 
-def mcts(game):
+def mcts(game, limit=10):
     startTime = time.time()
     iteration = 0
     node = Node(game.copy())
-    while isInComputationalBudget(startTime):  # and iteration <= 200:
+    while isInComputationalBudget(startTime, limit):  # and iteration <= 200:
         iteration += 1
         lastNode = treePolicy(node)
         reward = defaultPolicy(lastNode)
         backup(lastNode, reward)
         # printDebug(node, delay=0)
-    printDebug(node, delay=0)
-    print(iteration)
+    # printDebug(node, delay=0)
+    # print(iteration)
+    if node.bestChild(0).move == None:
+        print("None move on :")
+        game.printBoard()
     return node.bestChild(0).move
 
 
-def isInComputationalBudget(startTime, limit=0.05):
+def isInComputationalBudget(startTime, limit):
     return True if time.time() - startTime < limit else False
 
 # Play

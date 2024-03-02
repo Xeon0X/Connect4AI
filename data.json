@@ -1,0 +1,41 @@
+{
+    "settings 1": {
+        "total": 0,
+        "X": {
+            "algo": "name",
+            "setting": 1,
+            "lose": 0
+        },
+        "O": {
+            "algo": "name",
+            "setting": 1,
+            "lose": 0
+        }
+    },
+    "simulation 2": {
+        "total": 39,
+        "X": {
+            "algo": "mcts",
+            "setting": 1,
+            "lose": 38
+        },
+        "O": {
+            "algo": "minmax",
+            "setting": 5,
+            "lose": 1
+        }
+    },
+    "simulation 3": {
+        "total": 20,
+        "X": {
+            "algo": "minmax",
+            "setting": 5,
+            "lose": 0
+        },
+        "O": {
+            "algo": "mcts",
+            "setting": 1,
+            "lose": 20
+        }
+    }
+}
