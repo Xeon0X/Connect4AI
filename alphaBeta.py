@@ -3,15 +3,26 @@ from Game import ConnectFour
 from score import calculateScore
 from Player import Player
 
+indices_order = [3, 4, 2, 5, 1, 6, 0, 7]
 
 
-def alphaBeta(game,profondeur,player):
+def custom_sort(move):
+    distance_from_middle = abs(move[1] - 3.5)
+    return distance_from_middle
+
+def alphaBeta(game, max_depth, player):
     """
     This function calculates the best move for a given game state with the alphaBeta algorithm.
     """
-    memoryBoard = {}
-    eval,action = playerMax(game,profondeur,player, -math.inf,math.inf,memoryBoard)
-    return action
+    best_action = None
+    for depth in range(1, max_depth + 1):  
+        memoryBoard = {}
+        eval, action = playerMax(game, depth, player, -math.inf, math.inf, memoryBoard)
+        if action is not None:  
+            best_action = action
+        else:
+            break  
+    return best_action
 
 def playerMax(game,profondeur,player,alpha,beta,memoryBoard):
     """
@@ -28,8 +39,10 @@ def playerMax(game,profondeur,player,alpha,beta,memoryBoard):
        
     maxEval = -math.inf
     maxAction = None
-
-    for gameState, move in game.getPossibleMoves():
+    possibleMoves = game.getPossibleMoves()
+    possibleMoves.sort(key=custom_sort)
+    
+    for gameState, move in possibleMoves:
         eval,_ = playerMin(gameState,profondeur-1,player,alpha,beta,memoryBoard)
         if eval > maxEval:
             maxEval = eval
@@ -57,8 +70,10 @@ def playerMin(game,profondeur,player,alpha,beta,memoryBoard):
     
     minEval = math.inf
     minAction = None
+    possibleMoves = game.getPossibleMoves()
+    possibleMoves.sort(key=custom_sort)
 
-    for gameState, move in game.getPossibleMoves():
+    for gameState, move in possibleMoves:
         eval,_ = playerMax(gameState,profondeur-1,player,alpha,beta,memoryBoard)
         if eval < minEval:
             minEval = eval
@@ -77,6 +92,7 @@ def playAlphaBeta(game):
     """
     IA1 = Player('X')
     IA2 = Player('O')
+    state = False
     while True:
         game.printBoard()
         if game.isBoardFull():
