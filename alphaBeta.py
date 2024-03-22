@@ -104,4 +104,5 @@ def playAlphaBeta(game):
 
 if __name__ == "__main__":
     game = ConnectFour()
+    
     playAlphaBeta(game)
