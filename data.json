@@ -1,0 +1,301 @@
+{
+    "settings 1": {
+        "total": 0,
+        "X": {
+            "algo": "name",
+            "setting": 1,
+            "lose": 0
+        },
+        "O": {
+            "algo": "name",
+            "setting": 1,
+            "lose": 0
+        }
+    },
+    "simulation 2": {
+        "total": 80,
+        "X": {
+            "algo": "mcts",
+            "setting": 1,
+            "lose": 77
+        },
+        "O": {
+            "algo": "minmax",
+            "setting": 5,
+            "lose": 3
+        }
+    },
+    "simulation 3": {
+        "total": 52,
+        "X": {
+            "algo": "minmax",
+            "setting": 5,
+            "lose": 1
+        },
+        "O": {
+            "algo": "mcts",
+            "setting": 1,
+            "lose": 51
+        }
+    },
+    "simulation 4": {
+        "total": 28,
+        "X": {
+            "algo": "minmax",
+            "setting": 1,
+            "lose": 2
+        },
+        "O": {
+            "algo": "mcts",
+            "setting": 1,
+            "lose": 26
+        }
+    },
+    "simulation 5": {
+        "total": 21,
+        "X": {
+            "algo": "minmax",
+            "setting": 2,
+            "lose": 1
+        },
+        "O": {
+            "algo": "mcts",
+            "setting": 1,
+            "lose": 20
+        }
+    },
+    "simulation 6": {
+        "total": 43,
+        "X": {
+            "algo": "mcts",
+            "setting": 1,
+            "lose": 40
+        },
+        "O": {
+            "algo": "minmax",
+            "setting": 1,
+            "lose": 3
+        }
+    },
+    "simulation 7": {
+        "total": 23,
+        "X": {
+            "algo": "minmax",
+            "setting": 3,
+            "lose": 0
+        },
+        "O": {
+            "algo": "mcts",
+            "setting": 1,
+            "lose": 23
+        }
+    },
+    "simulation 8": {
+        "total": 38,
+        "X": {
+            "algo": "mcts",
+            "setting": 1,
+            "lose": 37
+        },
+        "O": {
+            "algo": "minmax",
+            "setting": 2,
+            "lose": 1
+        }
+    },
+    "simulation 9": {
+        "total": 36,
+        "X": {
+            "algo": "mcts",
+            "setting": 1,
+            "lose": 35
+        },
+        "O": {
+            "algo": "minmax",
+            "setting": 3,
+            "lose": 1
+        }
+    },
+    "simulation 10": {
+        "total": 12,
+        "X": {
+            "algo": "minmax",
+            "setting": 4,
+            "lose": 0
+        },
+        "O": {
+            "algo": "mcts",
+            "setting": 1,
+            "lose": 12
+        }
+    },
+    "simulation 11": {
+        "total": 27,
+        "X": {
+            "algo": "mcts",
+            "setting": 1,
+            "lose": 26
+        },
+        "O": {
+            "algo": "minmax",
+            "setting": 4,
+            "lose": 1
+        }
+    },
+    "simulation 12": {
+        "total": 9,
+        "X": {
+            "algo": "mcts",
+            "setting": 1,
+            "lose": 9
+        },
+        "O": {
+            "algo": "minmax",
+            "setting": 6,
+            "lose": 0
+        }
+    },
+    "simulation 13": {
+        "total": 10,
+        "X": {
+            "algo": "minmax",
+            "setting": 6,
+            "lose": 0
+        },
+        "O": {
+            "algo": "mcts",
+            "setting": 1,
+            "lose": 10
+        }
+    },
+    "simulation 14": {
+        "total": 27,
+        "X": {
+            "algo": "mcts",
+            "setting": 10,
+            "lose": 14
+        },
+        "O": {
+            "algo": "minmax",
+            "setting": 1,
+            "lose": 13
+        }
+    },
+    "simulation 15": {
+        "total": 24,
+        "X": {
+            "algo": "mcts",
+            "setting": 10,
+            "lose": 23
+        },
+        "O": {
+            "algo": "minmax",
+            "setting": 3,
+            "lose": 1
+        }
+    },
+    "simulation 16": {
+        "total": 23,
+        "X": {
+            "algo": "mcts",
+            "setting": 10,
+            "lose": 23
+        },
+        "O": {
+            "algo": "minmax",
+            "setting": 5,
+            "lose": 0
+        }
+    },
+    "simulation 17": {
+        "total": 12,
+        "X": {
+            "algo": "mcts",
+            "setting": 10,
+            "lose": 11
+        },
+        "O": {
+            "algo": "minmax",
+            "setting": 4,
+            "lose": 1
+        }
+    },
+    "simulation 18": {
+        "total": 19,
+        "X": {
+            "algo": "mcts",
+            "setting": 10,
+            "lose": 17
+        },
+        "O": {
+            "algo": "minmax",
+            "setting": 2,
+            "lose": 2
+        }
+    },
+    "simulation 19": {
+        "total": 18,
+        "X": {
+            "algo": "minmax",
+            "setting": 1,
+            "lose": 7
+        },
+        "O": {
+            "algo": "mcts",
+            "setting": 10,
+            "lose": 11
+        }
+    },
+    "simulation 20": {
+        "total": 16,
+        "X": {
+            "algo": "minmax",
+            "setting": 4,
+            "lose": 0
+        },
+        "O": {
+            "algo": "mcts",
+            "setting": 10,
+            "lose": 16
+        }
+    },
+    "simulation 21": {
+        "total": 16,
+        "X": {
+            "algo": "minmax",
+            "setting": 5,
+            "lose": 0
+        },
+        "O": {
+            "algo": "mcts",
+            "setting": 10,
+            "lose": 16
+        }
+    },
+    "simulation 22": {
+        "total": 17,
+        "X": {
+            "algo": "minmax",
+            "setting": 3,
+            "lose": 1
+        },
+        "O": {
+            "algo": "mcts",
+            "setting": 10,
+            "lose": 16
+        }
+    },
+    "simulation 23": {
+        "total": 10,
+        "X": {
+            "algo": "minmax",
+            "setting": 2,
+            "lose": 1
+        },
+        "O": {
+            "algo": "mcts",
+            "setting": 10,
+            "lose": 9
+        }
+    }
+}
