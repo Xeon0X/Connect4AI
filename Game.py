@@ -216,7 +216,7 @@ class ConnectFour:
                 if self.isWin(column):
                     return True
         return False
-
+      
     def play(self):
         """
         This function is an example of how to use the ConnectFour class.
@@ -239,7 +239,7 @@ class ConnectFour:
                 print(f"Player {self.currentPlayer} wins!")
                 self.printBoard()
                 break
-            self.switchPlayer()
+            # self.switchPlayer()
 
 
 if __name__ == "__main__":
