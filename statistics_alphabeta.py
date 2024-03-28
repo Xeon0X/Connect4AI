@@ -35,18 +35,18 @@ def statAlphaBeta(depth: int):
     
     def update_depth_data(result, depth1, depth2):
         if result == depth1:
-            depth_data[depth1]["win"].append(depth2)
-            depth_data[depth2]["loose"].append(depth1)
+            depth_data[depth1]["win"].append(depth2+1)
+            depth_data[depth2]["loose"].append(depth1+1)
             depth_data[depth1]["nbWin"] += 1
             depth_data[depth2]["nbLoose"] += 1
         elif result == depth2:
-            depth_data[depth1]["loose"].append(depth2)
-            depth_data[depth2]["win"].append(depth1)
+            depth_data[depth1]["loose"].append(depth2+1)
+            depth_data[depth2]["win"].append(depth1+1)
             depth_data[depth1]["nbLoose"] += 1
             depth_data[depth2]["nbWin"] += 1
         else:
-            depth_data[depth1]["draw"].append(depth2)
-            depth_data[depth2]["draw"].append(depth1)
+            depth_data[depth1]["draw"].append(depth2+1)
+            depth_data[depth2]["draw"].append(depth1+1)
             depth_data[depth1]["nbDraw"] += 1
             depth_data[depth2]["nbDraw"] += 1
         
