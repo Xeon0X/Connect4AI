@@ -1,171 +1,104 @@
 {
     "alphaBeta": {
-        "timeElapsed": 322.71782970428467,
-        "depthMax": 7,
+        "timeElapsed": 15.035141706466675,
+        "depthMax": 5,
         "depthData": [
             {
                 "depth": 1,
-                "nbWin": 1,
-                "nbLoose": 1,
-                "nbDraw": 10,
+                "nbWin": 7,
+                "nbLoose": 0,
+                "nbDraw": 1,
                 "win": [
-                    2
+                    2,
+                    3,
+                    3,
+                    4,
+                    4,
+                    5,
+                    5
                 ],
-                "loose": [
-                    2
-                ],
+                "loose": [],
                 "draw": [
-                    3,
-                    3,
-                    4,
-                    4,
-                    5,
-                    5,
-                    6,
-                    6,
-                    7,
-                    7
+                    2
                 ]
             },
             {
                 "depth": 2,
-                "nbWin": 1,
-                "nbLoose": 1,
-                "nbDraw": 10,
+                "nbWin": 2,
+                "nbLoose": 4,
+                "nbDraw": 2,
                 "win": [
-                    1
+                    5,
+                    5
                 ],
                 "loose": [
-                    1
+                    1,
+                    3,
+                    3,
+                    4
                 ],
                 "draw": [
-                    3,
-                    3,
-                    4,
-                    4,
-                    5,
-                    5,
-                    6,
-                    6,
-                    7,
-                    7
+                    1,
+                    4
                 ]
             },
             {
                 "depth": 3,
-                "nbWin": 0,
-                "nbLoose": 0,
-                "nbDraw": 12,
-                "win": [],
-                "loose": [],
-                "draw": [
-                    1,
-                    1,
+                "nbWin": 4,
+                "nbLoose": 4,
+                "nbDraw": 0,
+                "win": [
                     2,
                     2,
-                    4,
-                    4,
                     5,
-                    5,
-                    6,
-                    6,
-                    7,
-                    7
-                ]
+                    5
+                ],
+                "loose": [
+                    1,
+                    1,
+                    4,
+                    4
+                ],
+                "draw": []
             },
             {
                 "depth": 4,
-                "nbWin": 0,
-                "nbLoose": 1,
-                "nbDraw": 11,
-                "win": [],
+                "nbWin": 4,
+                "nbLoose": 3,
+                "nbDraw": 1,
+                "win": [
+                    2,
+                    3,
+                    3,
+                    5
+                ],
                 "loose": [
+                    1,
+                    1,
                     5
                 ],
                 "draw": [
-                    1,
-                    1,
-                    2,
-                    2,
-                    3,
-                    3,
-                    5,
-                    6,
-                    6,
-                    7,
-                    7
+                    2
                 ]
             },
             {
                 "depth": 5,
                 "nbWin": 1,
-                "nbLoose": 1,
-                "nbDraw": 10,
+                "nbLoose": 7,
+                "nbDraw": 0,
                 "win": [
                     4
                 ],
                 "loose": [
-                    6
+                    1,
+                    1,
+                    2,
+                    2,
+                    3,
+                    3,
+                    4
                 ],
-                "draw": [
-                    1,
-                    1,
-                    2,
-                    2,
-                    3,
-                    3,
-                    4,
-                    6,
-                    7,
-                    7
-                ]
-            },
-            {
-                "depth": 6,
-                "nbWin": 1,
-                "nbLoose": 2,
-                "nbDraw": 9,
-                "win": [
-                    5
-                ],
-                "loose": [
-                    7,
-                    7
-                ],
-                "draw": [
-                    1,
-                    1,
-                    2,
-                    2,
-                    3,
-                    3,
-                    4,
-                    4,
-                    5
-                ]
-            },
-            {
-                "depth": 7,
-                "nbWin": 2,
-                "nbLoose": 0,
-                "nbDraw": 10,
-                "win": [
-                    6,
-                    6
-                ],
-                "loose": [],
-                "draw": [
-                    1,
-                    1,
-                    2,
-                    2,
-                    3,
-                    3,
-                    4,
-                    4,
-                    5,
-                    5
-                ]
+                "draw": []
             }
         ]
     }
