@@ -162,5 +162,3 @@ cython_debug/
 # Every temp local file
 .vscode
 .DS_Store
-# JSON files
-*.json
