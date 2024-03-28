@@ -1,0 +1,231 @@
+\doxysection{Game.\+Connect\+Four Class Reference}
+\hypertarget{classGame_1_1ConnectFour}{}\label{classGame_1_1ConnectFour}\index{Game.ConnectFour@{Game.ConnectFour}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classGame_1_1ConnectFour_aaad57c96f409c0dab927624ce38e09f6}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self)
+\item 
+\mbox{\hyperlink{classGame_1_1ConnectFour_ac2bafd76ea058d2f1e8e83b3da5f450d}{print\+Board}} (self)
+\item 
+\mbox{\hyperlink{classGame_1_1ConnectFour_a2d4459d1c2aa4ec18c62005c2faa3482}{is\+APossible\+Move}} (self, column)
+\item 
+\mbox{\hyperlink{classGame_1_1ConnectFour_a47ef49510884d90036b7d982009d1077}{is\+Collumn\+Empty}} (self, column)
+\item 
+\mbox{\hyperlink{classGame_1_1ConnectFour_a7311dc13bcfb1137d4ed194ccf5c426a}{is\+Board\+Full}} (self)
+\item 
+\mbox{\hyperlink{classGame_1_1ConnectFour_aea0d319156a5327ed21d21c8cf89841e}{is\+Win}} (self, column)
+\item 
+\mbox{\hyperlink{classGame_1_1ConnectFour_a47834fda3949e2b9ff52b6bfa592eccb}{make\+Move}} (self, column)
+\item 
+\mbox{\hyperlink{classGame_1_1ConnectFour_a5f807a40f2a653f51213f16c8bc0ed9c}{switch\+Player}} (self)
+\item 
+\mbox{\hyperlink{classGame_1_1ConnectFour_a53564b91671ad3928bcba9421257b0b5}{copy}} (self)
+\item 
+\mbox{\hyperlink{classGame_1_1ConnectFour_a20db825d9f6e1bd42fb397a8829c8071}{get\+Row}} (self, row)
+\item 
+\mbox{\hyperlink{classGame_1_1ConnectFour_a58c0c82086ad07f1c3c2c4e7fd1a9d2a}{get\+Column}} (self, column)
+\item 
+\mbox{\hyperlink{classGame_1_1ConnectFour_a22ce264a1c5c0877053be5ce13ef6b5a}{get\+Diagonals}} (self)
+\item 
+\mbox{\hyperlink{classGame_1_1ConnectFour_ab4d22b79928c0edf5de6aecf1f227f54}{get\+Possible\+Moves}} (self)
+\item 
+\mbox{\hyperlink{classGame_1_1ConnectFour_a6cf1340adfb2720b94ba7b1a901d1dda}{check\+Win}} (self)
+\item 
+\mbox{\hyperlink{classGame_1_1ConnectFour_ae44b73b2fd123a6246617049e9a625d9}{play}} (self)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classGame_1_1ConnectFour_a1f9a30af764dc5655d72d5367baa46f6}\label{classGame_1_1ConnectFour_a1f9a30af764dc5655d72d5367baa46f6} 
+{\bfseries board}
+\item 
+\Hypertarget{classGame_1_1ConnectFour_a49b3df47ad6267c8d92972f14550072a}\label{classGame_1_1ConnectFour_a49b3df47ad6267c8d92972f14550072a} 
+{\bfseries current\+Player}
+\item 
+\Hypertarget{classGame_1_1ConnectFour_a431e741e54864c33a8ce3a21a7ffbc64}\label{classGame_1_1ConnectFour_a431e741e54864c33a8ce3a21a7ffbc64} 
+{\bfseries score\+Values}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}This class represents a game of Connect Four. It contains all the functions needed to play the game.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classGame_1_1ConnectFour_aaad57c96f409c0dab927624ce38e09f6}\label{classGame_1_1ConnectFour_aaad57c96f409c0dab927624ce38e09f6} 
+\index{Game.ConnectFour@{Game.ConnectFour}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!Game.ConnectFour@{Game.ConnectFour}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily Game.\+Connect\+Four.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Initializes a new ConnectFour object 
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classGame_1_1ConnectFour_a6cf1340adfb2720b94ba7b1a901d1dda}\label{classGame_1_1ConnectFour_a6cf1340adfb2720b94ba7b1a901d1dda} 
+\index{Game.ConnectFour@{Game.ConnectFour}!checkWin@{checkWin}}
+\index{checkWin@{checkWin}!Game.ConnectFour@{Game.ConnectFour}}
+\doxysubsubsection{\texorpdfstring{checkWin()}{checkWin()}}
+{\footnotesize\ttfamily Game.\+Connect\+Four.\+check\+Win (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}This function checks if a player has won the game.
+
+Returns:
+    bool: If a player has won the game or not
+\end{DoxyVerb}
+ \Hypertarget{classGame_1_1ConnectFour_a53564b91671ad3928bcba9421257b0b5}\label{classGame_1_1ConnectFour_a53564b91671ad3928bcba9421257b0b5} 
+\index{Game.ConnectFour@{Game.ConnectFour}!copy@{copy}}
+\index{copy@{copy}!Game.ConnectFour@{Game.ConnectFour}}
+\doxysubsubsection{\texorpdfstring{copy()}{copy()}}
+{\footnotesize\ttfamily Game.\+Connect\+Four.\+copy (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Copies the current game
+
+Returns:
+    ConnectFour: The copy of the current game
+\end{DoxyVerb}
+ \Hypertarget{classGame_1_1ConnectFour_a58c0c82086ad07f1c3c2c4e7fd1a9d2a}\label{classGame_1_1ConnectFour_a58c0c82086ad07f1c3c2c4e7fd1a9d2a} 
+\index{Game.ConnectFour@{Game.ConnectFour}!getColumn@{getColumn}}
+\index{getColumn@{getColumn}!Game.ConnectFour@{Game.ConnectFour}}
+\doxysubsubsection{\texorpdfstring{getColumn()}{getColumn()}}
+{\footnotesize\ttfamily Game.\+Connect\+Four.\+get\+Column (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{column }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb} Returns the requested column
+
+Args:
+    column (int): The column to return
+
+Returns:
+    list(str): The requested column
+\end{DoxyVerb}
+ \Hypertarget{classGame_1_1ConnectFour_a22ce264a1c5c0877053be5ce13ef6b5a}\label{classGame_1_1ConnectFour_a22ce264a1c5c0877053be5ce13ef6b5a} 
+\index{Game.ConnectFour@{Game.ConnectFour}!getDiagonals@{getDiagonals}}
+\index{getDiagonals@{getDiagonals}!Game.ConnectFour@{Game.ConnectFour}}
+\doxysubsubsection{\texorpdfstring{getDiagonals()}{getDiagonals()}}
+{\footnotesize\ttfamily Game.\+Connect\+Four.\+get\+Diagonals (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb} Returns all the diagonals of the board
+
+Returns:
+    list(list(str)): All the diagonals of the board
+\end{DoxyVerb}
+ \Hypertarget{classGame_1_1ConnectFour_ab4d22b79928c0edf5de6aecf1f227f54}\label{classGame_1_1ConnectFour_ab4d22b79928c0edf5de6aecf1f227f54} 
+\index{Game.ConnectFour@{Game.ConnectFour}!getPossibleMoves@{getPossibleMoves}}
+\index{getPossibleMoves@{getPossibleMoves}!Game.ConnectFour@{Game.ConnectFour}}
+\doxysubsubsection{\texorpdfstring{getPossibleMoves()}{getPossibleMoves()}}
+{\footnotesize\ttfamily Game.\+Connect\+Four.\+get\+Possible\+Moves (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}This function returns a list of tuples containing all the possible moves and the resulting game state.
+\end{DoxyVerb}
+ \Hypertarget{classGame_1_1ConnectFour_a20db825d9f6e1bd42fb397a8829c8071}\label{classGame_1_1ConnectFour_a20db825d9f6e1bd42fb397a8829c8071} 
+\index{Game.ConnectFour@{Game.ConnectFour}!getRow@{getRow}}
+\index{getRow@{getRow}!Game.ConnectFour@{Game.ConnectFour}}
+\doxysubsubsection{\texorpdfstring{getRow()}{getRow()}}
+{\footnotesize\ttfamily Game.\+Connect\+Four.\+get\+Row (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{row }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb} Returns the requested row
+
+Args:
+    row (int): The row to return
+
+Returns:
+    list(str): The requested row
+\end{DoxyVerb}
+ \Hypertarget{classGame_1_1ConnectFour_a2d4459d1c2aa4ec18c62005c2faa3482}\label{classGame_1_1ConnectFour_a2d4459d1c2aa4ec18c62005c2faa3482} 
+\index{Game.ConnectFour@{Game.ConnectFour}!isAPossibleMove@{isAPossibleMove}}
+\index{isAPossibleMove@{isAPossibleMove}!Game.ConnectFour@{Game.ConnectFour}}
+\doxysubsubsection{\texorpdfstring{isAPossibleMove()}{isAPossibleMove()}}
+{\footnotesize\ttfamily Game.\+Connect\+Four.\+is\+APossible\+Move (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{column }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Checks if the provided column is a possible move for the player
+
+Args:
+    column (int)): The column of the move give by the player
+
+Returns:
+    bool: If the move is possible or not
+\end{DoxyVerb}
+ \Hypertarget{classGame_1_1ConnectFour_a7311dc13bcfb1137d4ed194ccf5c426a}\label{classGame_1_1ConnectFour_a7311dc13bcfb1137d4ed194ccf5c426a} 
+\index{Game.ConnectFour@{Game.ConnectFour}!isBoardFull@{isBoardFull}}
+\index{isBoardFull@{isBoardFull}!Game.ConnectFour@{Game.ConnectFour}}
+\doxysubsubsection{\texorpdfstring{isBoardFull()}{isBoardFull()}}
+{\footnotesize\ttfamily Game.\+Connect\+Four.\+is\+Board\+Full (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Checks if the board is full
+
+Returns:
+    bool: If the board is full or not
+\end{DoxyVerb}
+ \Hypertarget{classGame_1_1ConnectFour_a47ef49510884d90036b7d982009d1077}\label{classGame_1_1ConnectFour_a47ef49510884d90036b7d982009d1077} 
+\index{Game.ConnectFour@{Game.ConnectFour}!isCollumnEmpty@{isCollumnEmpty}}
+\index{isCollumnEmpty@{isCollumnEmpty}!Game.ConnectFour@{Game.ConnectFour}}
+\doxysubsubsection{\texorpdfstring{isCollumnEmpty()}{isCollumnEmpty()}}
+{\footnotesize\ttfamily Game.\+Connect\+Four.\+is\+Collumn\+Empty (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{column }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Checks if the given column is empty
+
+Args:
+    column (int): The column of the move give by the player
+
+Returns:
+    int: If the column is empty or not
+\end{DoxyVerb}
+ \Hypertarget{classGame_1_1ConnectFour_aea0d319156a5327ed21d21c8cf89841e}\label{classGame_1_1ConnectFour_aea0d319156a5327ed21d21c8cf89841e} 
+\index{Game.ConnectFour@{Game.ConnectFour}!isWin@{isWin}}
+\index{isWin@{isWin}!Game.ConnectFour@{Game.ConnectFour}}
+\doxysubsubsection{\texorpdfstring{isWin()}{isWin()}}
+{\footnotesize\ttfamily Game.\+Connect\+Four.\+is\+Win (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{column }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Checks if the move in the given column is a winning move
+
+Args:
+    column (int): The column of the move give by the player
+
+Returns:
+    bool: If the move is a winning move or not
+\end{DoxyVerb}
+ \Hypertarget{classGame_1_1ConnectFour_a47834fda3949e2b9ff52b6bfa592eccb}\label{classGame_1_1ConnectFour_a47834fda3949e2b9ff52b6bfa592eccb} 
+\index{Game.ConnectFour@{Game.ConnectFour}!makeMove@{makeMove}}
+\index{makeMove@{makeMove}!Game.ConnectFour@{Game.ConnectFour}}
+\doxysubsubsection{\texorpdfstring{makeMove()}{makeMove()}}
+{\footnotesize\ttfamily Game.\+Connect\+Four.\+make\+Move (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{column }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Makes the move in the given column
+
+Args:
+    column (int): The column of the move give by the player
+
+Returns:
+    int: The row of the move
+\end{DoxyVerb}
+ \Hypertarget{classGame_1_1ConnectFour_ae44b73b2fd123a6246617049e9a625d9}\label{classGame_1_1ConnectFour_ae44b73b2fd123a6246617049e9a625d9} 
+\index{Game.ConnectFour@{Game.ConnectFour}!play@{play}}
+\index{play@{play}!Game.ConnectFour@{Game.ConnectFour}}
+\doxysubsubsection{\texorpdfstring{play()}{play()}}
+{\footnotesize\ttfamily Game.\+Connect\+Four.\+play (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}This function is an example of how to use the ConnectFour class.
+\end{DoxyVerb}
+ \Hypertarget{classGame_1_1ConnectFour_ac2bafd76ea058d2f1e8e83b3da5f450d}\label{classGame_1_1ConnectFour_ac2bafd76ea058d2f1e8e83b3da5f450d} 
+\index{Game.ConnectFour@{Game.ConnectFour}!printBoard@{printBoard}}
+\index{printBoard@{printBoard}!Game.ConnectFour@{Game.ConnectFour}}
+\doxysubsubsection{\texorpdfstring{printBoard()}{printBoard()}}
+{\footnotesize\ttfamily Game.\+Connect\+Four.\+print\+Board (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Displays the game board in the console
+\end{DoxyVerb}
+ \Hypertarget{classGame_1_1ConnectFour_a5f807a40f2a653f51213f16c8bc0ed9c}\label{classGame_1_1ConnectFour_a5f807a40f2a653f51213f16c8bc0ed9c} 
+\index{Game.ConnectFour@{Game.ConnectFour}!switchPlayer@{switchPlayer}}
+\index{switchPlayer@{switchPlayer}!Game.ConnectFour@{Game.ConnectFour}}
+\doxysubsubsection{\texorpdfstring{switchPlayer()}{switchPlayer()}}
+{\footnotesize\ttfamily Game.\+Connect\+Four.\+switch\+Player (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Changes the current player
+\end{DoxyVerb}
+ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Game.\+py\end{DoxyCompactItemize}

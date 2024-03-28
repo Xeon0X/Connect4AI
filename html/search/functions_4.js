@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['isapossiblemove_61',['isAPossibleMove',['../classGame_1_1ConnectFour.html#a48132be52bc04af3ca2f960512a655bd',1,'Game::ConnectFour']]],
-  ['isboardfull_62',['isBoardFull',['../classGame_1_1ConnectFour.html#acaf6af385551c5522b58e1e512bc4043',1,'Game::ConnectFour']]],
-  ['iscollumnempty_63',['isCollumnEmpty',['../classGame_1_1ConnectFour.html#af2569f554fb3f9b7100adbe7a2621637',1,'Game::ConnectFour']]],
-  ['iswin_64',['isWin',['../classGame_1_1ConnectFour.html#a066819a8d28873e19f5eacef60641483',1,'Game::ConnectFour']]]
+  ['getcolumn_0',['getColumn',['../classGame_1_1ConnectFour.html#a58c0c82086ad07f1c3c2c4e7fd1a9d2a',1,'Game::ConnectFour']]],
+  ['getdiagonals_1',['getDiagonals',['../classGame_1_1ConnectFour.html#a22ce264a1c5c0877053be5ce13ef6b5a',1,'Game::ConnectFour']]],
+  ['getpossiblemoves_2',['getPossibleMoves',['../classGame_1_1ConnectFour.html#ab4d22b79928c0edf5de6aecf1f227f54',1,'Game::ConnectFour']]],
+  ['getrow_3',['getRow',['../classGame_1_1ConnectFour.html#a20db825d9f6e1bd42fb397a8829c8071',1,'Game::ConnectFour']]]
 ];

@@ -1,4 +1,8 @@
 var searchData=
 [
-  ['board_3',['board',['../classGame_1_1ConnectFour.html#a1f9a30af764dc5655d72d5367baa46f6',1,'Game.ConnectFour.board()'],['../namespacetest.html#a12a5a6f2f5f699b78e5fb5afd69f5371',1,'test.board()']]]
+  ['check_5fclick_0',['check_click',['../classgraphics_1_1RadioButton.html#aa17c47fe5d01ba9d85d0a9c4bde71cfc',1,'graphics::RadioButton']]],
+  ['checkwin_1',['checkWin',['../classGame_1_1ConnectFour.html#a6cf1340adfb2720b94ba7b1a901d1dda',1,'Game::ConnectFour']]],
+  ['connect4ai_2',['Connect4AI',['../md_README.html',1,'']]],
+  ['connectfour_3',['ConnectFour',['../classGame_1_1ConnectFour.html',1,'Game']]],
+  ['copy_4',['copy',['../classGame_1_1ConnectFour.html#a53564b91671ad3928bcba9421257b0b5',1,'Game::ConnectFour']]]
 ];

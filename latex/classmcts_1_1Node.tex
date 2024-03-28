@@ -1,0 +1,77 @@
+\doxysection{mcts.\+Node Class Reference}
+\hypertarget{classmcts_1_1Node}{}\label{classmcts_1_1Node}\index{mcts.Node@{mcts.Node}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classmcts_1_1Node_a530574a662fcb190ec408168f7834554}\label{classmcts_1_1Node_a530574a662fcb190ec408168f7834554} 
+{\bfseries \+\_\+\+\_\+init\+\_\+\+\_\+} (self, game, parent=None, move=None, reward=0, visit=1)
+\item 
+\Hypertarget{classmcts_1_1Node_a5feb8dcfce0d513754ae5d0cd67a5eaa}\label{classmcts_1_1Node_a5feb8dcfce0d513754ae5d0cd67a5eaa} 
+{\bfseries add\+Child} (self, child)
+\item 
+\mbox{\hyperlink{classmcts_1_1Node_ab005023ea9e971f0993396beea988c78}{best\+Child}} (self, exploration=1/math.\+sqrt(2))
+\item 
+\Hypertarget{classmcts_1_1Node_ad54f2f926770f1ce15573c6955be40cf}\label{classmcts_1_1Node_ad54f2f926770f1ce15573c6955be40cf} 
+{\bfseries expand} (self, moves)
+\item 
+\Hypertarget{classmcts_1_1Node_a9b0c2776cd0406e001cf05c8b0fc2d8d}\label{classmcts_1_1Node_a9b0c2776cd0406e001cf05c8b0fc2d8d} 
+{\bfseries remaining\+Moves} (self)
+\item 
+\Hypertarget{classmcts_1_1Node_a4e95586a4d8735bb4d57890686ea713f}\label{classmcts_1_1Node_a4e95586a4d8735bb4d57890686ea713f} 
+{\bfseries is\+Move\+Unique} (self, move)
+\item 
+\Hypertarget{classmcts_1_1Node_af301a6fcd51aa668a4617020d567441b}\label{classmcts_1_1Node_af301a6fcd51aa668a4617020d567441b} 
+{\bfseries is\+Terminal} (self)
+\item 
+\Hypertarget{classmcts_1_1Node_afe3a753c9ac9aac773297308a0ca60d4}\label{classmcts_1_1Node_afe3a753c9ac9aac773297308a0ca60d4} 
+{\bfseries get\+Reward} (self)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classmcts_1_1Node_a65812de1c198a6b94ca4ad8478295fe0}\label{classmcts_1_1Node_a65812de1c198a6b94ca4ad8478295fe0} 
+{\bfseries game}
+\item 
+\Hypertarget{classmcts_1_1Node_a90986c76bafc67d6de0443360e208fa4}\label{classmcts_1_1Node_a90986c76bafc67d6de0443360e208fa4} 
+{\bfseries parent}
+\item 
+\Hypertarget{classmcts_1_1Node_a93ebffbec1d4aad3afcb3044af6d38d5}\label{classmcts_1_1Node_a93ebffbec1d4aad3afcb3044af6d38d5} 
+{\bfseries move}
+\item 
+\Hypertarget{classmcts_1_1Node_ade15b43ae8f97e10127014e7a29cd661}\label{classmcts_1_1Node_ade15b43ae8f97e10127014e7a29cd661} 
+{\bfseries reward}
+\item 
+\Hypertarget{classmcts_1_1Node_ac7e62781803d21abe43899c0f654b278}\label{classmcts_1_1Node_ac7e62781803d21abe43899c0f654b278} 
+{\bfseries visit}
+\item 
+\Hypertarget{classmcts_1_1Node_a4be5a601701f323fc9b23b341885a2e8}\label{classmcts_1_1Node_a4be5a601701f323fc9b23b341885a2e8} 
+{\bfseries children}
+\item 
+\Hypertarget{classmcts_1_1Node_a67899736000ab4ae7c89911f991dedb3}\label{classmcts_1_1Node_a67899736000ab4ae7c89911f991dedb3} 
+{\bfseries score}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classmcts_1_1Node_ab005023ea9e971f0993396beea988c78}\label{classmcts_1_1Node_ab005023ea9e971f0993396beea988c78} 
+\index{mcts.Node@{mcts.Node}!bestChild@{bestChild}}
+\index{bestChild@{bestChild}!mcts.Node@{mcts.Node}}
+\doxysubsubsection{\texorpdfstring{bestChild()}{bestChild()}}
+{\footnotesize\ttfamily mcts.\+Node.\+best\+Child (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{exploration = {\ttfamily 1~/~math.sqrt(2)} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Select the best child based on reward, visits, and exploration parameter.
+
+From https://www.lamsade.dauphine.fr/~cazenave/A+Survey+of+Monte+Carlo+Tree+Search+Methods.pdf : "Balance exploitation of
+the currently most promising action with exploration of alternatives which may later turn out to be superior"
+
+Args:
+    exploration (int[0-1]): Factor influencing the balance between exploration or exploration of nodes.
+
+Returns:
+    Node: The most promising child according to the exploration-exploitation parameter.
+\end{DoxyVerb}
+ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+mcts.\+py\end{DoxyCompactItemize}
