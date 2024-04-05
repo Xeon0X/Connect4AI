@@ -2,8 +2,8 @@ from alphaBeta import alphaBeta
 from Game import ConnectFour
 from Player import Player
 import json
-import os
 import time
+import sys
 
 def gameLoop(depth1: int, depth2: int):
     game = ConnectFour()
@@ -26,56 +26,57 @@ def gameLoop(depth1: int, depth2: int):
                 return depth2
 
 def statAlphaBeta(depth: int):
-    """_summary_
+    """Fight 2 AlphaBeta IA with different depth [1,depth] and stock the result of the game.
+    The depth is not the same between IAs (You can't have depth 5 vs depth 5).
+    Each IA fight two times the other IA: One IA play first then in the second game, he play last 
 
     Args:
-        depth (int): _description_
+        depth (int): The depth max to analyse
     """
     depth_data = [{"depth": i+1, "nbWin": 0, "nbLoose": 0, "nbDraw":0, "win": [], "loose": [], "draw": []} for i in range(0,depth)]
-    for i in range(0,depth):
-        print(f"Depth {i} : {depth_data[i]}")    
+  
     def update_depth_data(result, depth1, depth2):
         
         result-=1
-        print(f"Result: {result}")
-        print(f"Depth IA1: {depth1}")
-        print(f"Depth IA2: {depth2}")
-       
         if (result == depth1):
-            print("IA1 win")
             depth_data[depth1]["win"].append(depth2+1)
             depth_data[depth2]["loose"].append(depth1+1)
             depth_data[depth1]["nbWin"] += 1
             depth_data[depth2]["nbLoose"] += 1
         elif (result == depth2):
-            print("IA2 win")
             depth_data[depth1]["loose"].append(depth2+1)
             depth_data[depth2]["win"].append(depth1+1)
             depth_data[depth1]["nbLoose"] += 1
             depth_data[depth2]["nbWin"] += 1
         else:
-            print("Draw")
             depth_data[depth1]["draw"].append(depth2+1)
             depth_data[depth2]["draw"].append(depth1+1)
             depth_data[depth1]["nbDraw"] += 1
             depth_data[depth2]["nbDraw"] += 1
         
     timeElapsed = time.time()
-    for depth1 in range(depth-1):
-        for depth2 in range(depth1+1,depth):
-            print(f"---------------------------------")
-            print(depth1, depth2)
-            
-            result = gameLoop(depth1+1, depth2+1)
-            update_depth_data(result, depth1, depth2)
-            result = gameLoop(depth2+1, depth1+1)
-            update_depth_data(result, depth2, depth1)
-            
-            print(f"Games finished")
+    total_iterations = depth * (depth - 1) // 2
+    completed_iterations = 0
     
-    print(f"---------------------------------")
-    print(f"Finished in {time.time() - timeElapsed} seconds")
-    print(f"Saving data...")
+    sys.stdout.write('\r')
+    sys.stdout.write("[%-20s] %d%%" % ('#'*int(0), int(0)))
+    sys.stdout.flush()
+    
+    for depth1 in range(depth-1):
+            for depth2 in range(depth1+1, depth):
+                result = gameLoop(depth1+1, depth2+1)
+                update_depth_data(result, depth1, depth2)
+                result = gameLoop(depth2+1, depth1+1)
+                update_depth_data(result, depth2, depth1)
+
+                completed_iterations += 1
+                progress = completed_iterations / total_iterations
+                sys.stdout.write('\r')
+                sys.stdout.write("[%-20s] %d%%" % ('#'*int(20*progress), int(100*progress)))
+                sys.stdout.flush()
+
+    print(f"\nFinished in {time.time() - timeElapsed} seconds")
+    print("Saving data...")
     
     data = {}
     data["alphaBeta"] = {
@@ -90,4 +91,4 @@ def statAlphaBeta(depth: int):
     print("Done!")
 
 if __name__ == "__main__":
-    statAlphaBeta(5)
+    statAlphaBeta(10)
