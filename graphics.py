@@ -1,4 +1,5 @@
 from time import sleep
+
 import pygame
 from Game import ConnectFour
 from Player import Player
@@ -15,7 +16,7 @@ HEIGHT = 800
 WIDTH = 800
 DEPTH_MINMAX = 3
 DEPTH_ALPHABETA = 7
-TIME_MCTS = 3000
+TIME_MCTS = 3
 
 
 def drawBoard(screen: pygame.Surface) :
@@ -141,7 +142,7 @@ def gameLoop(screen: pygame.Surface, game: ConnectFour, mode: int):
                         case 3:
                             chosenMove = alphaBeta(game, DEPTH_ALPHABETA, IA1)
                         case 4:
-                            chosenMove = mcts(game, TIME_MCTS, IA1)
+                            chosenMove = mcts(game, TIME_MCTS)
                     state = makeMove(screen, game, chosenMove)
                     pygame.display.flip()
                     
