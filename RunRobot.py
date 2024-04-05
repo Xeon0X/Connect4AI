@@ -10,7 +10,7 @@ from pose import *
 
 
 def makeMoveRobot(chosenMove,game,robot):
-    robot.push_air_vacuum_pump()
+    robot.open_gripper(speed=500)
 
     robot.move_pose(connect4_Move1)
 
@@ -20,7 +20,7 @@ def makeMoveRobot(chosenMove,game,robot):
     robot.move_pose(connect4_Token)
     
     
-    robot.pull_air_vacuum_pump()
+    robot.close_gripper(speed=500)
     robot.move_pose(connect4_Move3)
     robot.move_pose(connect4_Move4)
     
@@ -43,7 +43,7 @@ def makeMoveRobot(chosenMove,game,robot):
         case 6 :
             robot.move_pose(connect4_Column7)
             
-    robot.push_air_vacuum_pump()
+    robot.open_gripper(speed=500)
     robot.move_pose(connect4_AboveGame)
     
     game.makeMove(chosenMove)
@@ -110,9 +110,9 @@ if __name__ == "__main__":
 
     robot.calibrate_auto()
     
-    robot.move_pose(connect4_AboveGame)
+   # robot.move_pose(connect4_AboveGame)
 
-    playRobot(game,robot)
+   # playRobot(game,robot)
 
     robot.close_connection()
 
