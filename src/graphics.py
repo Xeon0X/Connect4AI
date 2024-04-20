@@ -1,8 +1,8 @@
 from time import sleep
 
 import pygame
-from Game import ConnectFour
-from Player import Player
+from src.Game import ConnectFour
+from src.Player import Player
 from src.IAs.minmax import minmax
 from src.IAs.alphaBeta import alphaBeta
 from src.IAs.mcts import mcts

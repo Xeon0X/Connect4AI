@@ -5,10 +5,7 @@ import random
 from src.Game import ConnectFour
 from src.IAs.minmax import minmax
 
-import networkx as nx
 from pyvis.network import Network
-import matplotlib.pyplot as plt
-
 
 class Node:
     def __init__(self, game, parent=None, move=None, reward=0, visit=1):
