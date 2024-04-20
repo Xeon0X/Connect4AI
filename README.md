@@ -8,7 +8,7 @@ You can install all the libraries needed using pip:
 pip install -r requirements.txt
 ```
 ## Usage
-To play the game, run the `graphic.py` file.
+To play the game, run the `src/graphic.py` file.
 
 You can choose to play against another human or against one of the AI.
 
