@@ -24,7 +24,7 @@ Here is the layout of this project:
 Connect4AI
 │
 ├── src
-│   ├── IAs
+│   ├── AIs
 │   │   ├── alphaBeta.py
 │   │   ├── mcts.py
 │   │   ├── Q_learning.py
