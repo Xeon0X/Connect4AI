@@ -13,7 +13,7 @@ To play the game, run the `src/graphics.py` file.
 You can choose to play against another human or against one of the AI.
 
 ```bash
-python -m graphics
+python -m src.graphics
 ```
 
 ## Project Structure
@@ -49,7 +49,7 @@ Connect4AI
 To run the tests for Connect4AI, navigate to the project directory and run the following commands:
 
 ```bash
-python -m test_score_calculation
+python -m tests.test_score_calculation
 ```
 
 ## License
