@@ -8,12 +8,12 @@ You can install all the libraries needed using pip:
 pip install -r requirements.txt
 ```
 ## Usage
-To play the game, run the `src/graphic.py` file.
+To play the game, run the `src/graphics.py` file.
 
 You can choose to play against another human or against one of the AI.
 
 ```bash
-python -m graphic
+python -m graphics
 ```
 
 ## Project Structure
@@ -27,6 +27,7 @@ Connect4AI
 │   ├── IAs
 │   │   ├── alphaBeta.py
 │   │   ├── mcts.py
+│   │   ├── Q_learning.py
 │   │   └── minmax.py
 │   │
 │   ├── Statistics
