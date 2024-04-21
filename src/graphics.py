@@ -148,7 +148,7 @@ def gameLoop(screen: pygame.Surface, game: ConnectFour, mode: int):
                         case 4:
                             chosenMove = mcts(game, TIME_MCTS)
                         case 5:
-                            chosenMove = Q_learning(game)
+                            chosenMove = Q_learning.getMove(game)
                     state = makeMove(screen, game, chosenMove)
                     pygame.display.flip()
                     
