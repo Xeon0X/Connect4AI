@@ -3,11 +3,6 @@ from src.Game import ConnectFour
 from src.Player import Player
 
 
-#------------------WELCOME TO THE TEST FILE------------------
-#This file is used to test the code functions.
-#You can add your own tests here by looking at the examples below.
-#You shoud so all the output by HAND to make sure that the code is working properly.
-
 def test_score_calculation():
     game = ConnectFour()
     player = Player('X')

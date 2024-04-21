@@ -22,14 +22,14 @@ class ConnectFour:
         """Checks if the provided column is a possible move for the player
 
         Args:
-            column (int)): The column of the move give by the player
+            column (int): The column of the move give by the player
 
         Returns:
             bool: If the move is possible or not
         """
-        if (column > 6 or column < 0):
+        if column > 6 or column < 0:
             return False
-        elif (self.board[0][column] != ' '):
+        elif self.board[0][column] != ' ':
             return False
         else:
             return True
@@ -43,9 +43,9 @@ class ConnectFour:
         Returns:
             int: If the column is empty or not
         """
-        if (column > 6 or column < 0):
+        if column > 6 or column < 0:
             return True
-        elif (self.board[5][column] == ' '):
+        elif self.board[5][column] == ' ':
             return True
         else:
             return False
@@ -57,7 +57,7 @@ class ConnectFour:
             bool: If the board is full or not
         """
         for column in range(7):
-            if (self.board[0][column] == ' '):
+            if self.board[0][column] == ' ':
                 return False
         return True
 
@@ -71,12 +71,12 @@ class ConnectFour:
             bool: If the move is a winning move or not
         """
         row = 0
-        while (self.board[row][column] == ' '):
+        while self.board[row][column] == ' ':
             row += 1
 
         # Check vertical grid
-        if (row <= 2):
-            if (self.board[row][column] == self.board[row+1][column] == self.board[row+2][column] == self.board[row+3][column]):
+        if row <= 2:
+            if self.board[row][column] == self.board[row + 1][column] == self.board[row + 2][column] == self.board[row + 3][column]:
                 return True
 
         # Check horizontal grid
@@ -87,12 +87,12 @@ class ConnectFour:
 
         # Check diagonal grid
         for i in range(4):
-            if (row+i-3 >= 0 and row+i <= 5 and column+i-3 >= 0 and column+i <= 6):
-                if (self.board[row+i-3][column+i-3] == self.board[row+i-2][column+i-2] == self.board[row+i-1][column+i-1] == self.board[row+i][column+i]):
+            if row+i-3 >= 0 and row+i <= 5 and column+i-3 >= 0 and column+i <= 6:
+                if self.board[row + i - 3][column + i - 3] == self.board[row + i - 2][column + i - 2] == self.board[row + i - 1][column + i - 1] == self.board[row + i][column + i]:
                     return True
 
-            if (row-i+3 <= 5 and row-i >= 0 and column+i-3 >= 0 and column+i <= 6):
-                if (self.board[row-i+3][column+i-3] == self.board[row-i+2][column+i-2] == self.board[row-i+1][column+i-1] == self.board[row-i][column+i]):
+            if row-i+3 <= 5 and row-i >= 0 and column+i-3 >= 0 and column+i <= 6:
+                if self.board[row - i + 3][column + i - 3] == self.board[row - i + 2][column + i - 2] == self.board[row - i + 1][column + i - 1] == self.board[row - i][column + i]:
                     return True
 
         return False
@@ -231,7 +231,7 @@ class ConnectFour:
 
             column = int(
                 input(f"Player {self.currentPlayer}, enter a column (0-6): "))
-            if (not self.isAPossibleMove(column)):
+            if not self.isAPossibleMove(column):
                 print("Invalid move")
                 continue
             self.makeMove(column)
