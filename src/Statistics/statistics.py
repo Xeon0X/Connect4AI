@@ -3,8 +3,8 @@ import json
 from multiprocessing import Pool, current_process, Queue
 
 from src.Game import ConnectFour
-from src.IAs.minmax import minmax
-from src.IAs.mcts import mcts
+from src.AIs.minmax import minmax
+from src.AIs.mcts import mcts
 
 
 def playSimulation(algorithm1, algorithm2):

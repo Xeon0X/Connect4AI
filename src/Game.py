@@ -205,6 +205,16 @@ class ConnectFour:
                 possibleMoves.append((gameState, column))
         return possibleMoves
 
+    def onlyPossibleMoves(self):
+        """
+        This function returns a list containing all the possible moves.
+        """
+        possibleMoves = []
+        for column in range(7):
+            if self.isAPossibleMove(column):
+                possibleMoves.append(column)
+        return possibleMoves
+
     def checkWin(self):
         """This function checks if a player has won the game.
 

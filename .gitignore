@@ -164,3 +164,4 @@ cython_debug/
 .DS_Store
 /venv/
 /.idea/
+/src/AIs/Q_table.json

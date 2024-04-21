@@ -1,7 +1,7 @@
 import random as rd
 from src.Player import Player
 from src.Game import ConnectFour
-from src.IAs.alphaBeta import alphaBeta
+from src.AIs.alphaBeta import alphaBeta
 AI1_WON = 0
 AI2_WON = 1
 DRAW = 2

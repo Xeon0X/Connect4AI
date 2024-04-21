@@ -1,4 +1,4 @@
-from src.IAs.alphaBeta import alphaBeta
+from src.AIs.alphaBeta import alphaBeta
 from src.Game import ConnectFour
 from src.Player import Player
 import json

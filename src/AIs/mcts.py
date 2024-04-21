@@ -3,7 +3,7 @@ import time
 import random
 
 from src.Game import ConnectFour
-from src.IAs.minmax import minmax
+from src.AIs.minmax import minmax
 
 from pyvis.network import Network
 

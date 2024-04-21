@@ -3,9 +3,10 @@ from time import sleep
 import pygame
 from src.Game import ConnectFour
 from src.Player import Player
-from src.IAs.minmax import minmax
-from src.IAs.alphaBeta import alphaBeta
-from src.IAs.mcts import mcts
+from src.AIs.minmax import minmax
+from src.AIs.alphaBeta import alphaBeta
+from src.AIs.mcts import mcts
+from src.AIs.Q_learning import QLearning
 
 PLAYING = True
 GAMEOVER = False
@@ -124,6 +125,9 @@ def gameLoop(screen: pygame.Surface, game: ConnectFour, mode: int):
     drawBoard(screen)
     IA1 = Player('O')
 
+    if(mode == 5):
+        Q_learning = QLearning()
+
     while state:
         for event in pygame.event.get() :
             if event.type == pygame.QUIT:
@@ -133,7 +137,7 @@ def gameLoop(screen: pygame.Surface, game: ConnectFour, mode: int):
                 state = handleMouseDown(event, screen, game)
                 pygame.display.flip()
                 
-                sleep(0.1)
+                sleep(0.05)
                 # Make the IA play the game if the player based on the mode selected by the player
                 if(state and mode != 1):
                     match(mode):
@@ -143,6 +147,8 @@ def gameLoop(screen: pygame.Surface, game: ConnectFour, mode: int):
                             chosenMove = alphaBeta(game, DEPTH_ALPHABETA, IA1)
                         case 4:
                             chosenMove = mcts(game, TIME_MCTS)
+                        case 5:
+                            chosenMove = Q_learning(game)
                     state = makeMove(screen, game, chosenMove)
                     pygame.display.flip()
                     
@@ -236,11 +242,15 @@ def optionMenu(screen: pygame.Surface, game: ConnectFour):
     
     button4_rect = pygame.Rect(300, 500, 200, 80) #bouton4 pour jouer avec MCTS
     button4_text = "MCTS"
+
+    button4_rect = pygame.Rect(300, 500, 200, 80) #bouton4 pour jouer avec MCTS
+    button4_text = "Q Learning"
     
     button_array = [{'rect': button1_rect, 'text': button1_text, 'color': 'red', 'value': 1}, 
                 {'rect': button2_rect, 'text': button2_text, 'color': 'blue', 'value': 2}, 
                 {'rect': button3_rect, 'text': button3_text, 'color': 'yellow', 'value': 3}, 
-                {'rect': button4_rect, 'text': button4_text, 'color': 'green', 'value': 4}]
+                {'rect': button4_rect, 'text': button4_text, 'color': 'green', 'value': 4},
+                {'rect': button4_rect, 'text': button4_text, 'color': 'purple', 'value': 5}]
     
     color_choice_button = RadioButton (550, 230, "Color Choice", screen, font, game)
     
