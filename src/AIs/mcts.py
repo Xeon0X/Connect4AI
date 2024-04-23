@@ -1,11 +1,15 @@
 import math
 import time
 import random
+import numpy as np
 
 from src.Game import ConnectFour
 from src.AIs.minmax import minmax
+from src.AIs.alphaBeta import alphaBeta
+from src.Player import Player
 
 from pyvis.network import Network
+
 
 class Node:
     def __init__(self, game, parent=None, move=None, reward=0, visit=1):
@@ -21,7 +25,7 @@ class Node:
         child.parent = self
         self.children.append(child)
 
-    def bestChild(self, exploration=1 / math.sqrt(2)):
+    def bestChild(self, exploration=(1 / math.sqrt(2))):
         """Select the best child based on reward, visits, and exploration parameter.
 
         From https://www.lamsade.dauphine.fr/~cazenave/A+Survey+of+Monte+Carlo+Tree+Search+Methods.pdf : "Balance exploitation of
@@ -66,9 +70,9 @@ class Node:
                 return True
         return False
 
-    def getReward(self):
+    def getReward(self, depth):
         if self.game.isWin(self.move):  # player agnostic
-            return 1
+            return (1 * 1/depth)
         else:
             return 0
 
@@ -97,17 +101,25 @@ def defaultPolicy(node):
     Returns:
         int: -1 if lose, 0 if draw, 1 if win.
     """
-    simulation = Node(node.game.copy())
-    while not simulation.isTerminal():
-        moves = simulation.game.getPossibleMoves()
-        if moves != []:
-            move = random.choice(moves)[1]
-            simulation.move = move
-            simulation.game.makeMove(move)
-    if node.game.currentPlayer == simulation.game.currentPlayer:  # loser
-        return simulation.getReward()
-    else:
-        return -simulation.getReward()  # winner
+    reward = []
+    for i in range(10):
+        simulation = Node(node.game.copy())
+        depth = 0
+        while not simulation.isTerminal():
+            depth += 1
+            moves = simulation.game.getPossibleMoves()
+            if moves != []:
+                move = random.choice(moves)[1]
+                # move = alphaBeta(simulation.game, 1, Player(
+                #     simulation.game.currentPlayer))
+                simulation.move = move
+                simulation.game.makeMove(move)
+        if node.game.currentPlayer == simulation.game.currentPlayer:  # loser
+            reward.append(simulation.getReward(depth))
+        else:
+            reward.append(-simulation.getReward(depth))  # winner
+
+    return np.sum(reward)/len(reward)
 
 
 def backup(node, reward):
@@ -130,7 +142,7 @@ def mcts(game, limit=10):
         # printDebug(node, delay=0)
     # printDebug(node, delay=0)
     # print(iteration)
-    return node.bestChild(0).move
+    return node.bestChild().move
 
 
 def isInComputationalBudget(startTime, limit):
