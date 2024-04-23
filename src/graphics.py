@@ -58,7 +58,7 @@ def makeMove(screen: pygame.Surface, game: ConnectFour, column: int):
         column (int): column to play the move
 
     Returns:
-        bool: False if the game is over, True otherwise 
+        bool: False if the game is over, True otherwise
     """
     row = game.makeMove(column)
     addToken(screen, column+1, row+1, game.currentPlayer)
@@ -78,7 +78,7 @@ def clickToPos(mouse_x: int):
         mouse_x (int): x position of the mouse
 
     Returns:
-        int: the column position 
+        int: the column position
     """
     return int(mouse_x/(WIDTH/7))
 
@@ -127,6 +127,8 @@ def gameLoop(screen: pygame.Surface, game: ConnectFour, mode: int):
 
     if (mode == 5):
         Q_learning = QLearning()
+    if (mode == 4):
+        node = None
 
     while state:
         for event in pygame.event.get():
@@ -146,7 +148,11 @@ def gameLoop(screen: pygame.Surface, game: ConnectFour, mode: int):
                         case 3:
                             chosenMove = alphaBeta(game, DEPTH_ALPHABETA, IA1)
                         case 4:
-                            chosenMove = mcts(game, TIME_MCTS)
+                            if node == None:
+                                node = mcts(game, TIME_MCTS)
+                            else:
+                                node = mcts(game, TIME_MCTS, node, 0)
+                            chosenMove = node.move
                         case 5:
                             chosenMove = Q_learning.getMove(game)
                     state = makeMove(screen, game, chosenMove)

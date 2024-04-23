@@ -77,7 +77,7 @@ class Node:
             return 0
 
 
-def treePolicy(node):
+def treePolicy(node, exploration=(1 / math.sqrt(2))):
     """Choose to explore a new move if still possible or continue on the most poising one
 
     Args:
@@ -91,18 +91,18 @@ def treePolicy(node):
         if moves:
             return node.expand(moves)
         else:
-            node = node.bestChild()
+            node = node.bestChild(exploration)
     return node
 
 
-def defaultPolicy(node):
+def defaultPolicy(node, iteration=1):
     """Simulate random movements until terminal state of the game and return a reward depending on win, lose, draw.
 
     Returns:
         int: -1 if lose, 0 if draw, 1 if win.
     """
     reward = []
-    for i in range(10):
+    for i in range(iteration):
         simulation = Node(node.game.copy())
         depth = 0
         while not simulation.isTerminal():
@@ -130,19 +130,22 @@ def backup(node, reward):
         node = node.parent
 
 
-def mcts(game, limit=10):
+def mcts(game, limit=10, precedent_node=None, exploration=(1 / math.sqrt(2))):
     startTime = time.time()
     iteration = 0
-    node = Node(game.copy())
+    if precedent_node == None:
+        node = Node(game.copy())
+    else:
+        node = precedent_node
     while isInComputationalBudget(startTime, limit):  # and iteration <= 200:
         iteration += 1
-        lastNode = treePolicy(node)
+        lastNode = treePolicy(node, exploration)
         reward = defaultPolicy(lastNode)
         backup(lastNode, reward)
         # printDebug(node, delay=0)
     # printDebug(node, delay=0)
     # print(iteration)
-    return node.bestChild().move
+    return node.bestChild()
 
 
 def isInComputationalBudget(startTime, limit):
@@ -162,7 +165,7 @@ def playMonteCarlo(game):
 
         if game.currentPlayer == 'X':
             column = mcts(game)
-            print(f"Player {game.currentPlayer} played column {column}")
+            print(f"Player {game.currentPlayer} played column {column.move}")
         else:
             column = minmax(game, 5, game.currentPlayer)
         if (not game.isAPossibleMove(column)):
