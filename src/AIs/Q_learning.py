@@ -30,56 +30,75 @@ def Q_learning_training(num_game = 1000000):
     alpha = 0.5
     gamma = 0.95
     epsilon = 0.1
+    file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'Q_table.json')
 
-    for i in range(num_game):
+    print("Training Q-learning AI...")
+
+    for i in range(1, num_game+1):
+        if i % 10000 == 0:
+            print(f"Training game {i//1000}k/{num_game//1000}k")
+
         game = ConnectFour()
         state = get_state(game)
+        mirrored_state = mirror_state(state)
 
         while not game.isBoardFull():
-            if np.random.uniform() < epsilon or state not in Q:
-                action = np.random.choice(game.onlyPossibleMoves())
+            if state in Q:
+                action = int(max(Q[state], key=Q[state].get))
+            elif mirrored_state in Q:
+                action = 6 - int(max(Q[mirrored_state], key=Q[mirrored_state].get))
             else:
-                action = max(Q[state], key=Q[state].get)
+                action = np.random.choice(game.onlyPossibleMoves())
 
             game.makeMove(action)
             next_state = get_state(game)
+            mirrored_next_state = mirror_state(next_state)
 
             if game.isWin(action):
-                Q[state][action] = 1
-                break
-            elif next_state not in Q:
-                Q[next_state] = {}
-                Q[next_state][action] = 0
-            else:
                 if state not in Q:
                     Q[state] = {}
                 if action not in Q[state]:
                     Q[state][action] = 0
-                Q[state][action] = Q[state][action] + alpha * (gamma * max(Q[next_state].values()) - Q[state][action])
-
+                Q[state][action] = 1
+                break
+            if state in Q:
+                if action not in Q[state]:
+                    Q[state][action] = 0
+                Q[state][action] = Q[state][action] + alpha * (gamma * int(max(Q[next_state].values()) - Q[state][action]))
+            elif mirrored_state in Q:
+                if 6 - action not in Q[mirrored_state]:
+                    Q[mirrored_state][6 - action] = 0
+                Q[mirrored_state][6 - action] = Q[mirrored_state][6 - action] + alpha * (gamma * int(max(Q[mirrored_next_state].values()) - Q[mirrored_state][6 - action]))
+            else:
+                Q[state] = {}
+                Q[state][action] = 0
             state = next_state
+            mirrored_state = mirrored_next_state
 
-    with open('Q_table.json', 'w') as file:
+    print("Training finished!")
+    with open(file_path, 'w') as file:
         json.dump({str(k): {str(i): j for i, j in v.items()} for k, v in Q.items()}, file)
-
+    print("Q-table saved!")
 
 class QLearning:
     def __init__(self):
-        if not os.path.isfile('Q_table.json'):
-            Q_learning_training(100000)
-
-        with open('Q_table.json', 'r') as file:
-            Q = json.load(file)
+        file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'Q_table.json')
+        if not os.path.isfile(file_path):
+            print("Q-table not found, training...")
+            Q_learning_training(10000)
+        with open(file_path, 'r') as file:
+            self.Q = json.load(file)
 
     def get_move(self, game):
         state = get_state(game)
         mirrored_state = mirror_state(state)
 
         if state in self.Q:
-            return max(self.Q[state], key=self.Q[state].get)
+            return int(max(self.Q[state], key=self.Q[state].get))
         elif mirrored_state in self.Q:
-            return 6 - max(self.Q[mirrored_state], key=self.Q[mirrored_state].get)
+            return 6 - int(max(self.Q[mirrored_state], key=self.Q[mirrored_state].get))
         else:
+            print("State not found in Q-table")
             return np.random.choice(game.onlyPossibleMoves())
 
 

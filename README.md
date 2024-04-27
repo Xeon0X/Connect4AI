@@ -45,6 +45,13 @@ Connect4AI
     └── test_score_calculation.py
 </pre>
 
+## Q Learning
+To train the Q Learning IA with 1 000 000 games, run the `src/AIs/Q_learning.py` file.
+
+```bash
+python -m src.AIs.Q_learning
+```
+
 ## Testing
 To run the tests for Connect4AI, navigate to the project directory and run the following commands:
 
