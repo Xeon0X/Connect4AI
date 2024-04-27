@@ -1,4 +1,7 @@
 from time import sleep
+from random import randint
+from math import pi, sin, cos, sqrt
+from time import time
 
 import pygame
 from src.Game import ConnectFour
@@ -33,6 +36,25 @@ def drawBoard(screen: pygame.Surface):
             addToken(screen, i, j, 'black')
 
 
+class DrawBackground:
+    def __init__(self, color1: tuple[int, int, int], color2: tuple[int, int, int]):
+        self.color1 = color1
+        self.color2 = color2
+        self.angle = randint(0, 3) * pi / 2 + pi / 4
+
+    def draw(self, screen: pygame.Surface):
+        square_length = 100
+        current_time = int(time() * 50) % (square_length * 2 * sqrt(2) / 2)
+
+        screen.fill(self.color1)
+        for y in range(-2, HEIGHT // square_length + 2):
+            for x in range(-2, WIDTH // square_length + 2):
+                if (x + y) % 2 == 0:
+                    pygame.draw.rect(screen, self.color2, (x * square_length + cos(self.angle) * current_time,
+                                                           y * square_length + sin(self.angle) * current_time,
+                                                           square_length, square_length))
+
+
 def addToken(screen: pygame.Surface, x: int, y: int, player: str):
     """Draws a token on the screen.
 
@@ -58,10 +80,10 @@ def makeMove(screen: pygame.Surface, game: ConnectFour, column: int):
         column (int): column to play the move
 
     Returns:
-        bool: False if the game is over, True otherwise 
+        bool: False if the game is over, True otherwise
     """
     row = game.makeMove(column)
-    addToken(screen, column+1, row+1, game.currentPlayer)
+    addToken(screen, column + 1, row + 1, game.currentPlayer)
 
     if game.isWin(column):
         print(f"Player {game.currentPlayer} wins!")
@@ -78,9 +100,9 @@ def clickToPos(mouse_x: int):
         mouse_x (int): x position of the mouse
 
     Returns:
-        int: the column position 
+        int: the column position
     """
-    return int(mouse_x/(WIDTH/7))
+    return int(mouse_x / (WIDTH / 7))
 
 
 def handleMouseDown(event: pygame.event, screen: pygame.Surface, game: ConnectFour):
@@ -140,7 +162,7 @@ def gameLoop(screen: pygame.Surface, game: ConnectFour, mode: int):
                 sleep(0.05)
                 # Make the IA play the game if the player based on the mode selected by the player
                 if (state and mode != 1):
-                    match(mode):
+                    match (mode):
                         case 2:
                             chosenMove = minmax(game, DEPTH_MINMAX, IA1)
                         case 3:
@@ -207,8 +229,9 @@ class RadioButton():
                                (self.x + 10, self.y + 10), 20)
             self.game.switchPlayer()
 
-      #  else:
-          #  self.selected = False
+    #  else:
+    #  self.selected = False
+
 
 # Create radio buttons
 
@@ -253,22 +276,26 @@ def optionMenu(screen: pygame.Surface, game: ConnectFour):
 
     button_array = [{'rect': button1_rect, 'text': button1_text, 'color': 'red', 'value': 1},
                     {'rect': button2_rect, 'text': button2_text,
-                        'color': 'blue', 'value': 2},
+                     'color': 'blue', 'value': 2},
                     {'rect': button3_rect, 'text': button3_text,
-                        'color': 'yellow', 'value': 3},
+                     'color': 'yellow', 'value': 3},
                     {'rect': button4_rect, 'text': button4_text,
-                        'color': 'green', 'value': 4},
+                     'color': 'green', 'value': 4},
                     {'rect': button5_rect, 'text': button5_text, 'color': 'purple', 'value': 5}]
 
     color_choice_button = RadioButton(
         550, 230, "Color Choice", screen, font, game)
 
+    background = DrawBackground((32, 73, 144), (38, 59, 131))
+
     while True:
+        background.draw(screen)
+
         # Affichage du titre
         text_title = "Connect4IA"
         text_surface = font2.render(text_title, True, (255, 255, 255))
         text_rect = text_surface.get_rect()
-        text_rect.center = (WIDTH/2, HEIGHT/12)
+        text_rect.center = (WIDTH / 2, HEIGHT / 8)
         screen.blit(text_surface, text_rect)
 
         # Affichage des boutons
