@@ -151,6 +151,9 @@ def gameLoop(screen: pygame.Surface, game: ConnectFour, mode: int):
         Q_learning = QLearning()
 
     while state:
+        if game.isBoardFull():
+            return 3
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 state = GAMEOVER
@@ -158,6 +161,12 @@ def gameLoop(screen: pygame.Surface, game: ConnectFour, mode: int):
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 state = handleMouseDown(event, screen, game)
                 pygame.display.flip()
+
+                if(not state):
+                    if(game.currentPlayer == "O"):
+                        return 1
+                    else:
+                        return 2
 
                 sleep(0.05)
                 # Make the IA play the game if the player based on the mode selected by the player
@@ -174,7 +183,11 @@ def gameLoop(screen: pygame.Surface, game: ConnectFour, mode: int):
                     state = makeMove(screen, game, chosenMove)
                     pygame.display.flip()
 
+                    if(not state):
+                        return 2
+
         pygame.display.flip()
+    return 0
 
 
 class RadioButton():
@@ -276,7 +289,7 @@ def optionMenu(screen: pygame.Surface, game: ConnectFour):
 
     button_array = [{'rect': button1_rect, 'text': button1_text, 'color': 'red', 'value': 1},
                     {'rect': button2_rect, 'text': button2_text,
-                     'color': 'blue', 'value': 2},
+                     'color': 'cyan', 'value': 2},
                     {'rect': button3_rect, 'text': button3_text,
                      'color': 'yellow', 'value': 3},
                     {'rect': button4_rect, 'text': button4_text,
@@ -323,14 +336,96 @@ def optionMenu(screen: pygame.Surface, game: ConnectFour):
                     color_choice_button.draw()
 
 
+def end_screen(screen: pygame.Surface, player_won, mode: int):
+    """End screen of the game.
+
+    Args:
+        mode: mode of the game (1: 1v1 / 2: MiniMax / 3: AlphaBeta / 4: MCTS)
+        screen (pygame.Surface): the screen
+        player_won: if the player won or not (2 if draw)
+    """
+    pygame.font.init()
+    clock = pygame.time.Clock()
+    clock.tick(60)
+
+    font_size = 36  # Taille du text des boutons
+    font_size2 = 100  # Taille du texte en haut
+    font = pygame.font.Font(None, font_size)
+    font2 = pygame.font.Font(None, font_size2)
+
+    button1_rect = pygame.Rect(300, 400, 200, 80)  # bouton1 pour jouer en 1v1
+    button1_text = "Play Again"
+
+    button2_rect = pygame.Rect(300, 500, 200, 80)
+    button2_text = "Quit"
+
+    button_array = [{'rect': button1_rect, 'text': button1_text, 'color': 'cyan', 'value': 1},
+                    {'rect': button2_rect, 'text': button2_text, 'color': 'red', 'value': 0}]
+
+    if(player_won == 3):
+        background = DrawBackground((10, 10, 10), (25, 25, 25))
+        text_title = "Draw"
+    elif(player_won == 1):
+        background = DrawBackground((40, 60, 30), (29, 46, 40))
+    else:
+        background = DrawBackground((60, 30, 30), (46, 29, 29))
+
+    # Affichage du titre
+    if(player_won != 3):
+        if mode == 1:
+            text_title = "Player 1 won" if player_won==1 else "Player 2 won"
+        else:
+            text_title = "You won" if player_won==1 else "You lost"
+
+    while True:
+        background.draw(screen)
+
+        text_surface = font2.render(text_title, True, (255, 255, 255))
+        text_rect = text_surface.get_rect()
+        text_rect.center = (WIDTH / 2, HEIGHT / 3)
+        screen.blit(text_surface, text_rect)
+
+        # Affichage des boutons
+        for button in button_array:
+            pygame.draw.rect(screen, button['color'], button['rect'])
+            text_surface = font.render(button['text'], True, 'black')
+            text_rect = text_surface.get_rect(center=button['rect'].center)
+            screen.blit(text_surface, text_rect)
+
+        pygame.display.flip()
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                return 0
+
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                for button in button_array:
+                    if button['rect'].collidepoint(event.pos):
+                        return button['value']
+
+
 def main():
     pygame.init()
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
-    game = ConnectFour()
-    mode = optionMenu(screen, game)
-    if (mode != 0):
-        gameLoop(screen, game, mode)
+    while (True):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                return 0
+
+        game = ConnectFour()
+        mode = optionMenu(screen, game)
+        if (mode != 0):
+            player_won = gameLoop(screen, game, mode)
+            if not player_won:
+                break
+            if (not end_screen(screen, player_won, mode)):
+                break
+        else:
+            break
+
     pygame.quit()
+    return 0
 
 
 if __name__ == "__main__":
