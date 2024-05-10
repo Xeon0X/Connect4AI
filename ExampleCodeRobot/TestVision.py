@@ -8,8 +8,11 @@ observation_pose = PoseObject(
 )
 
 
-max_pose1 = PoseObject( x=0.467, y=0.129, z=0.263,
-    roll=-0.141, pitch=-0.016, yaw=-0.00,)
+test = PoseObject(x=0.124, y=0.0, z=0.209, roll=-0.070, pitch=0.574, yaw=0.001)
+
+
+max_pose1 = PoseObject( x=0.121, y=-0.01, z=0.214,
+    roll=0.0, pitch=0.581, yaw=0.0,)
 
 
 max_pose2 = PoseObject( x=0.467, y=-0.129, z=0.263,
@@ -22,7 +25,7 @@ robot.calibrate_auto()
 # Getting calibration param
 mtx, dist = robot.get_camera_intrinsics()
 # Moving to observation pose
-robot.move_pose(observation_pose)
+robot.move_pose(test)
 
 
 

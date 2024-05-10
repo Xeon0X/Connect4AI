@@ -5,11 +5,18 @@ from pyniryo import *
 
 connect4_gripperSpeed = 400
 
+Observation = PoseObject(x=0.124, y=0.0, z=0.209, roll=-0.070, pitch=0.574, yaw=0.001)
+
+
 connect4_GameObservation = (-0.012, 0.604, -1.337, 0.040, 0.114, -0.076)
 connect4_Move1 = PoseObject(x=0.150, y=-0.0004, z=0.287, roll=-0.038, pitch=0.893, yaw=-0.025)
 connect4_Move2 = PoseObject(x=0.135, y=-0.103, z=0.303, roll=0.018, pitch=1.313, yaw=-0.599)
-connect4_Move3 = PoseObject(x=0.161, y=-0.17, z=0.157, roll=2.199, pitch=1.533, yaw=2.217)
-connect4_Token = PoseObject(x=0.155, y=-0.180, z=0.057, roll=2.709, pitch=1.397, yaw=1.676)
+connect4_Move3 = PoseObject(x=0.166, y=-0.165, z=0.158, roll=-1.9, pitch=1.536, yaw=-1.678)
+
+
+connect4_Token = PoseObject(x=0.165, y=-0.172, z=0.097, roll=-0.955, pitch=1.484, yaw=-0.928)
+
+
 connect4_Move4 = PoseObject(x=0.181, y=-0.009, z=0.286, roll=-3.077, pitch=1.508, yaw=-3.024)
 connect4_AboveGame = PoseObject(x=0.303, y=-0.018, z=0.399, roll=0.008, pitch=1.146, yaw=-0.005)
 connect4_Win = PoseObject(x=0.162, y=-0.003, z=0.391, roll=-0.056, pitch=0.004, yaw=-0.018)

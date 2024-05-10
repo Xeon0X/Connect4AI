@@ -7,6 +7,8 @@ from time import *
 
 from pose import *
 
+from TestFindToken import *
+
 
 
 def makeMoveRobot(chosenMove,game,robot):
@@ -14,7 +16,7 @@ def makeMoveRobot(chosenMove,game,robot):
 
     robot.move_pose(connect4_Move1)
 
-    robot.move_pose(connect4_Move2)
+    #robot.move_pose(connect4_Move2)
 
     robot.move_pose(connect4_Move3)
     robot.move_pose(connect4_Token)
@@ -44,7 +46,7 @@ def makeMoveRobot(chosenMove,game,robot):
             robot.move_pose(connect4_Column7)
             
     robot.open_gripper(speed=500)
-    robot.move_pose(connect4_AboveGame)
+    robot.move_pose(Observation)
     
     game.makeMove(chosenMove)
     return game
@@ -57,19 +59,50 @@ def playRobot(game,robot):
         This function is an example of how to use the ConnectFour class.
         """
         
+        startBoard = 137
+        endBoard = 520
+        
         
         IA1 = Player('X')
         IA2 = Player('O')
+        mtx, dist = robot.get_camera_intrinsics()
+        
+        img_compressed = robot.get_img_compressed()
+        previus_img = uncompress_image(img_compressed)
+       
         while True:
             game.printBoard()
             if game.currentPlayer == "X":
                 chosenMove = alphaBeta(game, 5, IA1)
                 print(f"Player {IA1.symbol} played column {chosenMove}")
                 game = makeMoveRobot(chosenMove,game,robot)
+                
+                sleep(5)
+                i = robot.get_img_compressed()
+                previus_img = uncompress_image(i)
             else:
-                chosenMove = alphaBeta(game, 5, IA2)
-                print(f"Player {IA2.symbol} played column {chosenMove}")
-                game = makeMoveRobot(chosenMove,game,robot)
+                img_compressed = robot.get_img_compressed()
+                img_raw = uncompress_image(img_compressed)
+                mtx, dist = robot.get_camera_intrinsics()                
+                col, img3 = findCollum(previus_img, img_raw, startBoard, endBoard, "red")
+                
+                concat_ims = concat_imgs((previus_img, img_raw, img3))
+
+                show_img("Images raw & undistorted", concat_ims, wait_ms=30)
+                
+
+                if col!=-1:
+                    game.makeMove(col)
+                    sleep(1)
+                    i = robot.get_img_compressed()
+                    previus_img = uncompress_image(i)
+                    
+
+                    
+                else:
+                    sleep(2)
+                    
+                
                 #chosenMove = int(
                 #input(f"Player {game.currentPlayer}, enter a column (0-6): "))
             
@@ -110,9 +143,9 @@ if __name__ == "__main__":
 
     robot.calibrate_auto()
     
-   # robot.move_pose(connect4_AboveGame)
+    robot.move_pose(Observation)
 
-   # playRobot(game,robot)
+    playRobot(game,robot)
 
     robot.close_connection()
 
