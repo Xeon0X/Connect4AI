@@ -60,4 +60,4 @@ python -m tests.test_score_calculation
 ```
 
 ## License
-This project is licensed under the terms of the MIT license.
+This project is licensed under the terms of the GPL-3.0 license.
